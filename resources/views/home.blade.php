@@ -5,9 +5,9 @@
 @section('content')
 	<div class="container mx-auto min-h-screen">
 		<div class="flex items-center w-full h-screen py-3" x-data="requests">
-			<div class="flex items-center justify-between max-h-[300px] h-[50vh] w-full">
+			<div class="flex flex-col md:flex-row items-center justify-between gap-y-10 md:max-h-[300px] md:h-[50vh] w-full">
 				<textarea 
-					name="request" class="w-[40%] h-full border rounded-xl resize-none p-1 shadow-lg" 
+					name="request" class="w-full md:w-[40%] h-[200px] md:h-full border rounded-xl resize-none p-1 shadow-lg" 
 					placeholder="Request"
 					@keyup.enter.prevent="submit"
 					x-ref="request"
@@ -23,7 +23,7 @@
 					</button>
 				</div>
 	
-				<div class="relative w-[40%] h-full">
+				<div class="relative w-full md:w-[40%] h-[200px] md:h-full">
 					<div class="absolute -top-[25px]">Роль: <span x-text="role"></span></div>
 					<textarea 
 						name="response" 
