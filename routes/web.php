@@ -18,4 +18,9 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/first-page', function () {
+    return view('first-page');
+})->name('first-page');
+
 Route::post('request', [OpenAIController::class, 'request'])->name('request');
+Route::post('copywriter/request', [OpenAIController::class, 'firstPage'])->name('copywriter.first-page');

@@ -7,26 +7,38 @@ use Illuminate\Support\Facades\Http;
 
 class OpenAIApi
 {
-	public static function models(): Response
-	{
-		return Http::openai()->get('/models');
-	}
+    public static function models(): Response
+    {
+        return Http::openai()->get('/models');
+    }
 
-	public static function completion(string $message): Response
-	{
-		return Http::openai()
-			->post('/chat/completions', [
-				'model' => 'gpt-3.5-turbo',
-				'messages' => [
-					[
-						'role' => 'system',
-						'content' => 'You are a helpful assistant.',
-					],
-					[
-						'role' => 'user',
-						'content' => $message,
-					],
-				],
-			]);
-	}
+    public static function completion(
+        string $userMessage,
+        string $systemMessage = '',
+        int|float $temperature = 1.3,
+        int $n = 1,
+        int|float $maxTokens = 1000,
+        int|float $presencePenalty = 2,
+        int|float $frequencyPenalty = 2,
+    ): Response {
+        return Http::openai()
+            ->post('/chat/completions', [
+                'model' => 'gpt-3.5-turbo',
+                'messages' => [
+                    [
+                        'role' => 'system',
+                        'content' => $systemMessage,
+                    ],
+                    [
+                        'role' => 'user',
+                        'content' => $userMessage,
+                    ],
+                ],
+                'temperature' => $temperature,
+                'n' => $n,
+                'max_tokens' => $maxTokens,
+                'presence_penalty' => $presencePenalty,
+                'frequency_penalty' => $frequencyPenalty,
+            ]);
+    }
 }
