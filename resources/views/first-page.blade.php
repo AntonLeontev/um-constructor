@@ -42,7 +42,7 @@
 	
 			<div 
 				class="fixed top-0 right-0 w-1/2 min-w-[300px] h-screen bg-base-100 transition border-l-2 shadow-lg p-3 z-20 translate-x-full" 
-				:class="active && 'translate-x-0'"
+				:class="active && '!translate-x-0'"
 			>
 				<div class="flex justify-end w-full mb-3">
 					<button class="btn btn-circle btn-outline" @click="active = false">
