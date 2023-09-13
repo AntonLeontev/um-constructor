@@ -31,9 +31,70 @@
 			</form>
 		</div>
 
+		<div x-data="rawForm">
+			<div class="fixed z-10 top-3 right-3">
+				<button class="btn btn-circle btn-primary" @click="active = true">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+					</svg>
+				</button>
+			</div>
+	
+			<div 
+				class="fixed top-0 right-0 w-1/2 min-w-[300px] h-screen bg-base-100 transition border-l-2 shadow-lg p-3 z-20 translate-x-full" 
+				:class="active && 'translate-x-0'"
+			>
+				<div class="flex justify-end w-full mb-3">
+					<button class="btn btn-circle btn-outline" @click="active = false">
+						<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+					</button>
+				</div>
+				<form class="flex flex-col h-full gap-y-5 w-fill" @submit.prevent="submit">
+					<textarea class="w-full resize-none textarea textarea-primary basis-5/12" name="request" required placeholder="Запрос"></textarea>
+					<div class="flex justify-center">
+						<div class="relative flex items-center">
+							<input class="btn btn-accent" type="submit" value="Отправить">
+							<span class="absolute -right-8 loading loading-ball loading-md text-primary" x-show="loading"></span>
+						</div>
+					</div>
+					<textarea class="w-full resize-none textarea textarea-primary basis-5/12" placeholder="Ответ" readonly x-text="response"></textarea>
+				</form>
+			</div>
+		</div>
+
+		<script>
+			document.addEventListener('alpine:init', () => {
+				Alpine.data('rawForm', () => ({
+					active: false,
+					loading: false,
+					response: '',
+
+					submit() {
+						let data = new FormData(this.$event.target);
+
+						this.loading = true;
+						
+						axios
+							.post(route('request'), data)
+							.then(response => {
+								this.response = response.data.choices[0].message.content;
+								console.log(response.data);
+
+								this.loading = false;
+							})
+							.catch(error => {
+								alert('Ошибка!')
+								console.log(error);
+								this.loading = false;
+							})
+					}
+				}))
+			})
+		</script>
+
 
 		<dialog id="result_modal" class="modal bg-[#00000030]">
-			<div class="relative w-11/12 max-w-5xl modal-box">
+			<div class="relative w-11/12 max-w-5xl modal-box bg-base-100">
 				<h3 class="mb-3 text-[25px] text-center">Предпросмотр</h3>
 
 				<div class="w-full min-h-[200px] bg-info mb-5 flex flex-col gap-y-5 p-3">
@@ -113,9 +174,6 @@
 				subtitle: 'Подзаголовок',
 				button: 'Кнопка',
 
-				init() {
-
-				},
 				submit() {
 					let data = new FormData(this.$refs.form);
 
@@ -136,6 +194,7 @@
 							this.loading = false;
 						})
 				},
+				
 			}))
 		})
 	</script>
