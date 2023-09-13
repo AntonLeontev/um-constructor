@@ -151,7 +151,7 @@
 					<button class="btn btn-accent" @click="$refs.button.click()">Перегенерировать</button>
 					<form method="dialog">
 						<!-- if there is a button, it will close the modal -->
-						<button class="btn">Закрыть</button>
+						<button class="btn" @click="loading = true">Закрыть</button>
 					</form>
 				</div>
 
