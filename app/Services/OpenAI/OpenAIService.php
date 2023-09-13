@@ -2,6 +2,8 @@
 
 namespace App\Services\OpenAI;
 
+use Illuminate\Http\Client\Response;
+
 class OpenAIService
 {
     public function __construct(public OpenAIApi $api)
@@ -15,12 +17,10 @@ class OpenAIService
         return $response->json();
     }
 
-    public function firstPageBundle(string $userMessage, string $systemMessage, int $n = 1)
+    public function firstPageBundle(string $userMessage, string $systemMessage, int $n = 1): Response
     {
-        
-
         $response = $this->api->completion($userMessage, $systemMessage, n: $n);
 
-        return $response->json();
+        return $response;
     }
 }

@@ -14,7 +14,7 @@ class OpenAIController extends Controller
 
     public function firstPage(Request $request, OpenAIService $service)
     {
-		$systemMessage = "Формат ответа JSON: {title: Заголовок, subtitle: Подзаголовок, button: Текст кнопки}";
+		$systemMessage = "Формат ответа JSON: {\"title\": \"Заголовок\", \"subtitle\": \"Подзаголовок\", \"button\": \"Текст кнопки\"}";
 			// Заголовок не длиннее {$request->max_title} слов.
 			// Подзаголовок не длиннее {$request->max_subtitle} слов.
 			// Текст кнопки не длиннее {$request->max_button} слов.";
@@ -44,10 +44,22 @@ class OpenAIController extends Controller
 				$userMessage .= "Дополнительные требования: {$request->additionally}. ";
 			}
 			
-
-
 		$response = $service->firstPageBundle($userMessage, $systemMessage, $request->n);
 
-		dd($response);
+		$choices =  $response->json('choices');
+		$results = [];
+
+		foreach ($choices as $choice) {
+			$content = json_decode($choice['message']['content']);
+
+			if (is_null($content)) {
+				clock($choice);
+				continue;
+			}
+
+			$results[] = $content;
+		}
+
+		return response()->json($results);
     }
 }

@@ -3,126 +3,140 @@
 @section('title', 'First page generation')
 
 @section('content')
-	<div class="container min-h-screen mx-auto">
-		<form action="{{ route('copywriter.first-page') }}" method="POST" class="flex flex-col items-center justify-center py-3">
-			@csrf
-			<div class="flex flex-col max-w-[700px] px-2 gap-3">
-				<label class="flex flex-col">
-					Какую цель преследует ваш лендинг?
-					<input 
-						type="text" 
-						name="goal" 
-						class="p-3 text-black border rounded shadow-lg"
-					>
-				</label>
-				<label class="flex flex-col">
-					Кто является целевой аудиторией вашего лендинга?
-					<input 
-						type="text" 
-						name="ta" 
-						class="p-3 text-black border rounded shadow-lg"
-					>
-				</label>
-				<label class="flex flex-col">
-					Кратко опишите основное предложение или преимущество вашего продукта или услуги
-					<input 
-						type="text" 
-						name="benefit" 
-						class="p-3 text-black border rounded shadow-lg"
-					>
-				</label>
-				<label class="flex flex-col">
-					Какое конкретное действие вы хотите, чтобы посетители совершили на вашем лендинге?
-					<input 
-						type="text" 
-						name="action" 
-						class="p-3 text-black border rounded shadow-lg"
-					>
-				</label>
-				<label class="flex flex-col">
-					Каково общее сообщение, которое хотели бы донести до посетителей?
-					<input 
-						type="text" 
-						name="message" 
-						class="p-3 text-black border rounded shadow-lg"
-					>
-				</label>
-				<label class="flex flex-col">
-					Какие ключевые слова или фразы нужно использовать?
-					<input 
-						type="text" 
-						name="keywords" 
-						class="p-3 text-black border rounded shadow-lg"
-					>
-				</label>
-				{{-- <label class="flex flex-col">
-					Стиль текста
-					<select name="style" class="p-3 text-black uppercase normal-case bg-white border rounded shadow-lg">
-						<option value="Neutral">Нейтральный</option>
-						<option value="Official">Официальный</option>
-						<option value="science">Научный</option>
-						<option value="journalistic">Публицистический</option>
-						<option value="conversational">Разговорный</option>
-						<option value="artistic">Художественный</option>
-						<option value="Analytical">Аналитический</option>
-					</select>
-				</label> --}}
-				<label class="flex flex-col">
-					Что нужно учесть дополнительно?
-					<input 
-						type="text" 
-						name="additionally" 
-						class="p-3 text-black border rounded shadow-lg"
-					>
-				</label>
-				{{-- <label class="flex flex-row items-center justify-between gap-x-3">
-					Максимум слов в заголовке
-					<input 
-						type="number" 
-						name="max_title" 
-						class="p-3 text-black border rounded shadow-lg"
-						min="3"
-						max="10"
-						value="5"
-					>
-				</label>
-				<label class="flex flex-row items-center justify-between gap-x-3">
-					Максимум слов в подзаголовке
-					<input 
-						type="number" 
-						name="max_subtitle" 
-						class="p-3 text-black border rounded shadow-lg"
-						min="3"
-						max="10"
-						value="8"
-					>
-				</label>
-				<label class="flex flex-row items-center justify-between gap-x-3">
-					Максимум слов в кнопке
-					<input 
-						type="number" 
-						name="max_button" 
-						class="p-3 text-black border rounded shadow-lg"
-						min="3"
-						max="10"
-						value="3"
-					>
-				</label> --}}
-				<label class="flex flex-row items-center justify-between gap-x-3">
-					Сколько вариантов сгенерировать?
-					<input 
-						type="number" 
+	<div class="container flex items-center min-h-screen mx-auto" x-data="firstPage">
+		<div class="border card max-w-[700px] mx-auto shadow">
+			<form class="items-center justify-center py-3 card-body" @submit.prevent="submit" x-ref="form">
+				<div class="flex flex-col max-w-[700px] px-2 gap-3">
+					<x-shared.forms.input name="goal" placeholder="Продажа услуг свадебного фотографа" label="Какую цель преследует ваш лендинг?" required />
+					<x-shared.forms.input name="ta" placeholder="Незамужние женщины от 18 до 35 лет" label="Кто является целевой аудиторией вашего лендинга?" />
+					<x-shared.forms.input name="benefit" placeholder="Обработка 10 фотографий в подарок" label="Кратко опишите основное предложение или преимущество вашего продукта или услуги" />
+					<x-shared.forms.input name="action" placeholder="Оставили заявку на обратный звонок" label="Какое конкретное действие вы хотите, чтобы посетители совершили на вашем лендинге?" />
+					<x-shared.forms.input name="message" placeholder="Сделаем душевные и эмоциональные снимки" label="Каково общее сообщение, которое хотели бы донести до посетителей?" />
+					<x-shared.forms.input name="keywords" placeholder="Например название организации" label="Какие ключевые слова или фразы нужно использовать?" />
+					<x-shared.forms.input name="additionally" placeholder="" label="Что нужно учесть дополнительно?" />
+					<x-shared.forms.input 
 						name="n" 
-						class="p-3 text-black border rounded shadow-lg"
-						min="1"
-						max="5"
+						placeholder="" 
+						label="Сколько вариантов сгенерировать?" 
+						class="flex items-center gap-x-10" 
+						type="number" 
 						value="3"
-					>
-				</label>
+						min="1" 
+						max="5" 
+					/>
+	
+					<button type="submit" class="btn btn-accent" x-ref="button">Сгенерировать</button>
+					
+				</div>
+			</form>
+		</div>
 
-				<button type="submit" class="p-4 bg-green-500 rounded shadow-lg">Сгенерировать</button>
+
+		<dialog id="result_modal" class="modal bg-[#00000030]">
+			<div class="relative w-11/12 max-w-5xl modal-box">
+				<h3 class="mb-3 text-[25px] text-center">Предпросмотр</h3>
+
+				<div class="w-full min-h-[200px] bg-info mb-5 flex flex-col gap-y-5 p-3">
+					<input class="text-[32px] uppercase font-bold bg-transparent focus-visible:outline-none" x-model="title">
+					<input class="text-[22px] bg-transparent focus-visible:outline-none" x-model="subtitle">
+					<input class="btn btn-accent focus-visible:outline-none transform-none" x-model="button">
+				</div>
+
+				<div class="">
+					<h3 class="mb-1 text-[25px] text-center">Варианты:</h3>
+					<h4 class="mb-3 text-sm text-center">Выбирайте текст для предпросмотра</h4>
+					<div class="w-full max-h-[350px] overflow-y-auto flex flex-col gap-y-2">
+						<template x-for="(item, key) in choices">
+							<div class="border card">
+								<div class="flex-col w-full p-4 card-body gap-y-3">
+									<div class="flex items-center">
+										<div class="w-1/4">Заголовок: </div>
+										<div class="w-3/4">
+											<span 
+												class="p-1 transition cursor-pointer hover:bg-accent" 
+												x-text="item.title"
+												@click="title = $el.innerText"
+											></span>
+										</div>
+									</div>
+									<div class="flex items-center">
+										<div class="w-1/4">Подзаголовок: </div>
+										<div class="w-3/4">
+											<span 
+												class="p-1 transition cursor-pointer hover:bg-accent" 
+												x-text="item.subtitle"
+												@click="subtitle = $el.innerText"
+											></span>
+										</div>
+									</div>
+									<div class="flex items-center">
+										<div class="w-1/4">Кнопка: </div>
+										<div class="w-3/4">
+											<span 
+												class="p-1 transition cursor-pointer hover:bg-accent" 
+												x-text="item.button"
+												@click="button = $el.innerText"
+											></span>
+										</div>
+									</div>
+								</div> 
+							</div>
+						</template>
+					</div> 
+				</div>
+
 				
+				<div class="modal-action">
+					<button class="btn btn-accent" @click="$refs.button.click()">Перегенерировать</button>
+					<form method="dialog">
+						<!-- if there is a button, it will close the modal -->
+						<button class="btn">Закрыть</button>
+					</form>
+				</div>
+
+				
+				<div class="absolute top-0 bottom-0 left-0 right-0 flex flex-col items-center justify-center bg-white" x-show="loading" x-transition.opacity>
+					<span class="loading loading-ball loading-lg text-primary"></span>
+					<div class="">Придумываем...</div>
+				</div>
 			</div>
-		</form>
+		</dialog>
 	</div>
+
+	<script>
+		document.addEventListener('alpine:init', () => {
+			Alpine.data('firstPage', () => ({
+				rawForm: false,
+				loading: false,
+				choices: [],
+				title: 'Заголовок',
+				subtitle: 'Подзаголовок',
+				button: 'Кнопка',
+
+				init() {
+
+				},
+				submit() {
+					let data = new FormData(this.$refs.form);
+
+					result_modal.showModal();
+					this.loading = true;
+					
+					axios
+						.post(route('copywriter.first-page'), data)
+						.then(response => {
+							this.choices = response.data;
+							console.log(response.data);
+
+							this.loading = false;
+						})
+						.catch(error => {
+							alert('Ошибка!')
+							console.log(error);
+							this.loading = false;
+						})
+				},
+			}))
+		})
+	</script>
 @endsection
