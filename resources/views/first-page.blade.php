@@ -24,7 +24,6 @@
 						min="1" 
 						max="5" 
 					/>
-	
 					<button type="submit" class="btn btn-accent" x-ref="button">Сгенерировать</button>
 					
 				</div>
@@ -40,16 +39,21 @@
 				</button>
 			</div>
 	
-			<div 
+			<form 
 				class="fixed top-0 right-0 w-1/2 min-w-[300px] h-screen bg-base-100 transition border-l-2 shadow-lg p-3 z-20 translate-x-full" 
 				:class="active && '!translate-x-0'"
+				@submit.prevent="submit"
 			>
-				<div class="flex justify-end w-full mb-3">
-					<button class="btn btn-circle btn-outline" @click="active = false">
+				<div class="flex justify-between w-full mb-3">
+					<select name="model" id="" class="select select-primary">
+						<option value="gpt-3.5-turbo">GPT-3.5</option>
+						<option value="gpt-4">GPT-4</option>
+					</select>
+					<button class="btn btn-circle btn-outline" type="button" @click="active = false">
 						<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
 					</button>
 				</div>
-				<form class="flex flex-col h-full gap-y-5 w-fill" @submit.prevent="submit">
+				<div class="flex flex-col h-full gap-y-5 w-fill">
 					<textarea class="w-full resize-none textarea textarea-primary basis-5/12" name="request" required placeholder="Запрос"></textarea>
 					<div class="flex justify-center">
 						<div class="relative flex items-center">
@@ -58,8 +62,8 @@
 						</div>
 					</div>
 					<textarea class="w-full resize-none textarea textarea-primary basis-5/12" placeholder="Ответ" readonly x-text="response"></textarea>
-				</form>
-			</div>
+				</div>
+			</form>
 		</div>
 
 		<script>

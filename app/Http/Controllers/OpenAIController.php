@@ -9,7 +9,7 @@ class OpenAIController extends Controller
 {
     public function request(Request $request, OpenAIService $service)
     {
-        return $service->complete($request->get('request'));
+        return $service->complete($request->get('request'), $request->model);
     }
 
     public function firstPage(Request $request, OpenAIService $service)
@@ -44,7 +44,7 @@ class OpenAIController extends Controller
 				$userMessage .= "Дополнительные требования: {$request->additionally}. ";
 			}
 			
-		$response = $service->firstPageBundle($userMessage, $systemMessage, $request->n);
+		$response = $service->firstPageBundle($userMessage, $systemMessage, $request->n, $request->model ?? 'gpt-3.5-turbo');
 
 		$choices =  $response->json('choices');
 		$results = [];
@@ -53,6 +53,7 @@ class OpenAIController extends Controller
 			$content = json_decode($choice['message']['content']);
 
 			if (is_null($content)) {
+				//TODO remove log
 				clock($choice);
 				continue;
 			}

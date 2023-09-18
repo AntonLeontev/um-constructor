@@ -20,10 +20,11 @@ class OpenAIApi
         int|float $maxTokens = 1000,
         int|float $presencePenalty = 2,
         int|float $frequencyPenalty = 2,
+		string $model = 'gpt-3.5-turbo',
     ): Response {
         return Http::openai()
             ->post('/chat/completions', [
-                'model' => 'gpt-3.5-turbo',
+                'model' => $model,
                 'messages' => [
                     [
                         'role' => 'system',
