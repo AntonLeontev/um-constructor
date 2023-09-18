@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\OpenAIController;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,10 @@ Route::get('/', function () {
 Route::get('/first-page', function () {
     return view('first-page');
 })->name('first-page');
+
+
+Route::get('/test', function() {
+})->name('test');
 
 Route::post('request', [OpenAIController::class, 'request'])->name('request');
 Route::post('copywriter/request', [OpenAIController::class, 'firstPage'])->name('copywriter.first-page');
