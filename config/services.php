@@ -16,8 +16,15 @@ return [
 
     'openAI' => [
         'token' => env('OPENAI_TOKEN', ''),
-        'max_tokens' => 10000,
-        'gpt_model' => 'gpt-4', // [gpt-3.5-turbo, gpt-4, gpt-3.5-turbo-16k, gpt-4-32k]
     ],
+
+	// Midjourney access
+	'nextLeg' => [
+		'authToken' => env('NEXT_LEG_TOKEN'),
+	],
+
+	'telegram' => [
+        'bot' => env('TELEGRAM_TOKEN'),
+	],
 
 ];
