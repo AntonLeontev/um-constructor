@@ -15,7 +15,7 @@
 				@include('partials.first-page.preview')
 			</div>
 	
-			<div class="h-full overflow-auto basis-3/5 border-x">
+			<div class="h-full px-2 overflow-auto basis-3/5 border-x">
 	
 				<x-shared.tabs class="py-5">
 					<a class="transition tab tab-lg" :class="tab === 'text' && 'tab-active'" @click="tab = 'text'">
@@ -26,7 +26,7 @@
 					</a>
 				</x-shared.tabs>
 		
-				<div class="border card max-w-[700px] mx-auto shadow">
+				<div class="mx-auto border shadow card">
 					<div x-show="tab === 'text'" x-transition>
 						@include('partials.first-page.text')
 					</div>
