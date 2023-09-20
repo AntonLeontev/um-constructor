@@ -14,7 +14,15 @@ class NextLegController extends Controller
 
     public function imagine(Request $request): JsonResponse
     {
-        $messageId = $this->service->imagine($request->get('prompt'));
+        $messageId = $this->service->imagine(
+            $request->get('prompt'),
+            $request->get('chaos'),
+            $request->get('stylize'),
+            $request->get('weird'),
+            $request->get('quality'),
+            $request->get('no'),
+            $request->get('aspect'),
+        );
 
         return response()->json(['messageId' => $messageId]);
     }

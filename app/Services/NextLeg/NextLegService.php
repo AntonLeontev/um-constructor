@@ -10,8 +10,39 @@ class NextLegService
     {
     }
 
-    public function imagine(string $prompt): string
-    {
+    public function imagine(
+        string $prompt,
+        int $chaos = null,
+        int $stylize = null,
+        int $weird = null,
+        string $quality = null,
+        string $no = null,
+        string $aspect = null,
+    ): string {
+        if (! is_null($chaos)) {
+            $prompt .= " --chaos $chaos";
+        }
+
+        if (! is_null($stylize)) {
+            $prompt .= " --stylize $stylize";
+        }
+
+        if (! is_null($weird)) {
+            $prompt .= " --weird $weird";
+        }
+
+        if (! is_null($quality)) {
+            $prompt .= " --quality $quality";
+        }
+
+        if (! is_null($no)) {
+            $prompt .= " --no $no";
+        }
+
+        if (! is_null($aspect)) {
+            $prompt .= " --ar $aspect";
+        }
+
         $response = $this->api->imagine($prompt);
 
         return $response->json('messageId');
@@ -55,6 +86,7 @@ class NextLegService
             '➡️',
             '⬆️',
             '⬇️',
+            '↕️ Make Square',
         ];
 
         foreach ($forbiddenButtons as $button) {
