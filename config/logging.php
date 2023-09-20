@@ -94,11 +94,11 @@ return [
             'processors' => [PsrLogMessageProcessor::class],
         ],
 
-		'telegram' => [
-			'driver' => 'custom',
-			'via'    => Logger\TelegramLogger::class,
-			'level'  => 'debug',
-		],
+        'telegram' => [
+            'driver' => 'custom',
+            'via' => Logger\TelegramLogger::class,
+            'level' => 'debug',
+        ],
 
         'stderr' => [
             'driver' => 'monolog',

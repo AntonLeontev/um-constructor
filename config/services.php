@@ -18,13 +18,13 @@ return [
         'token' => env('OPENAI_TOKEN', ''),
     ],
 
-	// Midjourney access
-	'nextLeg' => [
-		'authToken' => env('NEXT_LEG_TOKEN'),
-	],
+    // Midjourney access
+    'nextLeg' => [
+        'authToken' => env('NEXT_LEG_TOKEN'),
+    ],
 
-	'telegram' => [
+    'telegram' => [
         'bot' => env('TELEGRAM_TOKEN'),
-	],
+    ],
 
 ];

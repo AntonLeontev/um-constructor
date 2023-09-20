@@ -14,53 +14,54 @@ class OpenAIController extends Controller
 
     public function firstPage(Request $request, OpenAIService $service)
     {
-		$systemMessage = "Формат ответа JSON: {\"title\": \"Заголовок\", \"subtitle\": \"Подзаголовок\", \"button\": \"Текст кнопки\"}";
-			// Заголовок не длиннее {$request->max_title} слов.
-			// Подзаголовок не длиннее {$request->max_subtitle} слов.
-			// Текст кнопки не длиннее {$request->max_button} слов.";
+        $systemMessage = 'Формат ответа JSON: {"title": "Заголовок", "subtitle": "Подзаголовок", "button": "Текст кнопки"}';
+        // Заголовок не длиннее {$request->max_title} слов.
+        // Подзаголовок не длиннее {$request->max_subtitle} слов.
+        // Текст кнопки не длиннее {$request->max_button} слов.";
 
-		$userMessage = "Напиши  связку: заголовок - подзаголовок - текст кнопки целевого действия для лендинга.
+        $userMessage = "Напиши  связку: заголовок - подзаголовок - текст кнопки целевого действия для лендинга.
 			Цель лендинга: {$request->goal}. ";
 
-			if (!is_null($request->ta)) {
-				$userMessage .= "Целевая аудитория лендинга: {$request->ta}. ";
-			}
-			if (!is_null($request->benefit)) {
-				$userMessage .= "Описание основного предложения или преимущества: {$request->benefit}. ";
-			}
-			if (!is_null($request->action)) {
-				$userMessage .= "Целевое действие на лендинге: {$request->action}. ";
-			}
-			if (!is_null($request->message)) {
-				$userMessage .= "Общее сообщение, которое нужно донести до посетителей: {$request->message}. ";
-			}
-			if (!is_null($request->keywords)) {
-				$userMessage .= "Используй следующие ключевые слова или фразы: {$request->keywords}. ";
-			}
-			if (!is_null($request->style)) {
-				$userMessage .= "Текст в следующем стиле: {$request->style}. ";
-			}
-			if (!is_null($request->additionally)) {
-				$userMessage .= "Дополнительные требования: {$request->additionally}. ";
-			}
-			
-		$response = $service->firstPageBundle($userMessage, $systemMessage, $request->n, $request->model ?? 'gpt-3.5-turbo');
+        if (! is_null($request->ta)) {
+            $userMessage .= "Целевая аудитория лендинга: {$request->ta}. ";
+        }
+        if (! is_null($request->benefit)) {
+            $userMessage .= "Описание основного предложения или преимущества: {$request->benefit}. ";
+        }
+        if (! is_null($request->action)) {
+            $userMessage .= "Целевое действие на лендинге: {$request->action}. ";
+        }
+        if (! is_null($request->message)) {
+            $userMessage .= "Общее сообщение, которое нужно донести до посетителей: {$request->message}. ";
+        }
+        if (! is_null($request->keywords)) {
+            $userMessage .= "Используй следующие ключевые слова или фразы: {$request->keywords}. ";
+        }
+        if (! is_null($request->style)) {
+            $userMessage .= "Текст в следующем стиле: {$request->style}. ";
+        }
+        if (! is_null($request->additionally)) {
+            $userMessage .= "Дополнительные требования: {$request->additionally}. ";
+        }
 
-		$choices =  $response->json('choices');
-		$results = [];
+        $response = $service->firstPageBundle($userMessage, $systemMessage, $request->n, $request->model ?? 'gpt-3.5-turbo');
 
-		foreach ($choices as $choice) {
-			$content = json_decode($choice['message']['content']);
+        $choices = $response->json('choices');
+        $results = [];
 
-			if (is_null($content)) {
-				//TODO remove log
-				clock($choice);
-				continue;
-			}
+        foreach ($choices as $choice) {
+            $content = json_decode($choice['message']['content']);
 
-			$results[] = $content;
-		}
+            if (is_null($content)) {
+                //TODO remove log
+                clock($choice);
 
-		return response()->json($results);
+                continue;
+            }
+
+            $results[] = $content;
+        }
+
+        return response()->json($results);
     }
 }
