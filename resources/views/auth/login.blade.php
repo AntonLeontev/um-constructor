@@ -4,7 +4,7 @@
 
 @section('content')
 	<div class="flex items-center justify-center w-full h-screen">
-		<form class="card">
+		<form method="POST" action="{{ route('login') }}" class="card w-[315px]">
 			<div class="card-body">
 				<div class="text-center">{{ __('auth.login to your account') }}</div>
 				@csrf
