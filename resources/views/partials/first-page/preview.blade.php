@@ -16,7 +16,7 @@
                     class="relative z-10 mb-[3%] bg-transparent text-[100%] @5xl:text-[3rem] font-bold uppercase focus-visible:outline-none max-w-[50%] resize-none overflow-hidden"
                     x-model="title"></textarea>
                 <textarea class="relative z-10 mb-[3%] bg-transparent text-[60%] focus-visible:outline-none max-w-[50%] resize-none"
-                    x-model="subtitle"></textarea>
+                    x-model="subtitle"></textarea>	
                 <input class="relative z-10 w-[40%] bg-black text-center text-[70%] text-white uppercase focus-visible:outline-none" x-model="button">
                 <img class="bg-red absolute right-0 z-0 aspect-[700/300] w-[70%]" :src="image" alt="Picture">
             </div>
