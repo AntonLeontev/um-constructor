@@ -16,7 +16,9 @@
 		@yield('head_scripts')
     </head>
     <body class="min-h-screen">
-		
+		@include('partials.header')
+
+
 		@yield('content')
 		@yield('body_scripts')
     </body>

@@ -8,4 +8,5 @@ return [
     'password' => 'Password',
     'confirm password' => 'Repeat password',
     'name' => 'Name',
+    'logout' => 'Logout',
 ];

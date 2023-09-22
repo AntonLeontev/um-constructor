@@ -16,14 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-
-Route::get('/first-page', function () {
-    return view('first-page');
-})->name('first-page');
-
 Route::get('/test', function (NextLegService $service) {
     $response = $service->getMessage('sJg0IIJntLR38hlTGyd5');
     // $response = $service->getMessage('X1xZNvlEleYDUF6yuItQ');
@@ -32,14 +24,26 @@ Route::get('/test', function (NextLegService $service) {
     dd($json);
 })->name('test');
 
-Route::post('request', [OpenAIController::class, 'request'])->name('request');
-Route::post('copywriter/request', [OpenAIController::class, 'firstPage'])->name('copywriter.first-page');
+Route::get('/', function () {
+    return view('home');
+})->name('home');
 
-Route::prefix('midjourney')
-    ->controller(NextLegController::class)
+Route::middleware('auth')
     ->group(function () {
-        Route::post('imagine', 'imagine')->name('midjourney.imagine');
-        Route::post('get-message', 'getMessage')->name('midjourney.get-message');
-        Route::post('check-banned-words', 'checkBannedWords')->name('midjourney.check-banned-words');
-        Route::post('push-button', 'pushButton')->name('midjourney.push-button');
+
+        Route::get('/first-page', function () {
+            return view('first-page');
+        })->name('first-page');
+
+        Route::post('request', [OpenAIController::class, 'request'])->name('request');
+        Route::post('copywriter/request', [OpenAIController::class, 'firstPage'])->name('copywriter.first-page');
+
+        Route::prefix('midjourney')
+            ->controller(NextLegController::class)
+            ->group(function () {
+                Route::post('imagine', 'imagine')->name('midjourney.imagine');
+                Route::post('get-message', 'getMessage')->name('midjourney.get-message');
+                Route::post('check-banned-words', 'checkBannedWords')->name('midjourney.check-banned-words');
+                Route::post('push-button', 'pushButton')->name('midjourney.push-button');
+            });
     });
