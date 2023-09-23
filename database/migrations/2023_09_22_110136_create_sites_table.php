@@ -14,8 +14,8 @@ return new class extends Migration
     {
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
-			$table->string('title');
-			$table->foreignIdFor(User::class);
+            $table->string('title');
+            $table->foreignIdFor(User::class);
             $table->timestamps();
         });
     }

@@ -9,8 +9,8 @@ class Text extends Model
 {
     use HasFactory;
 
-	protected $fillable = [
-		'text',
-		'block_id',
-	];
+    protected $fillable = [
+        'text',
+        'block_id',
+    ];
 }

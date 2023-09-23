@@ -14,8 +14,8 @@ return new class extends Migration
     {
         Schema::create('texts', function (Blueprint $table) {
             $table->id();
-			$table->foreignIdFor(Block::class);
-			$table->string('text')->nullable();
+            $table->foreignIdFor(Block::class);
+            $table->string('text')->nullable();
             $table->timestamps();
         });
     }

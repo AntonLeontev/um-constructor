@@ -14,13 +14,17 @@
 					<span>{{ auth()->user()->name }}</span>
 				</label>
 				<ul tabindex="0" class="z-20 p-2 mt-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-					<li><a>Profile</a></li>
-					<li>
-						<a class="justify-between">
-							Sites
-							<span class="badge">New</span>
-						</a>
-					</li>
+					{{-- <li><a>Profile</a></li> --}}
+
+					@if (Route::has('personal.sites'))
+						<li>
+							<a href="{{ route('personal.sites') }}" class="justify-between">
+								Sites
+								<span class="badge">New</span>
+							</a>
+						</li>
+					@endif
+
 					<li>
 						<form action="{{ route('logout') }}" method="POST">
 							@csrf

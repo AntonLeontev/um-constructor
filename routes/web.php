@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\NextLegController;
 use App\Http\Controllers\OpenAIController;
+use App\Http\Controllers\PersonalController;
 use App\Services\NextLeg\NextLegService;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,13 @@ Route::middleware('auth')
         Route::get('/first-page', function () {
             return view('first-page');
         })->name('first-page');
+
+        Route::prefix('personal')
+            ->controller(PersonalController::class)
+            ->group(function () {
+                Route::get('sites', 'sites')->name('personal.sites');
+
+            });
 
         Route::post('request', [OpenAIController::class, 'request'])->name('request');
         Route::post('copywriter/request', [OpenAIController::class, 'firstPage'])->name('copywriter.first-page');

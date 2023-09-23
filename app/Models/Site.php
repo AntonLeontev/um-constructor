@@ -10,13 +10,13 @@ class Site extends Model
 {
     use HasFactory;
 
-	protected $fillable = [
-		'title',
-		'user_id',
-	];
+    protected $fillable = [
+        'title',
+        'user_id',
+    ];
 
-	public function blocks(): HasMany
-	{
-		return $this->hasMany(Block::class);
-	}
+    public function blocks(): HasMany
+    {
+        return $this->hasMany(Block::class);
+    }
 }

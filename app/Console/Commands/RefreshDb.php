@@ -28,6 +28,6 @@ class RefreshDb extends Command
     {
         $this->call('migrate:fresh');
 
-		User::create(['name' => 'Anton', 'email' => 'aner-anton@yandex.ru', 'password' => bcrypt('12345678')]);
+        User::create(['name' => 'Anton', 'email' => 'aner-anton@yandex.ru', 'password' => bcrypt('12345678')]);
     }
 }
