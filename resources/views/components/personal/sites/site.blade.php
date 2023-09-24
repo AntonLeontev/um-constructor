@@ -48,7 +48,7 @@
 		<form x-show="isRenaming"  x-ref="renameForm" @click.outside="isRenaming = false" @submit.prevent="rename">
 			<input type="text" name="title" class="w-full border-0" :value="title" x-ref="title" @blur="rename">
 		</form>
-        <a href="#" class="truncate" x-show="!isRenaming" x-text="title" :title="title"></a>
+        <a :href="route('constructor', site.id)" class="truncate" x-show="!isRenaming" x-text="title" :title="title"></a>
     </div>
 
     <div class="absolute dropdown dropdown-left right-1 top-1">

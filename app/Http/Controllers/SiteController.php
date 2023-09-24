@@ -41,9 +41,9 @@ class SiteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Site $site)
     {
-        Site::find($id)->delete();
+        $site->delete();
 
         return response('', Response::HTTP_NO_CONTENT);
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConstructorController;
 use App\Http\Controllers\NextLegController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\PersonalController;
@@ -36,10 +37,6 @@ Route::get('/', function () {
 Route::middleware('auth')
     ->group(function () {
 
-        Route::get('/first-page', function () {
-            return view('first-page');
-        })->name('first-page');
-
         Route::prefix('personal')
             ->controller(PersonalController::class)
             ->group(function () {
@@ -47,7 +44,9 @@ Route::middleware('auth')
 
             });
 
-        Route::apiResource('sites', SiteController::class)->except('index');
+        Route::get('constructor/{site}', ConstructorController::class)->name('constructor');
+
+        Route::apiResource('sites', SiteController::class)->except(['index', 'show']);
 
         Route::post('request', [OpenAIController::class, 'request'])->name('request');
         Route::post('copywriter/request', [OpenAIController::class, 'firstPage'])->name('copywriter.first-page');
