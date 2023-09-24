@@ -3,7 +3,9 @@
 use App\Http\Controllers\NextLegController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\PersonalController;
+use App\Http\Controllers\SiteController;
 use App\Services\NextLeg\NextLegService;
+use HaydenPierce\ClassFinder\ClassFinder;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,11 +20,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function (NextLegService $service) {
-    $response = $service->getMessage('sJg0IIJntLR38hlTGyd5');
-    // $response = $service->getMessage('X1xZNvlEleYDUF6yuItQ');
-    $json = $response;
+    ClassFinder::disablePSR4Vendors();
+    $classes = ClassFinder::getClassesInNamespace('App\Constructor\Blocks', ClassFinder::RECURSIVE_MODE);
 
-    dd($json);
+    $classes = array_diff($classes, ['App\Constructor\Blocks\AbstractBlock']);
+
+    dd($classes);
+
 })->name('test');
 
 Route::get('/', function () {
@@ -42,6 +46,8 @@ Route::middleware('auth')
                 Route::get('sites', 'sites')->name('personal.sites');
 
             });
+
+        Route::apiResource('sites', SiteController::class)->except('index');
 
         Route::post('request', [OpenAIController::class, 'request'])->name('request');
         Route::post('copywriter/request', [OpenAIController::class, 'firstPage'])->name('copywriter.first-page');
