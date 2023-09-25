@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\BlockCreating;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,6 +14,7 @@ class Block extends Model
 
     protected $fillable = [
         'site_id',
+        'title',
         'class',
         'position',
         'is_active',
@@ -32,4 +34,17 @@ class Block extends Model
     {
         return $this->belongsTo(BlockType::class);
     }
+
+    public function jsonSerialize(): mixed
+    {
+        $array = array_merge($this->attributesToArray(), $this->relationsToArray());
+
+        $array['class'] = app($this->class);
+
+        return $array;
+    }
+
+    protected $dispatchesEvents = [
+        'creating' => BlockCreating::class,
+    ];
 }

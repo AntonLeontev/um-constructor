@@ -2,14 +2,11 @@
 
 namespace App\Constructor\Blocks\Headers;
 
-class Header
+use App\Constructor\Blocks\AbstractBlock;
+
+class Header extends AbstractBlock
 {
     protected static string $title = 'Header';
 
     protected static string $view = 'blocks.headers.header';
-
-    public static function getTitle(): string
-    {
-        return self::$title;
-    }
 }

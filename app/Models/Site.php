@@ -17,6 +17,17 @@ class Site extends Model
 
     public function blocks(): HasMany
     {
-        return $this->hasMany(Block::class);
+        return $this->hasMany(Block::class)->orderBy('position');
+    }
+
+    public function getBlocks(): array
+    {
+        $result = [];
+
+        foreach ($this->blocks as $block) {
+            $result[] = app($block->class);
+        }
+
+        return $result;
     }
 }

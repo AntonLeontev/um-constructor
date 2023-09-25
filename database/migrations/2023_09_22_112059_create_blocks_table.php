@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('class');
             $table->unsignedSmallInteger('position');
-            $table->boolean('is_active')->default(1);
+            $table->boolean('is_active')->default(0);
             $table->timestamps();
         });
     }

@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\BlockController;
 use App\Http\Controllers\ConstructorController;
 use App\Http\Controllers\NextLegController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\SiteController;
+use App\Models\Site;
 use App\Services\NextLeg\NextLegService;
-use HaydenPierce\ClassFinder\ClassFinder;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,12 +22,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function (NextLegService $service) {
-    ClassFinder::disablePSR4Vendors();
-    $classes = ClassFinder::getClassesInNamespace('App\Constructor\Blocks', ClassFinder::RECURSIVE_MODE);
+    $r = Site::find(1)->blocks;
 
-    $classes = array_diff($classes, ['App\Constructor\Blocks\AbstractBlock']);
-
-    dd($classes);
+    dd(json_encode($r));
 
 })->name('test');
 
@@ -47,6 +45,7 @@ Route::middleware('auth')
         Route::get('constructor/{site}', ConstructorController::class)->name('constructor');
 
         Route::apiResource('sites', SiteController::class)->except(['index', 'show']);
+        Route::apiResource('sites.blocks', BlockController::class)->shallow();
 
         Route::post('request', [OpenAIController::class, 'request'])->name('request');
         Route::post('copywriter/request', [OpenAIController::class, 'firstPage'])->name('copywriter.first-page');

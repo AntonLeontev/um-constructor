@@ -2,7 +2,9 @@
 
 namespace App\Constructor\Blocks\FirstScreens;
 
-class FirstScreen
+use App\Constructor\Blocks\AbstractBlock;
+
+class FirstScreen extends AbstractBlock
 {
     protected static string $title = 'First screen';
 

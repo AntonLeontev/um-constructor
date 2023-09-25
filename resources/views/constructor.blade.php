@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('constructor.title') . " $site->title")
+@section('title', $site->title)
 
 @section('content')
 	@include('partials.gptRawForm')
@@ -10,8 +10,15 @@
 		{{-- sidebar --}}
 		<div class="flex flex-col w-[200px] border-r p-1">
 			<h3 class="text-center">Blocks</h3>
-			<div class="overflow-auto basis-auto">
-				
+			<div class="flex flex-col gap-1 overflow-auto basis-auto">
+				<template x-for="block in blocks">
+					<div 
+						class="p-1 transition border cursor-pointer" 
+					>
+						<img :src="block.class.preview" alt="preview">
+						<p class="mt-2 text-center" x-text="block.title"></p>
+					</div>
+				</template>
 			</div>
 			<div class="flex justify-center pb-2">
 				<button class="btn btn-sm btn-success" @click="blocks_choice.showModal()">
@@ -56,23 +63,65 @@
 
 
 
-		<dialog id="blocks_choice" class="modal">
-			<div class="modal-box">
+		<dialog id="blocks_choice" class="modal" x-data="addBlock">
+			<div class="w-11/12 max-w-[50rem] modal-box">
 				<h3 class="text-lg font-bold">Choose block type:</h3>
-				@foreach (blocks_list() as $block)
-					<p>{{ $block::class }}</p>
-				@endforeach
-				<p class="py-4">Press ESC key or click outside to close</p>
+				<div class="grid grid-cols-5 gap-2 mb-3">
+					<template x-for="block in blocks">
+						<div 
+							class="p-1 transition border cursor-pointer" 
+							:class="selected?.class === block.class && 'bg-primary'"
+							@click="selected = block"
+						>
+							<img :src="block.preview" alt="preview">
+							<p class="mt-2 text-center" x-text="block.title"></p>
+						</div>
+					</template>
+				</div>
+				<div class="flex justify-center">
+					<button type="submit" class="btn btn-accent btn-sm" :disabled="!selected" @click="addBlock">
+						add
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+						</svg>
+					</button>
+				</div>
 			</div>
 			<form method="dialog" class="modal-backdrop">
 				<button>close</button>
 			</form>
 		</dialog>
+
+		<script>
+			document.addEventListener('alpine:init', () => {
+				Alpine.data('addBlock', () => ({
+					blocks: @json(blocks_list()),
+					selected: null,
+
+					addBlock() {
+						axios
+							.post(route('sites.blocks.store', this.siteId), {
+								class: this.selected.class,
+								title: this.selected.title,
+							})
+							.then(response => {
+								console.log(response.data);
+							})
+							.catch(error => {
+								alert('Error!');
+								console.log(error);
+							})
+					},
+				}))
+			})
+		</script>
 	</div>
 
 	<script>
 		document.addEventListener('alpine:init', () => {
 			Alpine.data('siteConstructor', () => ({
+				siteId: {{ $site->id }},
+				blocks: @json($site->blocks),
 				tab: 'text',
 
 			}))

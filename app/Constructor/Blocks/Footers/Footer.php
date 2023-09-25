@@ -2,7 +2,9 @@
 
 namespace App\Constructor\Blocks\Footers;
 
-class Footer
+use App\Constructor\Blocks\AbstractBlock;
+
+class Footer extends AbstractBlock
 {
     protected static string $title = 'Footer';
 
