@@ -28,6 +28,11 @@
 				</div>
 				<input type="password" class="input input-primary" name="password_confirmation" placeholder="{{ __('auth.confirm password') }}">
 				<input type="submit" class="btn btn-primary" value={{ __("auth.register") }}>
+
+				<div class="mt-3">
+					Already have an account?
+					<a class="link" href="{{ route('login') }}">Login</a>
+				</div>
 			</div>
 		</form>
 	</div>

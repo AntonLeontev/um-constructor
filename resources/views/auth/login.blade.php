@@ -21,6 +21,11 @@
 					@enderror
 				</div>
 				<input type="submit" class="btn btn-primary" value={{ __("auth.login") }}>
+				
+				<div class="mt-3">
+					Don't you have an account?
+					<a class="link" href="{{ route('register') }}">Register</a>
+				</div>
 			</div>
 		</form>
 	</div>
