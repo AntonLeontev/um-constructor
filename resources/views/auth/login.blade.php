@@ -22,10 +22,17 @@
 				</div>
 				<input type="submit" class="btn btn-primary" value={{ __("auth.login") }}>
 				
-				<div class="mt-3">
-					Don't you have an account?
-					<a class="link" href="{{ route('register') }}">Register</a>
-				</div>
+				@if (config('app.registration_enabled'))
+					<div class="mt-3">
+						Don't you have an account?
+						<a class="link" href="{{ route('register') }}">Register</a>
+					</div>
+				@else
+					<div class="mt-10">Sorry, registration is unavailable now</div>
+					<div class="py-3">
+						You can apply for testing by following the link: <a href="https://umchain.org/#form" class="link">Send request</a>
+					</div>
+				@endif
 			</div>
 		</form>
 	</div>

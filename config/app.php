@@ -5,6 +5,8 @@ use Illuminate\Support\ServiceProvider;
 
 return [
 
+    'registration_enabled' => false,
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
