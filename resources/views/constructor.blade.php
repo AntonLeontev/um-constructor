@@ -5,13 +5,17 @@
 @section('content')
 	@include('partials.gptRawForm')
 	
-	<div class="flex h-[calc(100vh-67px)] overflow-hidden" x-data="siteConstructor">
+	<div 
+		class="flex h-[calc(100vh-67px)] overflow-hidden" 
+		x-data="siteConstructor"
+		@add-block="blocks"
+	>
 
 		{{-- sidebar --}}
 		<div class="flex flex-col w-[200px] border-r p-1">
-			<h3 class="text-center">Blocks</h3>
+			{{-- <h3 class="text-center">Blocks</h3> --}}
 			<div class="flex flex-col gap-1 overflow-auto basis-auto">
-				<template x-for="block in blocks">
+				<template x-for="block in siteBlocks">
 					<div 
 						class="p-1 transition border cursor-pointer" 
 					>
@@ -105,7 +109,8 @@
 								title: this.selected.title,
 							})
 							.then(response => {
-								console.log(response.data);
+								this.siteBlocks.push(response.data);
+								blocks_choice.close();
 							})
 							.catch(error => {
 								alert('Error!');
@@ -121,7 +126,7 @@
 		document.addEventListener('alpine:init', () => {
 			Alpine.data('siteConstructor', () => ({
 				siteId: {{ $site->id }},
-				blocks: @json($site->blocks),
+				siteBlocks: @json($site->blocks),
 				tab: 'text',
 
 			}))
