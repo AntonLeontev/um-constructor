@@ -12,12 +12,14 @@ abstract class AbstractBlock implements JsonSerializable
 
     protected static string $preview = '/images/constructor/blocks/previews/default.png';
 
-    public static function getTitle(): string
+    protected array $data = [];
+
+    public function getTitle(): string
     {
         return static::$title;
     }
 
-    public static function getPreview(): string
+    public function getPreview(): string
     {
         return static::$preview;
     }
