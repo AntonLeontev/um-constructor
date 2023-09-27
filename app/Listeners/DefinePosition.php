@@ -28,7 +28,7 @@ class DefinePosition
 
         $blocks = Block::where('site_id', $block->site_id)
             ->orderByDesc('position')
-            ->get();
+            ->get('position');
 
         $maxPosition = $blocks->max('position');
 

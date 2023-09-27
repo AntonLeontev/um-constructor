@@ -15,8 +15,34 @@
 		@include('partials.constructor.blocks-list')
 
 		<div class="flex basis-full">
-			<div class="flex items-center justify-center p-1 border-x basis-2/5">
+			<div class="flex flex-col items-center p-1 border-x basis-2/5">
 				@include('partials.first-page.preview')
+				
+				<div x-data="inputView" class="w-full" x-html="view">
+					
+				</div>
+				<script>
+					document.addEventListener('alpine:init', () => {
+						Alpine.data('inputView', () => ({
+							view: '',
+
+							init() {
+								this.$watch('selectedBlock', block => this.update(block))
+							},
+							update(block) {
+								axios
+									.get(route('blocks.input-view', block.id))
+									.then(response => this.view = response.data.html)
+									.catch(error => {
+										alert('Error');
+										console.log(error);
+									})
+							
+							},
+						}))
+					})
+				</script>
+
 			</div>
 	
 			<div class="h-full px-2 overflow-auto basis-3/5 border-x">
@@ -53,6 +79,7 @@
 				siteId: {{ $site->id }},
 				selectedBlock: null,
 				tab: 'text',
+
 
 			}))
 		})

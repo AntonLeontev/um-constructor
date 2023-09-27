@@ -25,6 +25,7 @@
     </div>
 
 	<button class="mt-3 btn" @click="fullscreen = true">Fullscreen</button>
+	<a class="mt-3 btn" href="{{ route('sites.show', $site->id) }}" target="_blank">Preview</a>
 
 	<div 
 		class="fixed top-0 bottom-0 right-0 left-0 z-30 flex justify-center items-center bg-[#000000cf]"

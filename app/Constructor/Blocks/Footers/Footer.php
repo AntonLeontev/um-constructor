@@ -8,5 +8,5 @@ class Footer extends AbstractBlock
 {
     protected static string $title = 'Footer';
 
-    protected static string $view = 'blocks.footers.footer';
+    protected static string $view = 'constructor.blocks.footers.footer';
 }

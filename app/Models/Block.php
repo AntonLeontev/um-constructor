@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\BlockClassCast;
 use App\Events\BlockCreating;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,31 +21,32 @@ class Block extends Model
         'is_active',
     ];
 
+    protected $casts = [
+        'class' => BlockClassCast::class,
+    ];
+
+    protected $dispatchesEvents = [
+        'creating' => BlockCreating::class,
+    ];
+
     public function site(): BelongsTo
     {
         return $this->belongsTo(Site::class);
     }
 
-    public function texts(): HasMany
+    public function stringData(): HasMany
     {
-        return $this->hasMany(Text::class);
+        return $this->hasMany(StringData::class);
     }
 
-    public function type(): BelongsTo
+    public function getSavedData(): array
     {
-        return $this->belongsTo(BlockType::class);
+        $result = [];
+
+        foreach ($this->stringData as $data) {
+            $result[$data->key] = $data->value;
+        }
+
+        return $result;
     }
-
-    public function jsonSerialize(): mixed
-    {
-        $array = array_merge($this->attributesToArray(), $this->relationsToArray());
-
-        $array['class'] = app($this->class);
-
-        return $array;
-    }
-
-    protected $dispatchesEvents = [
-        'creating' => BlockCreating::class,
-    ];
 }

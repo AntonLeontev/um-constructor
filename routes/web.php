@@ -44,8 +44,9 @@ Route::middleware('auth')
 
         Route::get('constructor/{site}', ConstructorController::class)->name('constructor');
 
-        Route::apiResource('sites', SiteController::class)->except(['index', 'show']);
+        Route::apiResource('sites', SiteController::class)->except(['index']);
         Route::apiResource('sites.blocks', BlockController::class)->shallow();
+        Route::get('blocks/{block}/input-view', [BlockController::class, 'inputView'])->name('blocks.input-view');
 
         Route::post('request', [OpenAIController::class, 'request'])->name('request');
         Route::post('copywriter/request', [OpenAIController::class, 'firstPage'])->name('copywriter.first-page');

@@ -8,5 +8,5 @@ class FirstScreen extends AbstractBlock
 {
     protected static string $title = 'First screen';
 
-    protected static string $view = 'blocks.firstScreens.firstScreen';
+    protected static string $view = 'constructor.blocks.firstScreens.firstScreen';
 }

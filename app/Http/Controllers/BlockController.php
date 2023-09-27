@@ -28,4 +28,11 @@ class BlockController extends Controller
 
         return response()->json('', Response::HTTP_NO_CONTENT);
     }
+
+    public function inputView(Block $block): JsonResponse
+    {
+        $html = $block->class->inputView($block->getSavedData());
+
+        return response()->json(['html' => $html]);
+    }
 }
