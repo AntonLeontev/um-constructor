@@ -21,4 +21,11 @@ class BlockController extends Controller
 
         return response()->json($block, Response::HTTP_CREATED);
     }
+
+    public function destroy(Block $block): JsonResponse
+    {
+        $block->delete();
+
+        return response()->json('', Response::HTTP_NO_CONTENT);
+    }
 }

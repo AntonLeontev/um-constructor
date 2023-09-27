@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('blocks', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Site::class);
+            $table->foreignIdFor(Site::class)->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->string('class');
             $table->unsignedSmallInteger('position');
