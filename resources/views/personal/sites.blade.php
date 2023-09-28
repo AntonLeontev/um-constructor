@@ -45,8 +45,7 @@
 							this.sites.push(response.data);
 						})
 						.catch(error => {
-							console.log(error);
-							alert('Error');
+							this.$dispatch('toast', {type: 'error', message: error.response.data.message})
 						})
 				},
 				

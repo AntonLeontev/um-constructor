@@ -18,8 +18,7 @@
 				this.sites.splice(index, 1);
 			})
 			.catch(error => {
-				console.log(error);
-				alert('Error');
+				this.$dispatch('toast', {type: 'error', message: error.response.data.message})
 			})
 	},
 	renaming() {
@@ -36,8 +35,7 @@
 				this.title = this.$refs.title.value;
 			})
 			.catch(error => {
-				console.log(error);
-				alert('Error');
+				this.$dispatch('toast', {type: 'error', message: error.response.data.message})
 			})
 	},
 }">

@@ -34,8 +34,7 @@
 									.get(route('blocks.preview', block.id))
 									.then(response => this.view = response.data.html)
 									.catch(error => {
-										alert('Error');
-										console.log(error);
+										this.$dispatch('toast', {type: 'error', message: error.response.data.message})
 									})
 							
 							},
@@ -59,8 +58,7 @@
 									.get(route('blocks.input-view', block.id))
 									.then(response => this.view = response.data.html)
 									.catch(error => {
-										alert('Error');
-										console.log(error);
+										this.$dispatch('toast', {type: 'error', message: error.response.data.message})
 									})
 							
 							},

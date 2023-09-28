@@ -13,7 +13,7 @@
 							this.$dispatch('value-updated', {key: this.$event.target.dataset.key, value: this.$event.target.value})
 						})
 						.catch(error => {
-							alert('Error');
+							this.$dispatch('toast', {type: 'error', message: error.response.data.message})
 						})
 				}
 			}">
