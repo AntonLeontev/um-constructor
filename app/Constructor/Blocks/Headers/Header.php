@@ -3,14 +3,13 @@
 namespace App\Constructor\Blocks\Headers;
 
 use App\Constructor\Blocks\AbstractBlock;
+use App\Support\Enums\DataType;
 
 class Header extends AbstractBlock
 {
     protected static string $title = 'Header';
 
     protected static string $view = 'constructor.blocks.Header.view';
-
-    protected static string $inputView = 'constructor.blocks.Header.input-view';
 
     public function dataDefaults(): array
     {
@@ -23,8 +22,8 @@ class Header extends AbstractBlock
     public function dataTypes(): array
     {
         return [
-            'company' => 'text',
-            'phone' => 'text',
+            'company' => DataType::string,
+            'phone' => DataType::string,
         ];
     }
 

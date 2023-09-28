@@ -6,7 +6,7 @@
 				:class="selectedBlock?.class === block.class && 'bg-primary'"
 				@click="selectedBlock = block"
 			>
-				<img :src="block.class.preview" alt="preview">
+				<img :src="block.class.image" alt="preview">
 				<p class="mt-2 text-center" x-text="block.title"></p>
 				
 				<button class="absolute transition opacity-0 group-hover:opacity-100 top-1 left-1 btn btn-ghost btn-circle btn-sm" @click.stop="deleteSiteBlock(block.id)">
@@ -36,7 +36,7 @@
 							:class="selected?.class === block.class && 'bg-primary'"
 							@click="selected = block"
 						>
-							<img :src="block.preview" alt="preview">
+							<img :src="block.image" alt="preview">
 							<p class="mt-2 text-center" x-text="block.title"></p>
 						</div>
 					</template>

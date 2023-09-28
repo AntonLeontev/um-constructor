@@ -12,11 +12,36 @@
 	>
 
 		{{-- sidebar --}}
-		@include('partials.constructor.blocks-list')
+		@include('constructor.partials.blocks-list')
 
 		<div class="flex basis-full">
 			<div class="flex flex-col items-center p-1 border-x basis-2/5">
-				@include('partials.first-page.preview')
+				@include('constructor.partials.preview')
+
+				{{-- <div x-data="view" class="w-full" x-html="view">
+					
+				</div>
+				<script>
+					document.addEventListener('alpine:init', () => {
+						Alpine.data('view', () => ({
+							view: '',
+
+							init() {
+								this.$watch('selectedBlock', block => this.update(block))
+							},
+							update(block) {
+								axios
+									.get(route('blocks.preview', block.id))
+									.then(response => this.view = response.data.html)
+									.catch(error => {
+										alert('Error');
+										console.log(error);
+									})
+							
+							},
+						}))
+					})
+				</script> --}}
 				
 				<div x-data="inputView" class="w-full" x-html="view">
 					

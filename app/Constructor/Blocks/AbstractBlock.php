@@ -10,18 +10,13 @@ abstract class AbstractBlock implements JsonSerializable
 
     protected static string $view;
 
-    protected static string $inputView;
+    protected static string $preview;
 
-    protected static string $preview = '/images/constructor/blocks/previews/default.png';
+    protected static string $image = '/images/constructor/blocks/previews/default.png';
 
     public function getTitle(): string
     {
         return static::$title;
-    }
-
-    public function getPreview(): string
-    {
-        return static::$preview;
     }
 
     public function dataDefaults(): array
@@ -43,7 +38,7 @@ abstract class AbstractBlock implements JsonSerializable
     {
         return [
             'title' => static::getTitle(),
-            'preview' => static::getPreview(),
+            'image' => static::$image,
             'class' => static::class,
         ];
     }
@@ -51,6 +46,13 @@ abstract class AbstractBlock implements JsonSerializable
     public function inputView(array $data = []): string
     {
         return $this->render('constructor.input-view', $data);
+    }
+
+    public function preview(array $data = []): string
+    {
+        $view = static::$preview ?? static::$view;
+
+        return $this->render($view, $data);
     }
 
     public function view(array $data = []): string

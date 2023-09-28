@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class StringData extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'block_id',
+        'key',
+        'value',
+    ];
 }
