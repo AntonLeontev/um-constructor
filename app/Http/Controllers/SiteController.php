@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SiteStoreRequest;
 use App\Http\Requests\SiteUpdateRequest;
 use App\Models\Site;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class SiteController extends Controller
@@ -12,7 +12,7 @@ class SiteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SiteStoreRequest $request)
     {
         $site = Site::create([
             'title' => $request->get('title'),

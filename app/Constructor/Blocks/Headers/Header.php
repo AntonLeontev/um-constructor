@@ -11,6 +11,10 @@ class Header extends AbstractBlock
 
     protected static string $view = 'constructor.blocks.Header.view';
 
+    protected static string $neuralText = 'constructor.blocks.Header.neural-text';
+
+    protected static string $neuralImage = 'constructor.blocks.Header.neural-image';
+
     public function dataDefaults(): array
     {
         return [

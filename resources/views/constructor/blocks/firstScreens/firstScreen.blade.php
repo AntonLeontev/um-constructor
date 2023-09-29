@@ -1,3 +1,3 @@
 <div>
-	I am The FirstScreen, bitch!
+	Just first screen block
 </div>

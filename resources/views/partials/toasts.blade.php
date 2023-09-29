@@ -1,7 +1,7 @@
 <div class="toast toast-end" x-data="toasts" @toast.window="add">
 	<template x-for="toast in toasts">
 		<div class="transition alert" :class="typeObject(toast.type)" @click="remove(toast.id)">
-			<span x-text="toast.message"></span>
+			<span class="max-w-[400px] whitespace-normal" x-text="toast.message"></span>
 		</div>
 	</template>
 </div>

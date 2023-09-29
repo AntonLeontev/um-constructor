@@ -12,6 +12,10 @@ abstract class AbstractBlock implements JsonSerializable
 
     protected static string $preview;
 
+    protected static string $neuralText;
+
+    protected static string $neuralImage;
+
     protected static string $image = '/images/constructor/blocks/previews/default.png';
 
     public function getTitle(): string
@@ -37,7 +41,7 @@ abstract class AbstractBlock implements JsonSerializable
     public function jsonSerialize(): mixed
     {
         return [
-            'title' => static::getTitle(),
+            'title' => static::$title,
             'image' => static::$image,
             'class' => static::class,
         ];

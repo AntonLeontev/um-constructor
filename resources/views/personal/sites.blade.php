@@ -13,7 +13,7 @@
 			</template>
         </div>
 
-        <button class="btn btn-accent" onclick="add_site.classList.add('modal-open')">Add Site</button>
+        <button class="btn btn-accent" onclick="add_site.showModal()">Add Site</button>
 
         <dialog id="add_site" class="modal">
             <div class="modal-box">
@@ -37,12 +37,12 @@
 				createSite() {
 					let data = new FormData(this.$event.target);
 					this.$event.target.reset();
-					add_site.classList.remove('modal-open');
 
 					axios
 						.post(route('sites.store'), data)
 						.then(response => {
 							this.sites.push(response.data);
+							add_site.close();
 						})
 						.catch(error => {
 							this.$dispatch('toast', {type: 'error', message: error.response.data.message})

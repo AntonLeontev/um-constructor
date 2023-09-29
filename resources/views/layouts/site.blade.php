@@ -7,6 +7,12 @@
         <title>@yield('title')</title>
 
 		@yield('head_scripts')
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+		</style>
     </head>
     <body class="min-h-screen">
 
