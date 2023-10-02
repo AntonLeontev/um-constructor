@@ -59,7 +59,6 @@ Route::middleware('auth')
         Route::post('blocks/{block}/text-generation', [OpenAIController::class, 'blockTextGeneration'])->name('blocks.text-generation');
 
         Route::post('request', [OpenAIController::class, 'request'])->name('request');
-        Route::post('text-generator/block', [OpenAIController::class, 'request'])->name('request');
         Route::post('copywriter/request', [OpenAIController::class, 'firstPage'])->name('copywriter.first-page');
 
         Route::prefix('midjourney')
