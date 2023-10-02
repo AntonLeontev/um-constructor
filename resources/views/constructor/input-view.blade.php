@@ -10,16 +10,14 @@
 				init() {
 					this.$watch('{{ $key }}', value => this.input(value))
 				},
-				input(value = null){
-					let val = value ?? this.$event.target.value;
-
+				input(value){
 					axios
 						.put(route('blocks.string-data.update', this.selectedBlock.id), {
 							key: '{{ $key }}',
-							value: val
+							value: value
 						})
 						.then(response => {
-							this.$dispatch('value-updated', {key: '{{ $key }}', value: val})
+							this.$dispatch('value-updated', {key: '{{ $key }}', value: value})
 						})
 						.catch(error => {
 							this.$dispatch('toast', {type: 'error', message: error.response.data.message})
@@ -33,7 +31,7 @@
 					type="text" 
 					class="w-full input input-primary" 
 					:value="{{ $key }}" 
-					{{-- @input.debounce.350ms="input" --}}
+					@input.debounce.350ms="input($el.value)"
 				>
 			</div>
 	
