@@ -4,6 +4,7 @@ namespace App\Constructor\Blocks\Headers;
 
 use App\Constructor\Blocks\AbstractBlock;
 use App\Support\Enums\DataType;
+use Illuminate\Http\Request;
 
 class Header extends AbstractBlock
 {
@@ -37,5 +38,14 @@ class Header extends AbstractBlock
             'company' => 'Company',
             'phone' => 'Phone Number',
         ];
+    }
+
+    public function textGeneration(Request $request): array
+    {
+        $systemMessage = 'Response format JSON: {"name": "Company name"}';
+
+        $userMessage = "Write company name. The company is engaged: {$request->get('goal')}. ";
+
+        return [$userMessage, $systemMessage];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Constructor\Blocks;
 
+use Illuminate\Http\Request;
 use JsonSerializable;
 
 abstract class AbstractBlock implements JsonSerializable
@@ -17,6 +18,8 @@ abstract class AbstractBlock implements JsonSerializable
     protected static string $neuralImage;
 
     protected static string $image = '/images/constructor/blocks/previews/default.png';
+
+    abstract public function textGeneration(Request $request): array;
 
     public function getTitle(): string
     {
@@ -62,6 +65,16 @@ abstract class AbstractBlock implements JsonSerializable
     public function view(array $data = []): string
     {
         return $this->render(static::$view, $data);
+    }
+
+    public function neuralText(array $data = []): string
+    {
+        return $this->render(static::$neuralText, $data);
+    }
+
+    public function neuralImage(array $data = []): string
+    {
+        return $this->render(static::$neuralImage, $data);
     }
 
     protected function render(string $view, array $data = []): string

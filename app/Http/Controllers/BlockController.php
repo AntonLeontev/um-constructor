@@ -49,4 +49,18 @@ class BlockController extends Controller
 
         return response()->json(['html' => $html]);
     }
+
+    public function neuralText(Block $block): JsonResponse
+    {
+        $html = $block->class->neuralText($block->getSavedData());
+
+        return response()->json(['html' => $html]);
+    }
+
+    public function neuralImage(Block $block): JsonResponse
+    {
+        $html = $block->class->neuralImage($block->getSavedData());
+
+        return response()->json(['html' => $html]);
+    }
 }

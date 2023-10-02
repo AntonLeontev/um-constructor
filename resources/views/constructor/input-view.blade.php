@@ -2,15 +2,24 @@
 	@foreach ($data as $key => $value)
 		@if ($types[$key] === App\Support\Enums\DataType::string)
 			
-			<div class="w-full" x-data="{
-				input(){
+			<div class="w-full" 
+			@insert-{{ $key }}.window="{{ $key }} = $event.detail"
+			x-data="{
+				{{ $key }}: '{{ $value }}',
+
+				init() {
+					this.$watch('{{ $key }}', value => this.input(value))
+				},
+				input(value = null){
+					let val = value ?? this.$event.target.value;
+
 					axios
 						.put(route('blocks.string-data.update', this.selectedBlock.id), {
-							key: this.$event.target.dataset.key,
-							value: this.$event.target.value
+							key: '{{ $key }}',
+							value: val
 						})
 						.then(response => {
-							this.$dispatch('value-updated', {key: this.$event.target.dataset.key, value: this.$event.target.value})
+							this.$dispatch('value-updated', {key: '{{ $key }}', value: val})
 						})
 						.catch(error => {
 							this.$dispatch('toast', {type: 'error', message: error.response.data.message})
@@ -23,10 +32,8 @@
 				<input 
 					type="text" 
 					class="w-full input input-primary" 
-					name="{{ $key }}" 
-					value="{{ $value }}" 
-					data-key="{{ $key }}"
-					@input.debounce.350ms="input"
+					:value="{{ $key }}" 
+					{{-- @input.debounce.350ms="input" --}}
 				>
 			</div>
 	

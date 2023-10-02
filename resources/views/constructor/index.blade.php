@@ -11,7 +11,7 @@
         @include('constructor.partials.blocks-list')
 
         <div class="flex basis-full">
-            <div class="flex basis-2/5 flex-col items-center border-x p-1">
+            <div class="flex flex-col items-center p-1 basis-2/5 border-x">
 
                 @include('constructor.partials.preview')
 
@@ -43,7 +43,7 @@
 
             </div>
 
-            <div class="h-full basis-3/5 overflow-auto border-x px-2">
+            <div class="h-full px-2 overflow-auto basis-3/5 border-x">
 
                 @include('constructor.partials.neural')
 

@@ -2,17 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Block;
 use App\Services\OpenAI\OpenAIService;
 use Illuminate\Http\Request;
 
 class OpenAIController extends Controller
 {
-    public function request(Request $request, OpenAIService $service)
+    public function __construct(private OpenAIService $service)
     {
-        return $service->complete($request->get('request'), $request->model);
     }
 
-    public function firstPage(Request $request, OpenAIService $service)
+    public function request(Request $request)
+    {
+        return $this->service->complete($request->get('request'), $request->model);
+    }
+
+    public function blockTextGeneration(Block $block, Request $request)
+    {
+        [$userMessage, $systemMessage] = $block->class->textGeneration($request);
+
+        $response = $this->service->firstPageBundle($userMessage, $systemMessage);
+
+        $choices = $response->json('choices');
+        $results = [];
+
+        foreach ($choices as $choice) {
+            $content = json_decode($choice['message']['content']);
+
+            $results[] = $content;
+        }
+
+        return response()->json($results);
+    }
+
+    public function firstPage(Request $request)
     {
         $systemMessage = 'Формат ответа JSON: {"title": "Заголовок", "subtitle": "Подзаголовок", "button": "Текст кнопки"}';
         // Заголовок не длиннее {$request->max_title} слов.
@@ -44,7 +67,7 @@ class OpenAIController extends Controller
             $userMessage .= "Дополнительные требования: {$request->additionally}. ";
         }
 
-        $response = $service->firstPageBundle($userMessage, $systemMessage, $request->n, $request->model ?? 'gpt-3.5-turbo');
+        $response = $this->service->firstPageBundle($userMessage, $systemMessage, $request->n, $request->model ?? 'gpt-3.5-turbo');
 
         $choices = $response->json('choices');
         $results = [];

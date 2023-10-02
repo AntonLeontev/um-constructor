@@ -1,4 +1,9 @@
-<div class="toast toast-end" x-data="toasts" @toast.window="add">
+<div 
+	class="toast toast-end" 
+	x-data="toasts" 
+	@toast.window="add"
+	@toast-error.window="addError"
+>
 	<template x-for="toast in toasts">
 		<div class="transition alert" :class="typeObject(toast.type)" @click="remove(toast.id)">
 			<span class="max-w-[400px] whitespace-normal" x-text="toast.message"></span>
@@ -28,6 +33,13 @@
 					id: this.toasts.length + 1,
 					message: this.$event.detail.message,
 					type: this.$event.detail.type,
+				})
+			},
+			addError() {
+				this.toasts.push({
+					id: this.toasts.length + 1,
+					message: this.$event.detail,
+					type: 'error',
 				})
 			},
 

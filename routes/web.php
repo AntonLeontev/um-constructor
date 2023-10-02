@@ -51,10 +51,15 @@ Route::middleware('auth')
         Route::get('blocks/{block}/input-view', [BlockController::class, 'inputView'])->name('blocks.input-view');
         Route::get('blocks/{block}/preview', [BlockController::class, 'preview'])->name('blocks.preview');
         Route::get('blocks/{block}/view', [BlockController::class, 'view'])->name('blocks.view');
+        Route::get('blocks/{block}/neural-text', [BlockController::class, 'neuralText'])->name('blocks.neural-text');
+        Route::get('blocks/{block}/neural-image', [BlockController::class, 'neuralImage'])->name('blocks.neural-image');
 
-        Route::put('block/{block}/string-data', [StringDataController::class, 'update'])->name('blocks.string-data.update');
+        Route::put('blocks/{block}/string-data', [StringDataController::class, 'update'])->name('blocks.string-data.update');
+
+        Route::post('blocks/{block}/text-generation', [OpenAIController::class, 'blockTextGeneration'])->name('blocks.text-generation');
 
         Route::post('request', [OpenAIController::class, 'request'])->name('request');
+        Route::post('text-generator/block', [OpenAIController::class, 'request'])->name('request');
         Route::post('copywriter/request', [OpenAIController::class, 'firstPage'])->name('copywriter.first-page');
 
         Route::prefix('midjourney')

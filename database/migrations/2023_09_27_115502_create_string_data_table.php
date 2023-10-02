@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Block::class)->constrained()->cascadeOnDelete();
             $table->string('key', 100)->index();
-            $table->string('value');
+            $table->string('value')->nullable();
             $table->timestamps();
         });
     }
