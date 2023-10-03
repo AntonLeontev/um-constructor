@@ -3,7 +3,7 @@
 @section('title', 'Home')
 
 @section('content')
-	<div class="container min-h-screen mx-auto">
+	{{-- <div class="container min-h-screen mx-auto">
 		<div class="flex items-center w-full h-screen py-3" x-data="requests">
 			<div class="flex flex-col md:flex-row items-center justify-between gap-y-10 md:max-h-[300px] md:h-[50vh] w-full">
 				<textarea 
@@ -87,5 +87,5 @@
 				}))
 			})
 		</script>
-	</div>
+	</div> --}}
 @endsection
