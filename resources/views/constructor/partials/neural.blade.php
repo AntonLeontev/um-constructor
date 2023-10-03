@@ -1,10 +1,10 @@
 <div x-data="neural">
 	<x-shared.tabs class="py-5">
 		<a class="transition tab tab-lg" :class="tab === 'text' && 'tab-active'" @click="tab = 'text'" x-show="neuralText">
-			Текст
+			Text
 		</a>
 		<a class="transition tab tab-lg" :class="tab === 'pic' && 'tab-active'" @click="tab = 'pic'" x-show="neuralImage">
-			Картинки
+			Images
 		</a>
 	</x-shared.tabs>
 	
@@ -30,7 +30,12 @@
 					axios
 						.get(route('blocks.neural-text', block.id))
 						.then(response => this.neuralText = response.data.html)
-						.catch(error => this.$dispatch('toast', {type: 'error', message: error.response.data.error}))
+						.catch(error => this.$dispatch('toast-error', {message: error.response.data.error}))
+
+					axios
+						.get(route('blocks.neural-image', block.id))
+						.then(response => this.neuralImage = response.data.html)
+						.catch(error => this.$dispatch('toast-error', {message: error.response.data.error}))
 				})
 			},
 		}))

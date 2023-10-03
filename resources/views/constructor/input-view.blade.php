@@ -1,11 +1,11 @@
 <div class="w-full p-2">
-	@foreach ($data as $key => $value)
-		@if ($types[$key] === App\Support\Enums\DataType::string)
+	@foreach ($data as $key => $properties)
+		@if ($properties['type'] === App\Support\Enums\DataType::string)
 			
 			<div class="w-full" 
 			@insert-{{ $key }}.window="{{ $key }} = $event.detail"
 			x-data="{
-				{{ $key }}: '{{ $value }}',
+				{{ $key }}: '{{ $properties['value'] }}',
 
 				init() {
 					this.$watch('{{ $key }}', value => this.input(value))
@@ -25,7 +25,7 @@
 				}
 			}">
 				<label class="label">
-					{{ $labels[$key] ?? $key }}
+					{{ $properties['label'] ?? $key }}
 				</label>
 				<input 
 					type="text" 
@@ -37,24 +37,24 @@
 	
 		@endif
 
-		@if ($types[$key] === App\Support\Enums\DataType::image)
+		@if ($properties['type'] === App\Support\Enums\DataType::image)
 			
 			<div class="w-full">
 				<label class="label">
-					{{ $labels[$key] ?? $key }}
+					{{ $properties['value'] }}
 				</label>
-				<input type="file" class="w-full file-input file-input-primary" name="{{ $key }}" value="{{ $value }}">
+				<input type="file" class="w-full file-input file-input-primary" name="{{ $key }}" value="{{ $properties['value'] }}">
 			</div>
 	
 		@endif
 		
-		@if ($types[$key] === App\Support\Enums\DataType::text)
+		@if ($properties['type'] === App\Support\Enums\DataType::text)
 			
 			<div class="w-full">
 				<label class="label">
-					{{ $labels[$key] ?? $key }}
+					{{ $properties['value'] }}
 				</label>
-				<textarea type="text" class="w-full textarea textarea-primary h-[200px]" name="{{ $key }}">{{ $value }}</textarea>
+				<textarea type="text" class="w-full textarea textarea-primary h-[200px]" name="{{ $key }}">{{ $properties['value'] }}</textarea>
 			</div>
 	
 		@endif

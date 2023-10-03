@@ -32,8 +32,7 @@
                                     .get(route('blocks.input-view', block.id))
                                     .then(response => this.view = response.data.html)
                                     .catch(error => {
-                                        alert('Error');
-                                        console.log(error);
+                                        this.$dispatch('toast-error', error.response.data.message)
                                     })
 
                             },
@@ -60,7 +59,7 @@
             Alpine.data('siteConstructor', () => ({
                 siteId: {{ $site->id }},
                 selectedBlock: null,
-                tab: 'text',
+                tab: 'pic',
 
 
             }))

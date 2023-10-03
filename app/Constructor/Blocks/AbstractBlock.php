@@ -26,17 +26,7 @@ abstract class AbstractBlock implements JsonSerializable
         return static::$title;
     }
 
-    public function dataDefaults(): array
-    {
-        return [];
-    }
-
-    public function dataTypes(): array
-    {
-        return [];
-    }
-
-    public function dataLabels(): array
+    public function dataProperties(): array
     {
         return [];
     }
@@ -79,12 +69,18 @@ abstract class AbstractBlock implements JsonSerializable
 
     protected function render(string $view, array $data = []): string
     {
-        $data = array_merge(static::dataDefaults(), $data);
+        $props = static::dataProperties();
+
+        foreach ($props as $name => $properties) {
+            if (empty($data[$name])) {
+                continue;
+            }
+
+            $props[$name]['value'] = $data[$name];
+        }
 
         return view($view, [
-            'data' => $data,
-            'types' => static::dataTypes(),
-            'labels' => static::dataLabels(),
+            'data' => $props,
         ])->render();
     }
 }

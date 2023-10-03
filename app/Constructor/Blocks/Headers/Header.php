@@ -16,27 +16,26 @@ class Header extends AbstractBlock
 
     protected static string $neuralImage = 'constructor.blocks.Header.neural-image';
 
-    public function dataDefaults(): array
+    public function dataProperties(): array
     {
         return [
-            'company' => __('default value'),
-            'phone' => '000-00-00',
-        ];
-    }
-
-    public function dataTypes(): array
-    {
-        return [
-            'company' => DataType::string,
-            'phone' => DataType::string,
-        ];
-    }
-
-    public function dataLabels(): array
-    {
-        return [
-            'company' => 'Company',
-            'phone' => 'Phone Number',
+            'company' => [
+                'value' => 'default company',
+                'type' => DataType::string,
+                'label' => 'Company',
+            ],
+            'phone' => [
+                'value' => '000-00-00',
+                'type' => DataType::string,
+                'label' => 'Phone Number',
+            ],
+            'logo' => [
+                'value' => '',
+                'type' => DataType::image,
+                'label' => 'Logo',
+                'width' => '100',
+                'height' => '100',
+            ],
         ];
     }
 
@@ -47,5 +46,10 @@ class Header extends AbstractBlock
         $userMessage = "Write company name. The company is engaged: {$request->get('goal')}. ";
 
         return [$userMessage, $systemMessage];
+    }
+
+    public function imageGeneration(Request $request)
+    {
+
     }
 }
