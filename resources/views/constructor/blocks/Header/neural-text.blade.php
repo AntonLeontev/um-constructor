@@ -24,12 +24,15 @@
 	}" 
 >
     <div class="flex w-full max-w-[1000px] flex-col gap-3 px-2">
-		<div class="flex gap-x-2">
+		<div class="flex flex-wrap gap-x-2">
 			<x-shared.forms.input class="w-full" name="goal" placeholder="Sale of wedding photographer services"
 				label="What does your company do?" required />
+				
+			<x-shared.forms.input class="w-full" type="number" name="n" value="3" min="1" max="7"
+				label="Number of options" required />
 		</div>
         <button type="submit" class="relative btn btn-accent" x-ref="button">
-			Сгенерировать
+			Generate
 			<span class="absolute right-[10px] text-black loading loading-ball loading-sm" x-show="loading" x-cloak></span>
 		</button>
 
@@ -41,8 +44,8 @@
 				<div>
 					<span 
 						class="p-1 cursor-pointer hover:bg-accent" 
-						x-text="choice.name"
-						@click="$dispatch('insert-company', choice.name)"
+						x-text="choice"
+						@click="$dispatch('insert-company', choice)"
 					></span>
 				</div>
 			</div>

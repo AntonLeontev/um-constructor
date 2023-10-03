@@ -7,7 +7,7 @@
 
         <div class="">Your sites:</div>
 
-        <div class="grid grid-cols-4 gap-4 justify-items-center">
+        <div class="grid grid-cols-4 gap-4 mb-3 justify-items-center">
 			<template x-for="site in sites">
 				<x-personal.sites.site />
 			</template>

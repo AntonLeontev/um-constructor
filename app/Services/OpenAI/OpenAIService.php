@@ -2,8 +2,6 @@
 
 namespace App\Services\OpenAI;
 
-use Illuminate\Http\Client\Response;
-
 class OpenAIService
 {
     public function __construct(public OpenAIApi $api)
@@ -17,10 +15,19 @@ class OpenAIService
         return $response->json();
     }
 
-    public function firstPageBundle(string $userMessage, string $systemMessage, int $n = 1, string $model = 'gpt-3.5-turbo'): Response
+    public function completion(string $userMessage, string $systemMessage, int $n = 1, string $model = 'gpt-3.5-turbo'): array
     {
         $response = $this->api->completion($userMessage, $systemMessage, n: $n, model: $model);
 
-        return $response;
+        $choices = $response->json('choices');
+        $results = [];
+
+        foreach ($choices as $choice) {
+            $content = $choice['message']['content'];
+
+            $results[] = $content;
+        }
+
+        return $results;
     }
 }

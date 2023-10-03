@@ -42,7 +42,7 @@ class Header extends AbstractBlock
 
     public function textGeneration(Request $request): array
     {
-        $systemMessage = 'Response format JSON: {"name": "Company name"}';
+        $systemMessage = 'Don\'t use quotation marks in answer. Answer format must be in format: company name. Example: company name';
 
         $userMessage = "Write company name. The company is engaged: {$request->get('goal')}. ";
 
