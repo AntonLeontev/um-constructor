@@ -2,11 +2,8 @@
 	class="w-full" 
 	x-data="preview" 
 	x-show="view"
-	@insert-image.window="image = $event.detail"
-	@insert-title.window="title = $event.detail"
-	@insert-subtitle.window="subtitle = $event.detail"
-	@insert-button.window="button = $event.detail"
 	@value-updated.window="updateValue"
+	@image-updated.window="updateImage"
 >
     <h3 class="mb-3 text-center text-[25px]">Preview</h3>
 
@@ -80,6 +77,9 @@
 			},
 			updateValue() {
 				this.$refs.preview.querySelector(`[data-key="${this.$event.detail.key}"]`).innerText = this.$event.detail.value;
+			},
+			updateImage() {
+				this.$refs.preview.querySelector(`[data-key="${this.$event.detail.key}"]`).src = this.$event.detail.value + '?' + new Date().getTime();
 			},
         }))
     })

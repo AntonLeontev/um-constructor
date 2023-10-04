@@ -3,7 +3,11 @@
 namespace App\Providers;
 
 use App\Events\BlockCreating;
+use App\Events\BlockDeleting;
+use App\Events\SiteDeleting;
 use App\Listeners\DefinePosition;
+use App\Listeners\DeleteBlockFiles;
+use App\Listeners\DeleteSiteFiles;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -23,6 +27,14 @@ class EventServiceProvider extends ServiceProvider
 
         BlockCreating::class => [
             DefinePosition::class,
+        ],
+
+        BlockDeleting::class => [
+            DeleteBlockFiles::class,
+        ],
+
+        SiteDeleting::class => [
+            DeleteSiteFiles::class,
         ],
     ];
 

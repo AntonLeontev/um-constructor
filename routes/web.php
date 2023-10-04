@@ -7,8 +7,7 @@ use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\StringDataController;
-use App\Models\Site;
-use App\Services\NextLeg\NextLegService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,11 +21,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', function (NextLegService $service) {
-    $r = Site::find(1)->blocks;
-
-    dd(json_encode($r));
-
+Route::any('/test', function (Request $request) {
+    $img = Image::make($request->image->path());
+    dd($img);
 })->name('test');
 
 Route::get('/', function () {
@@ -54,7 +51,8 @@ Route::middleware('auth')
         Route::get('blocks/{block}/neural-text', [BlockController::class, 'neuralText'])->name('blocks.neural-text');
         Route::get('blocks/{block}/neural-image', [BlockController::class, 'neuralImage'])->name('blocks.neural-image');
 
-        Route::put('blocks/{block}/string-data', [StringDataController::class, 'update'])->name('blocks.string-data.update');
+        Route::put('blocks/{block}/string-data', [StringDataController::class, 'stringUpdate'])->name('blocks.string-data.update');
+        Route::post('blocks/{block}/image-data', [StringDataController::class, 'imageUpdate'])->name('blocks.image-data.update');
 
         Route::post('blocks/{block}/text-generation', [OpenAIController::class, 'blockTextGeneration'])->name('blocks.text-generation');
 

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Site;
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
 
 class RefreshDb extends Command
 {
@@ -27,6 +28,7 @@ class RefreshDb extends Command
      */
     public function handle()
     {
+        Storage::disk('public')->deleteDirectory('images');
         $this->call('migrate:fresh');
 
         $user = User::create(['name' => 'Anton', 'email' => 'aner-anton@yandex.ru', 'password' => bcrypt('12345678')]);

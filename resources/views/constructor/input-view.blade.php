@@ -39,12 +39,25 @@
 
 		@if ($properties['type'] === App\Support\Enums\DataType::image)
 			
-			<div class="w-full">
-				<label class="label">
-					{{ $properties['value'] }}
-				</label>
-				<input type="file" class="w-full file-input file-input-primary" name="{{ $key }}" value="{{ $properties['value'] }}">
-			</div>
+			<form enctype="multipart/form-data" x-data="{
+				saveImage() {
+					let data = new FormData(this.$event.target.closest('form'));
+					axios
+						.post(route('blocks.image-data.update', this.selectedBlock.id), data)
+						.then(response => {
+							this.$dispatch('image-updated', {key: '{{ $key }}', value: response.data})
+						})
+						.catch(error => this.$dispatch('toast-error', error.response.data.message))
+				},
+			}">
+				<div class="w-full">
+					<label class="label">
+						{{ $properties['label'] ?? $key }}
+					</label>
+					<input type="file" class="w-full file-input file-input-primary" name="image" value="{{ $properties['value'] }}" @change="saveImage">
+					<input type="hidden" name="key" value="{{ $key }}">
+				</div>
+			</form>
 	
 		@endif
 		

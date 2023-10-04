@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Casts\BlockClassCast;
 use App\Events\BlockCreating;
+use App\Events\BlockDeleting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -27,6 +28,7 @@ class Block extends Model
 
     protected $dispatchesEvents = [
         'creating' => BlockCreating::class,
+        'deleting' => BlockDeleting::class,
     ];
 
     public function site(): BelongsTo

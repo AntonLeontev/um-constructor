@@ -82,6 +82,10 @@ class NextLegService
         $forbiddenButtons = [
             'Web',
             '🖌️ Vary (Region)',
+            'U1',
+            'U2',
+            'U3',
+            'U4',
             '⬅️',
             '➡️',
             '⬆️',
