@@ -9,19 +9,16 @@
 	</x-shared.tabs>
 	
 	<div class="mx-auto border shadow card" x-show="neuralText || neuralImage">
-		<div x-show="tab === 'text'" x-transition x-html="neuralText">
-			{{-- @include('partials.first-page.text') --}}
-		</div>
+		<div x-show="tab === 'text'" x-transition x-html="neuralText"></div>
 		
-		<div class="" x-show="tab === 'pic'" x-transition x-html="neuralImage">
-			{{-- @include('partials.first-page.pics') --}}
-		</div>
+		<div class="" x-show="tab === 'pic'" x-transition x-html="neuralImage"></div>
 	</div>
 </div>
 
 <script>
 	document.addEventListener('alpine:init', () => {
 		Alpine.data('neural', () => ({
+			tab: 'text',
 			neuralText: null,
 			neuralImage: null,
 			

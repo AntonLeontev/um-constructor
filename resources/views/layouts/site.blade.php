@@ -12,9 +12,13 @@
 				margin: 0;
 				padding: 0;
 			}
+			html,
+			body {
+				height: 100%;
+			}
 		</style>
     </head>
-    <body class="min-h-screen">
+    <body class="flex min-h-full flex-column">
 
 		@yield('content')
 		

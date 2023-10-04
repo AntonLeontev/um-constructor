@@ -3,6 +3,7 @@
 namespace App\Services\NextLeg;
 
 use App\Exceptions\Services\NextLeg\IncompleteMessageException;
+use Illuminate\Validation\ValidationException;
 
 class NextLegService
 {
@@ -54,6 +55,10 @@ class NextLegService
 
         if ($response->json('progress') === 'incomplete') {
             throw new IncompleteMessageException($messageId);
+        }
+
+        if ($response->json('response.content') === 'INVALID_PARAMETER') {
+            throw ValidationException::withMessages([$response->json('response.description')]);
         }
 
         $json = $response->json();

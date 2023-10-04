@@ -79,12 +79,12 @@
 		accept(number) {
 			axios
 				.post(route('blocks.image-data.update', this.selectedBlock.id), {
-					key: 'logo',
+					key: 'image',
 					link: this.imageUrl,
 					number: number,
 				})
 				.then(response => {
-					this.$dispatch('image-updated', {key: 'logo', value: response.data})
+					this.$dispatch('image-updated', {key: 'image', value: response.data})
 				})
 				.catch(error => {
 					this.$dispatch('toast-error', error.response.data.message);
@@ -105,7 +105,7 @@
 			<option value=".5">0.5</option>
 			<option value="1">1</option>
 		</select>
-		<input type="hidden" name="aspect" value="{{ data_get($data, 'logo.width') }}:{{ data_get($data, 'logo.height') }}">
+		<input type="hidden" name="aspect" value="{{ data_get($data, 'image.width') }}:{{ data_get($data, 'image.height') }}">
 	</div>
 	<div class="flex gap-1">
 		<button type="submit" class="btn btn-accent">Generate</button>

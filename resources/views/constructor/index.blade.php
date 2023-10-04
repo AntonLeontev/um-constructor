@@ -11,7 +11,7 @@
         @include('constructor.partials.blocks-list')
 
         <div class="flex basis-full">
-            <div class="flex flex-col items-center p-1 basis-2/5 border-x">
+            <div class="flex flex-col items-center p-1 overflow-y-auto basis-2/5 border-x">
 
                 @include('constructor.partials.preview')
 
@@ -59,7 +59,7 @@
             Alpine.data('siteConstructor', () => ({
                 siteId: {{ $site->id }},
                 selectedBlock: null,
-                tab: 'pic',
+                
 
 
             }))
