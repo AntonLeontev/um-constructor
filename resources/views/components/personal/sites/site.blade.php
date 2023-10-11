@@ -46,7 +46,7 @@
 		<form x-show="isRenaming"  x-ref="renameForm" @click.outside="isRenaming = false" @submit.prevent="rename">
 			<input type="text" name="title" class="w-full border-0" :value="title" x-ref="title" @blur="rename">
 		</form>
-        <a :href="route('constructor', site.id)" class="truncate" x-show="!isRenaming" x-text="title" :title="title"></a>
+        <a :href="route('personal.site', site.id)" class="truncate" x-show="!isRenaming" x-text="title" :title="title"></a>
     </div>
 
     <div class="absolute dropdown dropdown-left right-1 top-1">
@@ -69,7 +69,7 @@
                 </button>
             </li>
             <li>
-                <button class="flex justify-between">
+                <a :href="route('constructor', site.id)" class="flex justify-between">
                     Edit
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -77,7 +77,7 @@
                             d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                     </svg>
 
-                </button>
+                </a>
             </li>
             <li>
                 <button class="flex justify-between" @click="deleteSite(site.id)">

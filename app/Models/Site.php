@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\SiteCreated;
 use App\Events\SiteDeleting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,12 +18,18 @@ class Site extends Model
     ];
 
     protected $dispatchesEvents = [
+        'created' => SiteCreated::class,
         'deleting' => SiteDeleting::class,
     ];
 
     public function blocks(): HasMany
     {
         return $this->hasMany(Block::class)->orderBy('position');
+    }
+
+    public function domains(): HasMany
+    {
+        return $this->hasMany(Domain::class);
     }
 
     public function getBlocks(): array

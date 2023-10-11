@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Exceptions\Services\NextLeg\NextLegException;
+use App\Exceptions\Services\Timeweb\TimewebException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ServiceProvider;
@@ -32,11 +33,20 @@ class HttpServiceProvider extends ServiceProvider
                 ->asJson()
                 ->withHeaders(['Authorization' => 'Bearer '.config('services.nextLeg.authToken')])
                 ->throw(function (Response $response) {
-                    if ($response->status() === 400 && $response->json('isNaughty') === true) {
+                    if ($response->status() === 400 && $response->json('isNaughty')) {
                         throw ValidationException::withMessages($response->json());
                     }
 
                     throw new NextLegException($response);
+                });
+        });
+
+        Http::macro('timeweb', function () {
+            return Http::baseUrl('https://api.timeweb.cloud')
+                ->asJson()
+                ->withHeader('Authorization', 'Bearer '.config('services.timeweb.token'))
+                ->throw(function (Response $response) {
+                    throw new TimewebException($response, 1);
                 });
         });
     }

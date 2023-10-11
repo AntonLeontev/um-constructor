@@ -22,9 +22,13 @@ task('build', function () {
 
 // Hosts
 
-host('195.93.253.43')
+// host('195.93.253.43')
+//     ->set('remote_user', 'deployer')
+//     ->set('deploy_path', '~/umLanding');
+
+host('94.241.174.226')
     ->set('remote_user', 'deployer')
-    ->set('deploy_path', '~/umLanding');
+    ->set('deploy_path', '~/constructor');
 
 // Hooks
 

@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Events\BlockCreating;
 use App\Events\BlockDeleting;
+use App\Events\SiteCreated;
 use App\Events\SiteDeleting;
+use App\Listeners\CreateTechnicalDomain;
 use App\Listeners\DefinePosition;
 use App\Listeners\DeleteBlockFiles;
 use App\Listeners\DeleteSiteFiles;
@@ -31,6 +33,10 @@ class EventServiceProvider extends ServiceProvider
 
         BlockDeleting::class => [
             DeleteBlockFiles::class,
+        ],
+
+        SiteCreated::class => [
+            CreateTechnicalDomain::class,
         ],
 
         SiteDeleting::class => [

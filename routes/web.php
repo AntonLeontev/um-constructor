@@ -22,8 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::any('/test', function (Request $request) {
-    $img = Image::make($request->image->path());
-    dd($img);
+    return bcrypt('Gkdc6asvvr');
 })->name('test');
 
 Route::get('/', function () {
@@ -36,7 +35,8 @@ Route::middleware('auth')
         Route::prefix('personal')
             ->controller(PersonalController::class)
             ->group(function () {
-                Route::get('sites', 'sites')->name('personal.sites');
+                Route::get('sites', 'sitesIndex')->name('personal.sites');
+                Route::get('sites/{site}', 'siteShow')->name('personal.site');
 
             });
 

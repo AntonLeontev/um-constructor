@@ -27,4 +27,8 @@ return [
         'bot' => env('TELEGRAM_TOKEN'),
     ],
 
+    'timeweb' => [
+        'token' => env('TIMEWEB_TOKEN'),
+    ],
+
 ];
