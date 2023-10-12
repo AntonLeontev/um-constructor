@@ -4,11 +4,15 @@ namespace App\Providers;
 
 use App\Events\BlockCreating;
 use App\Events\BlockDeleting;
+use App\Events\DomainCreated;
 use App\Events\SiteCreated;
 use App\Events\SiteDeleting;
+use App\Listeners\CreateDomainOnHosting;
 use App\Listeners\CreateTechnicalDomain;
+use App\Listeners\CreateWebServerConfig;
 use App\Listeners\DefinePosition;
 use App\Listeners\DeleteBlockFiles;
+use App\Listeners\DeleteNginxConfigs;
 use App\Listeners\DeleteSiteFiles;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -41,6 +45,12 @@ class EventServiceProvider extends ServiceProvider
 
         SiteDeleting::class => [
             DeleteSiteFiles::class,
+            DeleteNginxConfigs::class,
+        ],
+
+        DomainCreated::class => [
+            CreateWebServerConfig::class,
+            CreateDomainOnHosting::class,
         ],
     ];
 

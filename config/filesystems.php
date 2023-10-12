@@ -44,6 +44,12 @@ return [
             'throw' => false,
         ],
 
+        'nginx' => [
+            'driver' => 'local',
+            'root' => base_path('nginx'),
+            'throw' => true,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

@@ -63,6 +63,8 @@ return [
 
     'asset_url' => env('ASSET_URL'),
 
+    'sudo_password' => env('SUDO_PASSWORD'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
