@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\SiteDeleting;
+use App\Events\SiteDeleted;
 use App\Jobs\DeleteDomainFromHosting;
 
 class DeleteDomainsOnHosting
@@ -18,8 +18,12 @@ class DeleteDomainsOnHosting
     /**
      * Handle the event.
      */
-    public function handle(SiteDeleting $event): void
+    public function handle(SiteDeleted $event): void
     {
+        if (! app()->isProduction()) {
+            return;
+        }
+
         foreach ($event->site->domains as $domain) {
             dispatch(new DeleteDomainFromHosting($domain->title));
         }

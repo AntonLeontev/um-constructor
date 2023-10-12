@@ -2,12 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\SiteDeleting;
+use App\Events\SiteDeleted;
 use Illuminate\Support\Facades\Storage;
 
 class DeleteSiteFiles
 {
-    public function handle(SiteDeleting $event): void
+    public function handle(SiteDeleted $event): void
     {
         Storage::disk('public')
             ->deleteDirectory("images/sites/{$event->site->id}");

@@ -6,7 +6,7 @@ use App\Events\BlockCreating;
 use App\Events\BlockDeleting;
 use App\Events\DomainCreated;
 use App\Events\SiteCreated;
-use App\Events\SiteDeleting;
+use App\Events\SiteDeleted;
 use App\Listeners\CreateDomainOnHosting;
 use App\Listeners\CreateTechnicalDomain;
 use App\Listeners\CreateWebServerConfig;
@@ -44,7 +44,7 @@ class EventServiceProvider extends ServiceProvider
             CreateTechnicalDomain::class,
         ],
 
-        SiteDeleting::class => [
+        SiteDeleted::class => [
             DeleteSiteFiles::class,
             DeleteNginxConfigs::class,
             DeleteDomainsOnHosting::class,
