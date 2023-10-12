@@ -4,8 +4,6 @@ namespace App\Contracts;
 
 interface HostingApiService
 {
-    public $api;
-
     public function addSubdomain(string $domain, string $subdomain): void;
 
     public function addDomain(string $domain): void;
