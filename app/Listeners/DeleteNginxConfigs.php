@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\SiteDeleting;
-use Illuminate\Support\Facades\Process;
+use App\Services\Process\ProcessService;
 use Illuminate\Support\Facades\Storage;
 
 class DeleteNginxConfigs
@@ -12,6 +12,6 @@ class DeleteNginxConfigs
     {
         Storage::disk('nginx')->deleteDirectory($event->site->id);
 
-        Process::run('/usr/bin/sudo -S /usr/sbin/nginx -s reload');
+        ProcessService::reloadNginx();
     }
 }

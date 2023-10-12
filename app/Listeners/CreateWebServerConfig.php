@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\DomainCreated;
-use Illuminate\Support\Facades\Process;
+use App\Services\Process\ProcessService;
 use Illuminate\Support\Facades\Storage;
 
 class CreateWebServerConfig
@@ -16,6 +16,6 @@ class CreateWebServerConfig
 
         Storage::disk('nginx')->put("{$domain->site_id}/{$domain->title}", $content);
 
-        Process::run('/usr/bin/sudo -S nginx -s reload');
+        ProcessService::reloadNginx();
     }
 }
