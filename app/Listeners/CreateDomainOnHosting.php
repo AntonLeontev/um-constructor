@@ -23,12 +23,12 @@ class CreateDomainOnHosting
             return;
         }
 
-        if (str($event->domain)->contains(config('server.domain'))) {
-            $this->service->addSubdomain(config('server.domain'), $event->domain);
+        if (str($event->domain->title)->contains(config('server.domain'))) {
+            $this->service->addSubdomain(config('server.domain'), $event->domain->title);
 
             return;
         }
 
-        $this->service->addDomain($event->domain);
+        $this->service->addDomain($event->domain->title);
     }
 }
