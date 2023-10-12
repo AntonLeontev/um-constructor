@@ -9,8 +9,12 @@ require 'recipe/laravel.php';
 set('repository', 'https://github.com/AntonLeontev/um-landing.git');
 
 add('shared_files', []);
-add('shared_dirs', []);
-add('writable_dirs', []);
+add('shared_dirs', [
+    'nginx',
+]);
+add('writable_dirs', [
+    'nginx',
+]);
 
 // Tasks
 

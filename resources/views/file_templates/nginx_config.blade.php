@@ -3,7 +3,7 @@ server {
 	listen [::]:80;
 
 	server_name {{ $domain->title }};
-	root /home/aner/web_dev/UMCT/UM_constructor/public/;
+	root {{ config('server.root') }};
 	index index.php;
 
 	add_header X-Frame-Options "SAMEORIGIN";
@@ -21,7 +21,7 @@ server {
     error_page 404 /index.php;
 
     location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+        fastcgi_pass unix:/var/run/php/php{{ config('server.php_version') }}-fpm.sock;
         fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         include fastcgi_params;
     }

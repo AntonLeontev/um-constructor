@@ -12,7 +12,7 @@ class CreateTechnicalDomain
         $site = $event->site;
 
         if (app()->isProduction()) {
-            $title = $site->user_id.time().'.'.config('app.domain');
+            $title = $site->user_id.time().'.'.config('server.domain');
         }
 
         if (app()->isLocal()) {

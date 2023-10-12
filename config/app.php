@@ -59,11 +59,7 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'domain' => env('APP_DOMAIN'),
-
     'asset_url' => env('ASSET_URL'),
-
-    'sudo_password' => env('SUDO_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------
