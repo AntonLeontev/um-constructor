@@ -26,6 +26,10 @@ class CheckNestedSite
             return app(SiteController::class)->show($site);
         }
 
+        if ($request->host() === config('server.domain')) {
+            return $next($request);
+        }
+
         abort(404, 'Not found');
     }
 }
