@@ -45,6 +45,7 @@ class HttpServiceProvider extends ServiceProvider
             return Http::baseUrl('https://api.timeweb.cloud')
                 ->asJson()
                 ->withHeader('Authorization', 'Bearer '.config('services.timeweb.token'))
+                ->retry(3, 100)
                 ->throw(function (Response $response) {
                     throw new TimewebException($response, 1);
                 });

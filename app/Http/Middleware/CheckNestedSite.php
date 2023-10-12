@@ -22,9 +22,10 @@ class CheckNestedSite
         if ($domain = Domain::where('title', $request->host())->first()) {
             $site = Site::find($domain->site_id);
 
+            //TODO change view to scriptless
             return app(SiteController::class)->show($site);
         }
 
-        return $next($request);
+        abort(404, 'Not found');
     }
 }

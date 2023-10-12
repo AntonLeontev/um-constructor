@@ -22,7 +22,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::any('/test', function (Request $request) {
-    return bcrypt('Gkdc6asvvr');
+    $domain = 'test.loc';
+    $sub = '123.test.loc';
+
+    return str($sub)->remove($domain)->trim('.')->value();
 })->name('test');
 
 Route::get('/', function () {

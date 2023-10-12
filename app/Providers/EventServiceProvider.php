@@ -12,6 +12,7 @@ use App\Listeners\CreateTechnicalDomain;
 use App\Listeners\CreateWebServerConfig;
 use App\Listeners\DefinePosition;
 use App\Listeners\DeleteBlockFiles;
+use App\Listeners\DeleteDomainsOnHosting;
 use App\Listeners\DeleteNginxConfigs;
 use App\Listeners\DeleteSiteFiles;
 use Illuminate\Auth\Events\Registered;
@@ -46,6 +47,7 @@ class EventServiceProvider extends ServiceProvider
         SiteDeleting::class => [
             DeleteSiteFiles::class,
             DeleteNginxConfigs::class,
+            DeleteDomainsOnHosting::class,
         ],
 
         DomainCreated::class => [
