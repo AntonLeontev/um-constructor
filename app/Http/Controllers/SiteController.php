@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SiteDestroyRequest;
+use App\Http\Requests\SiteShowRequest;
 use App\Http\Requests\SiteStoreRequest;
 use App\Http\Requests\SiteUpdateRequest;
 use App\Models\Site;
@@ -25,7 +27,7 @@ class SiteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Site $site)
+    public function show(Site $site, SiteShowRequest $request)
     {
         return view('constructor.site-preview', compact('site'));
     }
@@ -41,7 +43,7 @@ class SiteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Site $site)
+    public function destroy(Site $site, SiteDestroyRequest $request)
     {
         $site->delete();
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ConstructorRequest extends FormRequest
 {
@@ -24,5 +25,10 @@ class ConstructorRequest extends FormRequest
         return [
             //
         ];
+    }
+
+    protected function failedAuthorization()
+    {
+        throw new NotFoundHttpException();
     }
 }

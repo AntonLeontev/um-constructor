@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class SiteUpdateRequest extends FormRequest
+class SiteShowRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +23,12 @@ class SiteUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:150'],
+            //
         ];
+    }
+
+    protected function failedAuthorization()
+    {
+        throw new NotFoundHttpException();
     }
 }
