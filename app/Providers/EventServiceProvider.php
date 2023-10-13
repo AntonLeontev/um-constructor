@@ -8,6 +8,7 @@ use App\Events\DomainCreated;
 use App\Events\SiteCreated;
 use App\Events\SiteDeleted;
 use App\Listeners\CreateDomainOnHosting;
+use App\Listeners\CreateSiteGeneral;
 use App\Listeners\CreateTechnicalDomain;
 use App\Listeners\CreateWebServerConfig;
 use App\Listeners\DefinePosition;
@@ -42,6 +43,7 @@ class EventServiceProvider extends ServiceProvider
 
         SiteCreated::class => [
             CreateTechnicalDomain::class,
+            CreateSiteGeneral::class,
         ],
 
         SiteDeleted::class => [

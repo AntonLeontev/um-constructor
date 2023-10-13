@@ -7,6 +7,7 @@ use App\Events\SiteDeleted;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Site extends Model
 {
@@ -30,6 +31,11 @@ class Site extends Model
     public function domains(): HasMany
     {
         return $this->hasMany(Domain::class);
+    }
+
+    public function general(): HasOne
+    {
+        return $this->hasOne(SiteGeneral::class);
     }
 
     public function getBlocks(): array

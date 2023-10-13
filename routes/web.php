@@ -6,6 +6,7 @@ use App\Http\Controllers\NextLegController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\SiteGeneralController;
 use App\Http\Controllers\StringDataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,7 @@ Route::middleware('auth')
 
         Route::apiResource('sites', SiteController::class)->except(['index']);
         Route::apiResource('sites.blocks', BlockController::class)->shallow();
+        Route::put('generals/{general}', [SiteGeneralController::class, 'update'])->name('generals.update');
 
         Route::get('blocks/{block}/input-view', [BlockController::class, 'inputView'])->name('blocks.input-view');
         Route::get('blocks/{block}/preview', [BlockController::class, 'preview'])->name('blocks.preview');

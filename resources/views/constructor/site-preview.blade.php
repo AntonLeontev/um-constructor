@@ -1,6 +1,12 @@
 @extends('layouts.site')
 
-@section('title', 'Title')
+@section('title', $site->general->title ?? 'Title')
+
+@section('description', $site->general->description)
+
+@section('head_scripts')
+	{!! $site->general->head_scripts !!}
+@endsection
 
 @section('content')
 	@if ($site->blocks->isEmpty())
@@ -20,4 +26,8 @@
 			{!! $block->class->view($block->getSavedData()) !!}
 		@endforeach
 	@endif
+@endsection
+
+@section('body_scripts')
+	{!! $site->general->body_scripts !!}
 @endsection

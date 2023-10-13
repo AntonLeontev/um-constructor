@@ -16,7 +16,7 @@ class CreateTechnicalDomain
         }
 
         if (app()->isLocal()) {
-            $title = '11697040354.dnwb.loc';
+            $title = 'site.dnwb.loc';
         }
 
         Domain::create(['site_id' => $site->id, 'title' => $title]);

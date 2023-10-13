@@ -15,6 +15,8 @@ class PersonalController extends Controller
 
     public function siteShow(Site $site)
     {
+        $site->load(['domains', 'general']);
+
         return view('personal.site', compact('site'));
     }
 }
