@@ -5,7 +5,9 @@
 @section('description', $site->general->description)
 
 @section('head_scripts')
-	{!! $site->general->head_scripts !!}
+	@unless (Route::is('sites.show'))
+		{!! $site->general->head_scripts !!}
+	@endunless
 @endsection
 
 @section('content')
@@ -29,5 +31,7 @@
 @endsection
 
 @section('body_scripts')
-	{!! $site->general->body_scripts !!}
+	@unless (Route::is('sites.show'))
+		{!! $site->general->body_scripts !!}
+	@endunless
 @endsection

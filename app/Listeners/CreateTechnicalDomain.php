@@ -19,6 +19,6 @@ class CreateTechnicalDomain
             $title = 'site.dnwb.loc';
         }
 
-        Domain::create(['site_id' => $site->id, 'title' => $title]);
+        Domain::create(['site_id' => $site->id, 'title' => $title, 'is_technical' => true]);
     }
 }

@@ -31,7 +31,7 @@
 				</ul>
 			</div>
 			<div class="w-full">
-				<div class="relative w-full" x-data="general" x-show="activeMenu === 'general'" x-cloak x-transition>
+				<div class="relative w-full" x-data="general" x-show="activeMenu === 'general'" x-cloak>
 					<h2 class="mb-3 text-2xl text-bold">General</h2>
 
 					<form x-ref="generalForm">
@@ -116,13 +116,110 @@
 					})
 				</script>
 
-				<div class="" x-show="activeMenu === 'domains'" x-cloak x-transition>
+				<div class="" x-show="activeMenu === 'domains'" x-cloak x-data="domains">
 					<h2 class="mb-3 text-2xl text-bold">Domains</h2>
 
-					@foreach ($site->domains as $domain)
-						<p>{{ $domain->title }}</p>
-					@endforeach
+					<p>This site is available at the following links:</p>
+
+					<div class="mb-5 overflow-x-auto">
+						<table class="table lg:text-lg">
+							<tbody>
+								<template x-for="domain in site.domains">
+									<tr>
+										<td>
+											<p x-text="domain.title"></p>
+										</td>
+										<td>
+											<a :href="'http://' + domain.title" class="btn btn-base btn-sm" target="_blank">
+												<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>
+											</a>
+										</td>
+										<td>
+											<template x-if="domain.is_technical">
+												<p class="text-gray-400">Technical domain</p>
+											</template>
+										</td>
+										<td class="flex justify-end">
+											<template x-if="!domain.is_technical">
+												<div class="dropdown dropdown-left">
+													<label tabindex="0" class="m-1 btn btn-xs btn-ghost">
+														<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" /></svg>
+													</label>
+													<ul tabindex="0" class="dropdown-content z-[1] menu flex flex-row flex-nowrap p-0 gap-x-2 shadow bg-base-100 rounded-box">
+														<li>
+															<a class="bg-error" @click="deleteDomain(domain)">
+																<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</template>
+										</td>
+									</tr>
+								</template>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="border collapse bg-base-200 border-primary">
+						<input type="checkbox" class="peer" /> 
+						<div class="flex items-center justify-center gap-2 collapse-title text-primary-content">
+							Add domain
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+
+						</div>
+						<div class="collapse-content text-primary-content"> 
+							<p>You can make the site accessible from your own domain. To do this, create a domain in the form below and change the NS settings at the registrar</p>
+							<p>NS servers:</p>
+							<ul class="p-2">
+								<li>ns1.timeweb.ru </li>
+								<li>ns2.timeweb.ru</li>
+								<li>ns3.timeweb.org</li>
+								<li>ns4.timeweb.org</li>
+							</ul>
+
+							<form class="flex items-end gap-3" @submit.prevent="submit">
+								<div class="w-full form-control">
+									<label class="label">
+										<span class="label-text">New domain</span>
+									</label>
+									<input 
+										type="text" 
+										name="domain" 
+										placeholder="mydomain.com" 
+										class="w-full input input-bordered input-primary" 
+									/>
+								</div>
+
+								<button type="submit" class="btn btn-primary">Add</button>
+							</form>
+						</div>
+					</div>
 				</div>
+				<script>
+					document.addEventListener('alpine:init', () => {
+						Alpine.data('domains', () => ({
+							submit() {
+								axios
+									.post(route('sites.domains.store', this.site.id), new FormData(this.$event.target))
+									.then(response => {
+										this.site.domains.push(response.data)
+										this.$event.target.reset()
+									})
+									.catch(error => this.$dispatch('toast-error', error.response.data.message))
+							},
+							deleteDomain(domain) {
+								axios
+									.delete(route('domains.destroy', domain.id))
+									.then(response => {
+										let index = this.site.domains.indexOf(domain)
+										this.site.domains.splice(index, 1)
+									})
+									.catch(error => this.$dispatch('toast-error', error.response.data.message))
+							},
+						}))
+					})
+				</script>
 			</div>
 		</div>
 	</div>
@@ -131,7 +228,7 @@
 		document.addEventListener('alpine:init', () => {
 			Alpine.data('site', () => ({
 				site: @json($site),
-				activeMenu: 'general',
+				activeMenu: 'domains',
 			}))
 		})
 	</script>

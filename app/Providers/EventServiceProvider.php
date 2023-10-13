@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Events\BlockCreating;
 use App\Events\BlockDeleting;
 use App\Events\DomainCreated;
+use App\Events\DomainDeleted;
 use App\Events\SiteCreated;
 use App\Events\SiteDeleted;
 use App\Listeners\CreateDomainOnHosting;
@@ -13,6 +14,8 @@ use App\Listeners\CreateTechnicalDomain;
 use App\Listeners\CreateWebServerConfig;
 use App\Listeners\DefinePosition;
 use App\Listeners\DeleteBlockFiles;
+use App\Listeners\DeleteDomainNginxConfig;
+use App\Listeners\DeleteDomainOnHosting;
 use App\Listeners\DeleteDomainsOnHosting;
 use App\Listeners\DeleteNginxConfigs;
 use App\Listeners\DeleteSiteFiles;
@@ -55,6 +58,11 @@ class EventServiceProvider extends ServiceProvider
         DomainCreated::class => [
             CreateWebServerConfig::class,
             CreateDomainOnHosting::class,
+        ],
+
+        DomainDeleted::class => [
+            DeleteDomainNginxConfig::class,
+            DeleteDomainOnHosting::class,
         ],
     ];
 

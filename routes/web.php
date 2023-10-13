@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlockController;
 use App\Http\Controllers\ConstructorController;
+use App\Http\Controllers\DomainController;
 use App\Http\Controllers\NextLegController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\PersonalController;
@@ -48,6 +49,7 @@ Route::middleware('auth')
 
         Route::apiResource('sites', SiteController::class)->except(['index']);
         Route::apiResource('sites.blocks', BlockController::class)->shallow();
+        Route::apiResource('sites.domains', DomainController::class)->only(['store', 'destroy'])->shallow();
         Route::put('generals/{general}', [SiteGeneralController::class, 'update'])->name('generals.update');
 
         Route::get('blocks/{block}/input-view', [BlockController::class, 'inputView'])->name('blocks.input-view');
