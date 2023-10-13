@@ -8,6 +8,7 @@ use App\Events\DomainCreated;
 use App\Events\DomainDeleted;
 use App\Events\SiteCreated;
 use App\Events\SiteDeleted;
+use App\Events\SiteDeleting;
 use App\Listeners\CreateDomainOnHosting;
 use App\Listeners\CreateSiteGeneral;
 use App\Listeners\CreateTechnicalDomain;
@@ -49,10 +50,13 @@ class EventServiceProvider extends ServiceProvider
             CreateSiteGeneral::class,
         ],
 
+        SiteDeleting::class => [
+            DeleteDomainsOnHosting::class,
+        ],
+
         SiteDeleted::class => [
             DeleteSiteFiles::class,
             DeleteNginxConfigs::class,
-            DeleteDomainsOnHosting::class,
         ],
 
         DomainCreated::class => [

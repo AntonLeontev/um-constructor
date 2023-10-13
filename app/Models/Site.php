@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Events\SiteCreated;
 use App\Events\SiteDeleted;
+use App\Events\SiteDeleting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -20,6 +21,7 @@ class Site extends Model
 
     protected $dispatchesEvents = [
         'created' => SiteCreated::class,
+        'deleting' => SiteDeleting::class,
         'deleted' => SiteDeleted::class,
     ];
 

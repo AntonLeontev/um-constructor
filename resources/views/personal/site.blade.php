@@ -228,7 +228,7 @@
 		document.addEventListener('alpine:init', () => {
 			Alpine.data('site', () => ({
 				site: @json($site),
-				activeMenu: 'domains',
+				activeMenu: 'general',
 			}))
 		})
 	</script>
