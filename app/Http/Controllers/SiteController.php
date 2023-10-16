@@ -7,6 +7,8 @@ use App\Http\Requests\SiteShowRequest;
 use App\Http\Requests\SiteStoreRequest;
 use App\Http\Requests\SiteUpdateRequest;
 use App\Models\Site;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response;
 
 class SiteController extends Controller
@@ -27,7 +29,12 @@ class SiteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Site $site, SiteShowRequest $request)
+    public function show(Site $site, SiteShowRequest $request): View|Factory
+    {
+        return view('constructor.site-preview', compact('site'));
+    }
+
+    public function showByDomain(Site $site): View|Factory
     {
         return view('constructor.site-preview', compact('site'));
     }

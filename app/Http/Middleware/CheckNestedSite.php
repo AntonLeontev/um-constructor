@@ -19,15 +19,14 @@ class CheckNestedSite
      */
     public function handle(Request $request, Closure $next): Response|View
     {
+        if ($request->host() === config('server.domain')) {
+            return $next($request);
+        }
+
         if ($domain = Domain::where('title', $request->host())->first()) {
             $site = Site::find($domain->site_id);
 
-            //TODO change view to scriptless
-            return app(SiteController::class)->show($site);
-        }
-
-        if ($request->host() === config('server.domain')) {
-            return $next($request);
+            return app(SiteController::class)->showByDomain($site);
         }
 
         abort(404, 'Not found');
