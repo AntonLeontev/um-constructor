@@ -47,6 +47,14 @@ class HttpServiceProvider extends ServiceProvider
                 ->withHeader('Authorization', 'Bearer '.config('services.timeweb.token'))
                 ->retry(3, 100)
                 ->throw(function (Response $response) {
+                    if (
+                        $response->getStatusCode() === 409
+                        && str($response->transferStats->getRequest()->getUri())->contains('add-domain')
+                        && $response->json('message') === 'Entity already exists'
+                    ) {
+                        throw ValidationException::withMessages(['This domain is already taken']);
+                    }
+
                     throw new TimewebException($response, 1);
                 });
         });

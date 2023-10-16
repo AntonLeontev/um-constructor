@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\DomainCreated;
+use App\Events\DomainCreating;
 use App\Events\DomainDeleted;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,7 +21,7 @@ class Domain extends Model
     ];
 
     protected $dispatchesEvents = [
-        'created' => DomainCreated::class,
+        'creating' => DomainCreating::class,
         'deleted' => DomainDeleted::class,
     ];
 

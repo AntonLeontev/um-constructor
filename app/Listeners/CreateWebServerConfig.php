@@ -2,13 +2,13 @@
 
 namespace App\Listeners;
 
-use App\Events\DomainCreated;
+use App\Events\DomainCreating;
 use App\Services\Process\ProcessService;
 use Illuminate\Support\Facades\Storage;
 
 class CreateWebServerConfig
 {
-    public function handle(DomainCreated $event): void
+    public function handle(DomainCreating $event): void
     {
         $domain = $event->domain;
 

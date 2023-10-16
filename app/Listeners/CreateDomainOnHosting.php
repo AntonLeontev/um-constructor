@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Contracts\HostingApiService;
-use App\Events\DomainCreated;
+use App\Events\DomainCreating;
 
 class CreateDomainOnHosting
 {
@@ -17,7 +17,7 @@ class CreateDomainOnHosting
     /**
      * Handle the event.
      */
-    public function handle(DomainCreated $event): void
+    public function handle(DomainCreating $event): void
     {
         if (! app()->isProduction()) {
             return;
