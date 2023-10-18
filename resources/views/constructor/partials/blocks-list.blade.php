@@ -35,6 +35,7 @@
 							class="p-1 transition border cursor-pointer" 
 							:class="selected?.class === block.class && 'bg-primary'"
 							@click="selected = block"
+							@dblclick="addBlock"
 						>
 							<img :src="block.image" alt="preview">
 							<p class="mt-2 text-center" x-text="block.title"></p>
