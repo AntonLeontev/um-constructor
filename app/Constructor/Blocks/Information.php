@@ -1,42 +1,36 @@
 <?php
 
-namespace App\Constructor\Blocks\Footers;
+namespace App\Constructor\Blocks;
 
-use App\Constructor\Blocks\AbstractBlock;
 use App\Support\Enums\DataType;
 use Illuminate\Http\Request;
 
-class Footer extends AbstractBlock
+class Information extends AbstractBlock
 {
-    protected static string $title = 'Footer';
+    protected static string $title = 'Information';
 
-    protected static string $view = 'constructor.blocks.Footer.view';
+    protected static string $view = 'constructor.blocks.Information.view';
 
-    protected static string $neuralText = 'constructor.blocks.Footer.neural-text';
+    protected static string $neuralText = 'constructor.blocks.Information.neural-text';
 
-    protected static string $neuralImage = 'constructor.blocks.Footer.neural-image';
+    protected static string $neuralImage = 'constructor.blocks.Information.neural-image';
 
     public function dataProperties(): array
     {
         return [
-            'email' => [
-                'value' => 'email',
+            'text' => [
+                'value' => 'Sample text',
                 'type' => DataType::string,
-                'label' => 'Email',
-            ],
-            'phone' => [
-                'value' => '000-00-00',
-                'type' => DataType::string,
-                'label' => 'Phone Number',
+                'label' => 'Text',
             ],
             'background_color' => [
-                'value' => '',
+                'value' => '#cccccc',
                 'type' => DataType::color,
                 'label' => 'Background color',
                 'css_property' => 'background-color',
             ],
             'font_color' => [
-                'value' => '',
+                'value' => '#ffffff',
                 'type' => DataType::color,
                 'label' => 'Font color',
                 'css_property' => 'color',

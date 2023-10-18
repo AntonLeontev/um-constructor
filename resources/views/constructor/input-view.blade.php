@@ -37,6 +37,42 @@
 	
 		@endif
 
+		@if ($properties['type'] === App\Support\Enums\DataType::color)
+			
+			<div class="w-full" 
+			x-data="{
+				{{ $key }}: '{{ $properties['value'] }}',
+
+				init() {
+					this.$watch('{{ $key }}', value => this.input(value))
+				},
+				change(value){
+					axios
+						.put(route('blocks.string-data.update', this.selectedBlock.id), {
+							key: '{{ $key }}',
+							value: value
+						})
+						.then(response => {
+							this.$dispatch('color-updated', {css: '{{ $properties['css_property'] }}', value: value})
+						})
+						.catch(error => {
+							this.$dispatch('toast', {type: 'error', message: error.response.data.message})
+						})
+				}
+			}">
+				<label class="label">
+					{{ $properties['label'] ?? $key }}
+				</label>
+				<input 
+					type="color" 
+					class="w-full" 
+					:value="{{ $key }}" 
+					@change="change($el.value)"
+				>
+			</div>
+	
+		@endif
+
 		@if ($properties['type'] === App\Support\Enums\DataType::image)
 			
 			<form enctype="multipart/form-data" x-data="{

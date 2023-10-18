@@ -7,4 +7,5 @@ enum DataType
     case string;
     case image;
     case text;
+    case color;
 }

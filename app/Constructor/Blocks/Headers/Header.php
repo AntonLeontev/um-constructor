@@ -36,6 +36,18 @@ class Header extends AbstractBlock
                 'width' => '100',
                 'height' => '100',
             ],
+            'background_color' => [
+                'value' => '',
+                'type' => DataType::color,
+                'label' => 'Background color',
+                'css_property' => 'background-color',
+            ],
+            'font_color' => [
+                'value' => '',
+                'type' => DataType::color,
+                'label' => 'Font color',
+                'css_property' => 'color',
+            ],
         ];
     }
 
