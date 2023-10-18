@@ -60,8 +60,8 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         DomainCreating::class => [
-            CreateWebServerConfig::class,
             CreateDomainOnHosting::class,
+            CreateWebServerConfig::class,
         ],
 
         DomainDeleted::class => [
