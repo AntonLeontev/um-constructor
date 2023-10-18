@@ -50,8 +50,7 @@
 	}
 
 	.first-screen-right .um-response__img {
-		max-width: 400px;
-		width: 100%;
+		max-width: 100%;
 		margin: 0 auto;
 		height: auto;
 		aspect-ratio: {{ data_get($data, 'image.width') }} / {{ data_get($data, 'image.height') }};

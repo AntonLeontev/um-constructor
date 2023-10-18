@@ -24,6 +24,7 @@
 
 	.first-screen-left.um-response {
 		background-color: #0B1331;
+		color: #fff;
 		padding-top: 58px;
 		padding-bottom: 61px;
 	}
@@ -48,6 +49,7 @@
 	}
 
 	.first-screen-left .um-response__img {
+		max-width: 100%;
 		margin: 0 auto;
 		height: auto;
 		aspect-ratio: {{ data_get($data, 'image.width') }} / {{ data_get($data, 'image.height') }};
