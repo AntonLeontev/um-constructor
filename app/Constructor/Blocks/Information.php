@@ -24,13 +24,13 @@ class Information extends AbstractBlock
                 'label' => 'Text',
             ],
             'background_color' => [
-                'value' => '#cccccc',
+                'value' => '',
                 'type' => DataType::color,
                 'label' => 'Background color',
                 'css_property' => 'background-color',
             ],
             'font_color' => [
-                'value' => '#ffffff',
+                'value' => '',
                 'type' => DataType::color,
                 'label' => 'Font color',
                 'css_property' => 'color',

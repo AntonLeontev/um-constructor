@@ -87,8 +87,13 @@
             <img data-key="logo" src="{{ data_get($data, 'logo.value') }}" alt="logo"
                 width="{{ data_get($data, 'logo.width') }}" height="{{ data_get($data, 'logo.height') }}">
         </a>
-        <div class="header__name">{{ data_get($data, 'company.value') }}</div>
-        <a class="header__link"
-            href="tel:{{ preg_replace('~\D~', '', data_get($data, 'phone.value')) }}">{{ data_get($data, 'phone.value') }}</a>
+        <div class="header__name" data-key="company">{{ data_get($data, 'company.value') }}</div>
+        <a 
+			class="header__link"
+            href="tel:{{ preg_replace('~\D~', '', data_get($data, 'phone.value')) }}"
+			data-key="phone"
+		>
+			{{ data_get($data, 'phone.value') }}
+		</a>
     </div>
 </section>
