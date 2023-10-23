@@ -45,6 +45,8 @@ Route::middleware('auth')
 
             });
 
+        Route::view('/dashboard', 'dashboard')->name('dashboard');
+
         Route::get('constructor/{site}', ConstructorController::class)->name('constructor');
 
         Route::apiResource('sites', SiteController::class)->except(['index']);

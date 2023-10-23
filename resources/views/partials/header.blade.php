@@ -16,11 +16,19 @@
 				<ul tabindex="0" class="z-20 p-2 mt-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
 					{{-- <li><a>Profile</a></li> --}}
 
+					@if (auth()->user()->email === 'aner-anton@yandex.ru')
+						<li>
+							<a href="/telescope" class="justify-between" target="_blank">
+								Telescope
+								<span class="badge">Admin</span>
+							</a>
+						</li>
+					@endif
+
 					@if (Route::has('personal.sites'))
 						<li>
 							<a href="{{ route('personal.sites') }}" class="justify-between">
 								Sites
-								<span class="badge">New</span>
 							</a>
 						</li>
 					@endif
