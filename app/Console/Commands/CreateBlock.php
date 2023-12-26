@@ -3,8 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Console\PromptsForMissingInput;
+use Illuminate\Support\Str;
 
-class CreateBlock extends Command
+class CreateBlock extends Command implements PromptsForMissingInput
 {
     /**
      * The name and signature of the console command.
@@ -25,11 +27,28 @@ class CreateBlock extends Command
      */
     public function handle()
     {
-        $dir = resource_path("views/constructor/blocks/{$this->argument('name')}");
+        $name = Str::of($this->argument('name'))->studly()->value();
+
+        $classDir = app_path('Constructor/Blocks');
+
+        $classContent = file_get_contents(resource_path('stubs/block.stub'));
+
+        $classContent = Str::of($classContent)->swap([
+            ':className' => $name,
+            ':title' => Str::of($name)->snake()->replace('_', ' ')->ucfirst()->value(),
+        ]);
+
+        if (! is_dir($classDir)) {
+            mkdir($classDir);
+        }
+
+        file_put_contents("$classDir/$name.php", $classContent);
+
+        $dir = resource_path("views/constructor/blocks/$name");
 
         if (! is_dir($dir)) {
             mkdir($dir);
-            file_put_contents($dir.'/neural-image.blade.php', '');
+            file_put_contents($dir.'/neural-image.blade.php', file_get_contents(resource_path('stubs/neural-image.stub')));
             file_put_contents($dir.'/neural-text.blade.php', '');
             file_put_contents($dir.'/view.blade.php', '');
         } else {

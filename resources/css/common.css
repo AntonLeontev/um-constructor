@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+/*common*/
+:root {
+    --text-second: #1F1F1F;
+    --text-grey: #909090;
+}
+
+body {
+    color: var(--text-second);
+}
+
+.um-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.d-grid_3 {
+    display: -ms-grid;
+    display: grid;
+    gap: 60px;
+}
+
+.um-mb-40 {
+    margin-bottom: 40px;
+}
+
+.um-d-flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 60px;
+}
+
+@media (min-width: 47.99875em) {
+    .d-grid_3 {
+        -ms-grid-columns: (1fr);
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 47.99875em) {
+    .um-d-flex {
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .d-grid_3 {
+      gap: 20px;
+    }
+}
+@media (max-width: 639.98px) {
+    .um-mb-40 {
+        margin-bottom: 20px;
+    }
+}
+@media (max-width: 479.98px) {
+    .um-container {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0 10px;
+    }
+}
+
+@media (min-width: 48em) and (max-width: 100em) {
+    @supports (gap: clamp( 1.25rem , -1.0576923077rem  +  4.8076923077vw , 3.75rem )) {
+        .d-grid_3 {
+            gap: clamp(1.25rem, -1.0576923077rem + 4.8076923077vw, 3.75rem);
+        }
+    }
+
+    @supports not (gap: clamp( 1.25rem , -1.0576923077rem  +  4.8076923077vw , 3.75rem )) {
+        .d-grid_3 {
+            gap: calc(1.25rem + 2.5 * (100vw - 48rem) / 52);
+        }
+    }
+
+    @supports (gap: clamp( 0.625rem , -2.2596153846rem  +  6.0096153846vw , 3.75rem )) {
+        .um-d-flex {
+            gap: clamp( 0.625rem , -2.2596153846rem  +  6.0096153846vw , 3.75rem );
+        }
+    }
+
+    @supports not (gap: clamp( 0.625rem , -2.2596153846rem  +  6.0096153846vw , 3.75rem )) {
+        .um-d-flex {
+            gap: calc(0.625rem + 3.125 * (100vw - 48rem) / 52);
+        }
+    }
+
+}

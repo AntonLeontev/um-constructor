@@ -1,107 +1,94 @@
 <style>
-    .um-footer {
-        padding: 120px 0;
+    /**header**/
+    .um-header {
+        padding: 40px 0;
     }
 
-    .um-footer .um-footer__container {
-        display: -webkit-box;
-        display: -ms-flexbox;
+
+    .um-header .um-header__inner {
         display: flex;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
         align-items: center;
-        -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
         justify-content: space-between;
         gap: 20px;
-        padding-top: 20px;
-        border-top: 1px solid var(--text-grey);
     }
 
-    .um-footer .um-footer__copy {
-        font-size: 18px;
-        color: var(--text-grey);
-    }
-
-    .um-footer .um-social {
-        display: -webkit-box;
-        display: -ms-flexbox;
+    .um-header .um-social {
         display: flex;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
         align-items: center;
-        -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
         justify-content: space-between;
         gap: 10px;
     }
 
-    .um-footer  .um-social__item {
-        -webkit-box-flex: 0;
-        -ms-flex: 0 0 21px;
+    .um-header .um-social__item {
         flex: 0 0 21px;
+
+        a {
+            display: flex;
+            align-items: center;
+        }
     }
 
-    .um-footer .um-social__item a {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
+    .um-header .um-logo {
+        text-transform: uppercase;
+        font-weight: 700;
+        line-height: 120%;
+        font-size: 25px;
+        &._img{
+            flex: 0 0 160px;
+            img{
+                object-fit: cover;
+                min-height: 27px;
+            }
+        }
     }
 
-    @media (max-width: 47.99875em) {
-        .um-footer {
-            padding: 40px 0;
+    .um-header .um-link {
+        color: var(--text-grey);
+        font-size: 18px;
+        white-space: nowrap;
+    }
+
+    @media (max-width: 640.98px) {
+        .um-header .um-header__social {
+            display: none;
         }
 
-        .um-footer .um-footer__container {
-            padding-top: 0;
-            border-top: 0;
-            -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            justify-content: center;
-            text-align: center;
+        .um-header .um-logo {
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 130%;
+            text-align: left;
+            &._img{
+                flex: 0 0 98px;
+                img{
+                    object-fit: cover;
+                    min-height: 23px;
+                }
+            }
         }
 
-        .um-footer .um-footer__copy {
-            border-top: 1px solid var(--text-grey);
-            padding-top: 20px;
-            -webkit-box-flex: 1;
-            -ms-flex: 1 1 100%;
-            flex: 1 1 100%;
+        .um-header .um-link {
+            font-size: 14px;
         }
-        .um-footer .um-social {
-            -webkit-box-flex: 1;
-            -ms-flex: 1 1 100%;
-            flex: 1 1 100%;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            justify-content: center;
+    }
+
+    @media (max-width: 479.98px) {
+        .um-header {
+            padding: 20px 0;
         }
-        .um-footer  .um-social__item {
-            -webkit-box-flex: 0;
-            -ms-flex: 0 0 42px;
-            flex: 0 0 42px;
+
+        .um-header .um-header__inner {
+            gap: 10px;
         }
 
     }
-
-    @media (max-width: 29.99875em) {
-        .um-footer .um-footer__copy {
-            font-size: 16px;
-        }
-
-    }
-
 </style>
-<section class="um-footer">
-    <div class="um-footer__container um-container">
-        <div class="um-footer__social um-social">
-            @if (data_get($data, 'instagram.value'))
+
+<section class="um-header" style="background-color: {{ data_get($data, 'background_color.value') }}; color: {{ data_get($data, 'font_color.value') }}">
+    <div class="um-header__container um-container">
+        <div class="um-header__inner">
+            <div class="um-header__social um-social">
+				@if (data_get($data, 'instagram.value') !== '#')
 					<div class="um-social__item">
 						<a href="{{ data_get($data, 'instagram.value') }}">
 							<svg class="instagram-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -112,7 +99,7 @@
 						</a>
 					</div>
 				@endif
-				@if (data_get($data, 'linkedin.value'))
+				@if (data_get($data, 'linkedin.value') !== '#')
 					<div class="um-social__item">
 						<a href="{{ data_get($data, 'linkedin.value') }}">
 							<svg class="linkedin-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -123,7 +110,7 @@
 						</a>
 					</div>
 				@endif
-				@if (data_get($data, 'facebook.value'))
+				@if (data_get($data, 'facebook.value') !== '#')
 					<div class="um-social__item">
 						<a href="{{ data_get($data, 'facebook.value') }}">
 							<svg class="facebook-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -134,7 +121,7 @@
 						</a>
 					</div>
 				@endif
-				@if (data_get($data, 'youtube.value'))
+				@if (data_get($data, 'youtube.value') !== '#')
 					<div class="um-social__item">
 						<a href="{{ data_get($data, 'youtube.value') }}">
 							<svg class="youtube-icon" width="22" height="18" viewBox="0 0 22 18" fill="none"
@@ -145,7 +132,7 @@
 						</a>
 					</div>
 				@endif
-				@if (data_get($data, 'tiktok.value'))
+				@if (data_get($data, 'tiktok.value') !== '#')
 					<div class="um-social__item">
 						<a href="{{ data_get($data, 'tiktok.value') }}">
 							<svg class="tiktok-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -156,7 +143,7 @@
 						</a>
 					</div>
 				@endif
-				@if(data_get($data, 'x.value'))
+				@if(data_get($data, 'x.value') !== '#')
 					<div class="um-social__item">
 						<a href="{{ data_get($data, 'x.value') }}">
 							<svg class="x-icon" width="21" height="24" viewBox="0 0 21 24" fill="none"
@@ -167,7 +154,15 @@
 						</a>
 					</div>
 				@endif
+            </div>
+            <div class="um-header__logo um-logo _img">
+                <img data-key="logo" src="{{ data_get($data, 'logo.value') }}" alt="Image"
+					width="{{ data_get($data, 'logo.width') }}" height="{{ data_get($data, 'logo.height') }}"
+				>
+            </div>
+            <div data-key="phone" class="um-header__contact">
+                <a href="tel:{{ preg_replace('~\D~', '', data_get($data, 'phone.value')) }}" class="um-link">{{ data_get($data, 'phone.value') }}</a>
+            </div>
         </div>
-        <div class="um-footer__copy">© {{ data_get($data, 'company.value') }}</div>
     </div>
 </section>

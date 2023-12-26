@@ -10,19 +10,8 @@
 		
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-		<style>
-			* {
-				margin: 0;
-				padding: 0;
-			}
-			html,
-			body {
-				height: 100%;
-				font-family: 'Roboto', sans-serif;
-			}
-		</style>
+		@vite(['resources/css/site.css'])
 
 		@yield('head_scripts')
     </head>

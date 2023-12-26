@@ -2,6 +2,10 @@
 
 @section('title', $site->title)
 
+@section('head_scripts')
+	@vite(['resources/css/common.css'])
+@endsection
+
 @section('content')
     @include('partials.gptRawForm')
 

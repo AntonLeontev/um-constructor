@@ -27,7 +27,7 @@ Route::any('/test', function (Request $request) {
     $domain = 'test.loc';
     $sub = '123.test.loc';
 
-    return str($sub)->remove($domain)->trim('.')->value();
+    return str('test string')->studly()->value();
 })->name('test');
 
 Route::get('/', function () {

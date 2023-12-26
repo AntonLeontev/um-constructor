@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Constructor\Blocks;
+
+use App\Support\Enums\DataType;
+use Illuminate\Http\Request;
+
+class :className extends AbstractBlock
+{
+    protected static string $title = ':title';
+
+    protected static string $view = 'constructor.blocks.:className.view';
+
+    protected static string $neuralText = 'constructor.blocks.:className.neural-text';
+
+    protected static string $neuralImage = 'constructor.blocks.:className.neural-image';
+
+    public function dataProperties(): array
+    {
+        return [
+            'background_color' => [
+                'value' => '',
+                'type' => DataType::color,
+                'label' => 'Background color',
+                'css_property' => 'background-color',
+            ],
+            'font_color' => [
+                'value' => '',
+                'type' => DataType::color,
+                'label' => 'Font color',
+                'css_property' => 'color',
+            ],
+        ];
+    }
+
+	/**
+	 * @return array [$userMessage, $systemMessage] 
+	 */
+    public function textGeneration(Request $request): array
+    {
+		return ['', ''];
+    }
+
+    public function imageGeneration(Request $request)
+    {
+
+    }
+}
