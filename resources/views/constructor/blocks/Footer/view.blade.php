@@ -168,6 +168,6 @@
 					</div>
 				@endif
         </div>
-        <div class="um-footer__copy">© {{ data_get($data, 'company.value') }}</div>
+        <div class="um-footer__copy">© <span data-key="company">{{ data_get($data, 'company.value') }}</span></div>
     </div>
 </section>
