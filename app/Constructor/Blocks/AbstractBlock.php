@@ -19,6 +19,8 @@ abstract class AbstractBlock implements JsonSerializable
 
     protected static string $image = '/images/constructor/blocks/previews/default.png';
 
+    protected bool $archived = false;
+
     abstract public function textGeneration(Request $request): array;
 
     public function getTitle(): string
@@ -65,6 +67,11 @@ abstract class AbstractBlock implements JsonSerializable
     public function neuralImage(array $data = []): string
     {
         return $this->render(static::$neuralImage, $data);
+    }
+
+    public function isArchived(): bool
+    {
+        return $this->archived;
     }
 
     protected function render(string $view, array $data = []): string

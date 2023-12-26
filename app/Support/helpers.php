@@ -14,7 +14,13 @@ if (! function_exists('blocks_list')) {
         $blocks = [];
 
         foreach ($classes as $class) {
-            $blocks[] = app($class);
+            $block = app($class);
+
+            if ($block->isArchived()) {
+                continue;
+            }
+
+            $blocks[] = $block;
         }
 
         return $blocks;

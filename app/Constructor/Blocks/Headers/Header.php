@@ -16,6 +16,8 @@ class Header extends AbstractBlock
 
     protected static string $neuralImage = 'constructor.blocks.Header.neural-image';
 
+    protected bool $archived = true;
+
     public function dataProperties(): array
     {
         return [
