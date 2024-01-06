@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Exceptions\Services\NextLeg\NextLegException;
+use App\Exceptions\Services\OpenAI\OpenAIException;
 use App\Exceptions\Services\Timeweb\TimewebException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
@@ -21,7 +22,10 @@ class HttpServiceProvider extends ServiceProvider
                 ->timeout(60)
                 ->asJson()
                 ->acceptJson()
-                ->baseUrl('https://api.openai.com/v1');
+                ->baseUrl('https://api.openai.com/v1')
+                ->throw(function (Response $response) {
+                    throw new OpenAIException($response);
+                });
         });
 
         Http::macro('discord', function () {

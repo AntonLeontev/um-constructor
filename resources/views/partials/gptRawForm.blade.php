@@ -58,7 +58,7 @@
                         this.response = response.data.choices[0].message.content;
                     })
                     .catch(error => {
-                        alert('Ошибка!')
+                        this.$dispatch('toast-error', error.response.data.message)
                         console.log(error);
                     })
 					.finally(() => {
