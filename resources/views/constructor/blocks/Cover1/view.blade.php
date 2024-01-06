@@ -54,7 +54,7 @@
         }
 
         .um-cover._absolute .um-cover__content {
-            padding-left: 50%;
+            padding-left: 45.225rem;
         }
     }
 
