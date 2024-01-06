@@ -54,16 +54,16 @@
                 axios
                     .post(route('request'), data)
                     .then(response => {
-                        this.response = response.data.choices[0].message.content;
                         console.log(response.data);
-
-                        this.loading = false;
+                        this.response = response.data.choices[0].message.content;
                     })
                     .catch(error => {
                         alert('Ошибка!')
                         console.log(error);
-                        this.loading = false;
                     })
+					.finally(() => {
+						this.loading = false;
+					})
             }
         }))
     })
