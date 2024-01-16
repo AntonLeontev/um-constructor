@@ -1,5 +1,5 @@
 <div 
-	class="toast toast-end" 
+	class="z-30 toast toast-end" 
 	x-data="toasts" 
 	@toast.window="add"
 	@toast-error.window="addError"
