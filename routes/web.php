@@ -3,12 +3,13 @@
 use App\Http\Controllers\BlockController;
 use App\Http\Controllers\ConstructorController;
 use App\Http\Controllers\DomainController;
-use App\Http\Controllers\NextLegController;
+use App\Http\Controllers\ImageGenerationController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SiteGeneralController;
 use App\Http\Controllers\StringDataController;
+use App\Services\LeonardoAI\LeonardoApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,10 +25,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::any('/test', function (Request $request) {
-    $domain = 'test.loc';
-    $sub = '123.test.loc';
 
-    return str('test string')->studly()->value();
+    dd(LeonardoApi::imagine('fancy cat on the roof under the moon', 400, 400)->json());
 })->name('test');
 
 Route::get('/', function () {
@@ -68,12 +67,10 @@ Route::middleware('auth')
         Route::post('request', [OpenAIController::class, 'request'])->name('request');
         Route::post('copywriter/request', [OpenAIController::class, 'firstPage'])->name('copywriter.first-page');
 
-        Route::prefix('midjourney')
-            ->controller(NextLegController::class)
+        Route::prefix('image-generation')
+            ->controller(ImageGenerationController::class)
             ->group(function () {
-                Route::post('imagine', 'imagine')->name('midjourney.imagine');
-                Route::post('get-message', 'getMessage')->name('midjourney.get-message');
-                Route::post('check-banned-words', 'checkBannedWords')->name('midjourney.check-banned-words');
-                Route::post('push-button', 'pushButton')->name('midjourney.push-button');
+                Route::post('imagine', 'imagine')->name('image.imagine');
+                Route::post('get-message', 'getMessage')->name('image.get-message');
             });
     });

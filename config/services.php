@@ -18,6 +18,10 @@ return [
         'token' => env('OPENAI_TOKEN', ''),
     ],
 
+    'leonardoAI' => [
+        'token' => env('LEONARDOAI_TOKEN', ''),
+    ],
+
     // Midjourney access
     'nextLeg' => [
         'authToken' => env('NEXT_LEG_TOKEN'),

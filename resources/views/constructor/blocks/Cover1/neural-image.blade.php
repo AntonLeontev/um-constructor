@@ -1,11 +1,9 @@
 <form 
 	x-data="{
 		messageId: null,
-		progress: 0,
-		buttons: [],
 		buttonMessageId: null,
 		imageUrl: null,
-		imageUrls: {},
+		images: [],
 		loading: false,
 
 		init() {
@@ -23,38 +21,33 @@
 			this.imageUrl = null;
 
 			axios
-				.post(route('midjourney.imagine'), data)
+				.post(route('image.imagine'), data)
 				.then(response => {
 					this.messageId = response.data.messageId;
 				})
 				.catch(error => {
 					this.loading = false;
-					this.$dispatch('toast-error', error.response.data.message)
+					this.$dispatch('toast-error', error.response.data.publicMessage ?? error.response.data.message)
 				})
 		},
 		getMessage() {
 			axios
-				.post(route('midjourney.get-message'), {messageId: this.messageId})
+				.post(route('image.get-message'), {messageId: this.messageId})
 				.then(response => {
-					this.progress = response.data.progress;
+					console.log(response)
+					this.progress = response.data.generations_by_pk.status;
 					
-					if (response.data.progress < 100) {
-						this.imageUrl = response.data.progressImageUrl;
-
+					if (response.data.generations_by_pk.status !== 'COMPLETE') {
 						setTimeout(() => this.getMessage(), 3000);
-
 						return;
 					}
 
-					this.imageUrl = response.data.response.imageUrl;
-					this.imageUrls = response.data.response.imageUrls;
-					this.buttons = response.data.response.buttons;
-					this.buttonMessageId = response.data.response.buttonMessageId;
+					this.images = response.data.generations_by_pk.generated_images;
 					this.loading = false;
 				})
 				.catch(error => {
+					this.$dispatch('toast-error', error.response.data.publicMessage ?? error.response.data.message)
 					this.loading = false;
-					this.$dispatch('toast-error', error.response.data.message)
 				})
 		},
 		pushButton(button) {
@@ -64,7 +57,7 @@
 			this.imageUrl = null;
 
 			axios
-				.post(route('midjourney.push-button'), {
+				.post(route('image.push-button'), {
 					buttonMessageId: this.buttonMessageId,
 					button: button,
 				})
@@ -73,7 +66,7 @@
 				})
 				.catch(error => {
 					this.loading = false;
-					this.$dispatch('toast-error', error.response.data.message)
+					this.$dispatch('toast-error', error.response.data.publicMessage ?? error.response.data.message)
 				})
 		},
 		accept(number) {
@@ -87,7 +80,7 @@
 					this.$dispatch('image-updated', {key: 'image', value: response.data})
 				})
 				.catch(error => {
-					this.$dispatch('toast-error', error.response.data.message);
+					this.$dispatch('toast-error', error.response.data.publicMessage ?? error.response.data.message);
 				})
 		},
 	}"
@@ -105,15 +98,17 @@
 			<option value=".5">0.5</option>
 			<option value="1">1</option>
 		</select>
-		<input type="hidden" name="aspect" value="{{ data_get($data, 'image.width') }}:{{ data_get($data, 'image.height') }}">
+		<input type="hidden" name="width" value="{{ data_get($data, 'image.width') }}">
+		<input type="hidden" name="height" value="{{ data_get($data, 'image.height') }}">
 	</div>
+
 	<div class="flex gap-1">
 		<button type="submit" class="btn btn-accent">Generate</button>
 		<button 
 			type="button" 
 			class="btn btn-accent" 
-			x-show="Object.values(buttons).indexOf('🔄') > -1"
-			@click="pushButton('🔄')"
+			x-show="true"
+			@click=""
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
@@ -121,12 +116,11 @@
 		</button>
 	</div>
 	<div x-show="loading" x-cloak>
-		Progress: <span x-text="progress"></span>
 		<span class="loading loading-ball loading-sm text-primary"></span>
 	</div>
 
 	<div class="relative">
-		<div 
+		{{-- <div 
 			class="absolute top-0 left-0 flex items-center gap-3 justify-evenly right-1/2 bottom-1/2 bg-[#00000080] opacity-0 hover:opacity-100 transition"
 			x-show="Object.values(buttons).length > 0"
 		>
@@ -216,7 +210,9 @@
 					<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
 				</svg>
 			</button>
-		</div>
-		<img :src="imageUrl">
+		</div> --}}
+		<template x-for="image in images">
+			<img :src="image.url">
+		</template>
 	</div>
 </form>

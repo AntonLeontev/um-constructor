@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Exceptions\Services\LeonardoAI\LeonardoException;
 use App\Exceptions\Services\NextLeg\NextLegException;
 use App\Exceptions\Services\OpenAI\OpenAIException;
 use App\Exceptions\Services\Timeweb\TimewebException;
@@ -25,6 +26,18 @@ class HttpServiceProvider extends ServiceProvider
                 ->baseUrl('https://api.openai.com/v1')
                 ->throw(function (Response $response) {
                     throw new OpenAIException($response);
+                });
+        });
+
+        Http::macro('leonardoai', function () {
+            return Http::withHeaders(['Authorization' => 'Bearer '.config('services.leonardoAI.token')])
+                ->timeout(60)
+                ->connectTimeout(5)
+                ->asJson()
+                ->acceptJson()
+                ->baseUrl('https://cloud.leonardo.ai/api/rest/v1/')
+                ->throw(function (Response $response) {
+                    throw new LeonardoException($response);
                 });
         });
 
