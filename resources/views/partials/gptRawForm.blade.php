@@ -15,7 +15,7 @@
         <div class="flex justify-between w-full mb-3">
             <select id="" name="model" class="select select-primary">
                 <option value="gpt-3.5-turbo">GPT-3.5</option>
-                <option value="gpt-4" disabled>GPT-4</option>
+                <option value="gpt-4">GPT-4</option>
             </select>
             <button class="btn btn-circle btn-outline" type="button" @click="active = false">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
