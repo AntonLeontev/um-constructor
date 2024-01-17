@@ -15,6 +15,13 @@ class LeonardoService
         string $no = null,
         ?string $modelId
     ): string {
+        $minDimension = min($height, $width);
+        if ($minDimension < 512) {
+            $coef = 512 / $minDimension;
+            $height = $height * $coef;
+            $width = $width * $coef;
+        }
+
         if ($width % 8 !== 0) {
             $width = 8 * ceil($width / 8);
         }

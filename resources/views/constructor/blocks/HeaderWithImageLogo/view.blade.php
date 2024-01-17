@@ -156,8 +156,8 @@
 				@endif
             </div>
             <div class="um-header__logo um-logo _img">
-                <img data-key="logo" src="{{ data_get($data, 'logo.value') }}" alt="Image"
-					width="{{ data_get($data, 'logo.width') }}" height="{{ data_get($data, 'logo.height') }}"
+                <img data-key="image" src="{{ data_get($data, 'image.value') }}" alt="Image"
+					width="{{ data_get($data, 'image.width') }}" height="{{ data_get($data, 'image.height') }}"
 				>
             </div>
             <div data-key="phone" class="um-header__contact">

@@ -23,12 +23,12 @@ class HeaderWithImageLogo extends AbstractBlock
                 'type' => DataType::string,
                 'label' => 'Phone Number',
             ],
-            'logo' => [
+            'image' => [
                 'value' => '',
                 'type' => DataType::image,
                 'label' => 'Logo',
                 'width' => '160',
-                'height' => '30',
+                'height' => '100',
             ],
             'instagram' => [
                 'value' => '#',
