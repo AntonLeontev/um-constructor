@@ -30,6 +30,11 @@ class LeonardoService
             $height = 8 * ceil($height / 8);
         }
 
+        $number = 4;
+        if ($width > 1024 || $height > 1024) {
+            $number = 2;
+        }
+
         return $this->api
             ->imagine(
                 $prompt,
@@ -37,6 +42,7 @@ class LeonardoService
                 $height,
                 negativePrompt: $no,
                 modelId: $modelId,
+                number: $number,
             )
             ->json('sdGenerationJob.generationId');
     }
