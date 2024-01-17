@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\LeonardoModel;
 use HaydenPierce\ClassFinder\ClassFinder;
+use Illuminate\Database\Eloquent\Collection;
 
 if (! function_exists('blocks_list')) {
     function blocks_list(): array
@@ -24,5 +26,12 @@ if (! function_exists('blocks_list')) {
         }
 
         return $blocks;
+    }
+}
+
+if (! function_exists('leo_models')) {
+    function leo_models(): Collection
+    {
+        return LeonardoModel::get();
     }
 }

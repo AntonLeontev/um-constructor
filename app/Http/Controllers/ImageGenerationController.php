@@ -18,6 +18,8 @@ class ImageGenerationController extends Controller
             $request->get('prompt'),
             $request->get('width'),
             $request->get('height'),
+            $request->get('no'),
+            $request->get('model_id'),
         );
 
         return response()->json(['messageId' => $messageId]);

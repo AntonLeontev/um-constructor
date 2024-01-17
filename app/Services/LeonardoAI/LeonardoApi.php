@@ -40,4 +40,10 @@ class LeonardoApi
         return Http::leonardoai()
             ->get('generations/'.$id);
     }
+
+    public static function platformModels()
+    {
+        return Http::leonardoai()
+            ->get('platformModels');
+    }
 }

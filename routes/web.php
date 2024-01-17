@@ -4,6 +4,7 @@ use App\Http\Controllers\BlockController;
 use App\Http\Controllers\ConstructorController;
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\ImageGenerationController;
+use App\Http\Controllers\LeonardoModelController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\SiteController;
@@ -26,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::any('/test', function (Request $request) {
 
-    dd(LeonardoApi::imagine('fancy cat on the roof under the moon', 400, 400)->json());
+    dd(LeonardoApi::platformModels()->json());
 })->name('test');
 
 Route::get('/', function () {
@@ -63,6 +64,8 @@ Route::middleware('auth')
         Route::post('blocks/{block}/image-data', [StringDataController::class, 'imageUpdate'])->name('blocks.image-data.update');
 
         Route::post('blocks/{block}/text-generation', [OpenAIController::class, 'blockTextGeneration'])->name('blocks.text-generation');
+
+        Route::get('leonardo/models', [LeonardoModelController::class, 'index'])->name('leonardo.index');
 
         Route::post('request', [OpenAIController::class, 'request'])->name('request');
         Route::post('copywriter/request', [OpenAIController::class, 'firstPage'])->name('copywriter.first-page');

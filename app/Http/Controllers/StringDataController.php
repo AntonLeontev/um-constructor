@@ -38,18 +38,8 @@ class StringDataController extends Controller
 
         if ($request->has('link')) {
             $image = Image::make($request->get('link'));
-            $widthHalf = floor($image->width() / 2);
-            $heightHalf = floor($image->height() / 2);
 
-            $cropCoords = match ($request->get('number')) {
-                1 => [0, 0],
-                2 => [$widthHalf, 0],
-                3 => [0, $heightHalf],
-                4 => [$widthHalf, $heightHalf],
-            };
-
-            $image->crop($widthHalf, $heightHalf, ...$cropCoords)
-                ->resize($properties['width'], $properties['height'])
+            $image->fit($properties['width'], $properties['height'])
                 ->save(storage_path("app/public/$path/{$request->get('key')}.webp"), 80, 'webp');
 
         } elseif ($request->has('image')) {

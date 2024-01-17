@@ -23,7 +23,6 @@ class ImageUpdateRequest extends FormRequest
     {
         return [
             'link' => ['sometimes', 'url'],
-            'number' => ['sometimes', 'required_with:link', 'int', 'in:1,2,3,4'],
             'image' => ['sometimes', 'image'],
             'key' => ['required', 'string', 'max:150'],
         ];
