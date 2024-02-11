@@ -15,6 +15,8 @@ class HeaderWithTextLogo extends AbstractBlock
 
     protected static string $neuralImage = 'constructor.blocks.HeaderWithTextLogo.neural-image';
 
+    protected string $category = 'Headers';
+
     public function dataProperties(): array
     {
         return [

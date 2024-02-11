@@ -1,11 +1,13 @@
 <?php
 
+use App\Constructor\Blocks\AbstractBlock;
 use App\Models\LeonardoModel;
 use HaydenPierce\ClassFinder\ClassFinder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 
 if (! function_exists('blocks_list')) {
-    function blocks_list(): array
+    function blocks_list(): SupportCollection
     {
         ClassFinder::disablePSR4Vendors();
 
@@ -13,7 +15,7 @@ if (! function_exists('blocks_list')) {
 
         $classes = array_diff($classes, ['App\Constructor\Blocks\AbstractBlock']);
 
-        $blocks = [];
+        $blocks = collect();
 
         foreach ($classes as $class) {
             $block = app($class);
@@ -22,10 +24,18 @@ if (! function_exists('blocks_list')) {
                 continue;
             }
 
-            $blocks[] = $block;
+            $blocks->push($block);
         }
 
         return $blocks;
+    }
+}
+
+if (! function_exists('blocks_by_categories')) {
+    function blocks_by_categories(): SupportCollection
+    {
+        return blocks_list()
+            ->mapToGroups(fn (AbstractBlock $item) => [$item->getCategory() => $item]);
     }
 }
 

@@ -16,6 +16,8 @@ class Footer extends AbstractBlock
 
     protected static string $neuralImage = 'constructor.blocks.Footer.neural-image';
 
+    protected string $category = 'Footers';
+
     public function dataProperties(): array
     {
         return [

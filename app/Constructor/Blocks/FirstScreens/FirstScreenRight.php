@@ -16,6 +16,8 @@ class FirstScreenRight extends AbstractBlock
 
     protected static string $neuralImage = 'constructor.blocks.FirstScreenRight.neural-image';
 
+    protected string $category = 'Info + Image';
+
     public function dataProperties(): array
     {
         return [

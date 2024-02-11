@@ -15,6 +15,8 @@ class Cover3 extends AbstractBlock
 
     protected static string $neuralImage = 'constructor.blocks.Cover3.neural-image';
 
+    protected string $category = 'Covers';
+
     public function dataProperties(): array
     {
         return [

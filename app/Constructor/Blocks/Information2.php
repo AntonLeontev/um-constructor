@@ -15,6 +15,8 @@ class Information2 extends AbstractBlock
 
     protected static string $neuralImage = 'constructor.blocks.Information2.neural-image';
 
+    protected string $category = 'Info';
+
     public function dataProperties(): array
     {
         return [

@@ -21,6 +21,8 @@ abstract class AbstractBlock implements JsonSerializable
 
     protected bool $archived = false;
 
+    protected string $category = 'Other';
+
     abstract public function textGeneration(Request $request): array;
 
     public function getTitle(): string
@@ -72,6 +74,11 @@ abstract class AbstractBlock implements JsonSerializable
     public function isArchived(): bool
     {
         return $this->archived;
+    }
+
+    public function getCategory(): string
+    {
+        return $this->category;
     }
 
     protected function render(string $view, array $data = []): string

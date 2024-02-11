@@ -10,7 +10,6 @@ use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SiteGeneralController;
 use App\Http\Controllers\StringDataController;
-use App\Services\LeonardoAI\LeonardoApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::any('/test', function (Request $request) {
 
-    dd(LeonardoApi::platformModels()->json());
+    dd(blocks_by_categories());
 })->name('test');
 
 Route::get('/', function () {

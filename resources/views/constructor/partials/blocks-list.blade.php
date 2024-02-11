@@ -27,41 +27,47 @@
 	</div>
 
 	<dialog id="blocks_choice" class="modal">
-			<div class="w-11/12 max-w-[50rem] modal-box">
-				<h3 class="text-lg font-bold">Choose block type:</h3>
-				<div class="grid grid-cols-5 gap-2 mb-3">
-					<template x-for="block in blocks">
-						<div 
-							class="p-1 transition border cursor-pointer" 
-							:class="selected?.class === block.class && 'bg-primary'"
-							@click="selected = block"
-							@dblclick="addBlock"
-						>
-							<img :src="block.image" alt="preview">
-							<p class="mt-2 text-center" x-text="block.title"></p>
+		<div class="w-11/12 max-w-[50rem] modal-box">
+			<div class="max-h-[70vh] overflow-auto">
+				<template x-for="blocks, category in blocksCategories">
+					<div class="">
+						<h3 class="text-lg font-bold" x-text="category"></h3>
+						<div class="grid grid-cols-5 gap-2 mb-3">
+							<template x-for="block in blocks">
+								<div 
+									class="p-1 transition border cursor-pointer" 
+									:class="selected?.class === block.class && 'bg-primary'"
+									@click="selected = block"
+									@dblclick="addBlock"
+								>
+									<img :src="block.image" alt="preview">
+									<p class="mt-2 text-center" x-text="block.title"></p>
+								</div>
+							</template>
 						</div>
-					</template>
-				</div>
-				<div class="flex justify-center">
-					<button type="submit" class="btn btn-accent btn-sm" :disabled="!selected" @click="addBlock">
-						add
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-						</svg>
-					</button>
-				</div>
+					</div>
+				</template>
 			</div>
-			<form method="dialog" class="modal-backdrop">
-				<button>close</button>
-			</form>
-		</dialog>
+			<div class="flex justify-center pt-1">
+				<button type="submit" class="btn btn-accent btn-sm" :disabled="!selected" @click="addBlock">
+					add
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+					</svg>
+				</button>
+			</div>
+		</div>
+		<form method="dialog" class="modal-backdrop">
+			<button>close</button>
+		</form>
+	</dialog>
 
 </div>
 
 <script>
 	document.addEventListener('alpine:init', () => {
 		Alpine.data('siteBlocks', () => ({
-			blocks: @json(blocks_list()),
+			blocksCategories: @json(blocks_by_categories()),
 			siteBlocks: @json($site->blocks),
 			selected: null,
 
