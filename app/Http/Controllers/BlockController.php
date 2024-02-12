@@ -38,14 +38,14 @@ class BlockController extends Controller
 
     public function preview(Block $block): JsonResponse
     {
-        $html = $block->class->view($block->getSavedData());
+        $html = $block->class->view($block->getSavedData(), $block);
 
         return response()->json(['html' => $html]);
     }
 
     public function view(Block $block): JsonResponse
     {
-        $html = $block->class->view($block->getSavedData());
+        $html = $block->class->view($block->getSavedData(), $block);
 
         return response()->json(['html' => $html]);
     }

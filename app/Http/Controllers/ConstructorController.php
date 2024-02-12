@@ -9,6 +9,6 @@ class ConstructorController extends Controller
 {
     public function __invoke(ConstructorRequest $request, Site $site)
     {
-        return view('constructor.index', compact('site'));
+        return view('constructor.new', compact('site'));
     }
 }

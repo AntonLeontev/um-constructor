@@ -2,6 +2,7 @@
 
 namespace App\Constructor\Blocks;
 
+use App\Models\Block;
 use Illuminate\Http\Request;
 use JsonSerializable;
 
@@ -56,9 +57,9 @@ abstract class AbstractBlock implements JsonSerializable
         return $this->render($view, $data);
     }
 
-    public function view(array $data = []): string
+    public function view(array $data, Block $block): string
     {
-        return $this->render(static::$view, $data);
+        return $this->render(static::$view, $data, $block);
     }
 
     public function neuralText(array $data = []): string
@@ -81,7 +82,7 @@ abstract class AbstractBlock implements JsonSerializable
         return $this->category;
     }
 
-    protected function render(string $view, array $data = []): string
+    protected function render(string $view, array $data = [], Block $block = null): string
     {
         $props = static::dataProperties();
 
@@ -95,6 +96,7 @@ abstract class AbstractBlock implements JsonSerializable
 
         return view($view, [
             'data' => $props,
+            'block' => $block,
         ])->render();
     }
 }

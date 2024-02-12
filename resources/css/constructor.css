@@ -1,0 +1,31 @@
+:root {
+  --main-background: #65c3c8;
+}
+
+.c-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 70px;
+	z-index: 50;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 5px 10px;
+	background: var(--main-background);
+	transition: transform 0.4s ease;
+}
+
+.c-block {
+
+}
+
+.c-text {
+	position: relative;
+	outline: transparent solid 1px;
+	cursor: pointer;
+}
+.c-text:hover {
+	outline: var(--main-background) solid 1px;
+}
