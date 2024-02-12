@@ -25,6 +25,7 @@
 
 		@yield('content')
 		
+		@include('partials.toasts')
 		@yield('body_scripts')
     </body>
 </html>

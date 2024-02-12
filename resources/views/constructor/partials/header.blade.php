@@ -1,4 +1,17 @@
-<header class="c-header" x-data="{show: true}" :class="show || '-translate-y-full'">
+<header class="c-header" id="header"
+	:class="show && '!transform-none'"
+	x-data="{
+		show: false,
+
+		init() {
+			this.show = sessionStorage.getItem('constructor-header') === 'true'
+		},
+		toggle() {
+			this.show = !this.show
+			sessionStorage.setItem('constructor-header', this.show)
+		},
+	}" 
+>
 	<a class="btn" href="{{ route('personal.site', $site->id) }}">
 		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 			<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
@@ -55,7 +68,7 @@
 		</div>
 	@endauth
 
-	<button class="absolute bottom-0 px-4 py-0 translate-y-full rounded-b-lg right-8 bg-primary" @click="show = !show">
+	<button class="absolute bottom-0 px-4 py-0 translate-y-full rounded-b-lg right-8 bg-primary" @click="toggle">
 		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 transition" :class="show || 'rotate-180'">
 			<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
 		</svg>

@@ -7,6 +7,7 @@ use App\Events\SiteDeleted;
 use App\Events\SiteDeleting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -38,6 +39,11 @@ class Site extends Model
     public function general(): HasOne
     {
         return $this->hasOne(SiteGeneral::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function getBlocks(): array

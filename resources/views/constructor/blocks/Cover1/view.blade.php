@@ -111,11 +111,21 @@
     <div class="um-container">
         <div class="um-cover__inner">
             <div class="um-cover__content">
-                <div class="c-text um-cover__title" data-key="title" @click="$dispatch('text-click', {type: 'string', key: 'title'})">
+                <div class="c-text um-cover__title" 
+					data-key="title" 
+					data-type="string" 
+					data-id="{{ $block->id }}" 
+					@click="$dispatch('select')"
+				>
                     {{ data_get($data, 'title.value') }}
                 </div>
                 <div class="um-cover__text">
-                    <p class="c-text" data-key="text">
+                    <p class="c-text"
+						data-key="text" 
+						data-type="string" 
+						data-id="{{ $block->id }}" 
+						@click="$dispatch('select')"
+					>
                         {!! data_get($data, 'text.value') !!}
                     </p>
                 </div>

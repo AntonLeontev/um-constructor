@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageUpdateRequest;
+use App\Http\Requests\StringDataUpdateRequest;
 use App\Models\Block;
 use App\Models\StringData;
 use Illuminate\Http\JsonResponse;
@@ -11,11 +12,11 @@ use Intervention\Image\Facades\Image;
 
 class StringDataController extends Controller
 {
-    public function stringUpdate(int $block): JsonResponse
+    public function stringUpdate(Block $block, StringDataUpdateRequest $request): JsonResponse
     {
         $data = StringData::updateOrCreate(
             [
-                'block_id' => $block,
+                'block_id' => $block->id,
                 'key' => request('key'),
             ],
             [

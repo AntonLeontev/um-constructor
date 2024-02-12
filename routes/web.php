@@ -10,6 +10,7 @@ use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SiteGeneralController;
 use App\Http\Controllers\StringDataController;
+use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -59,7 +60,9 @@ Route::middleware('auth')
         Route::get('blocks/{block}/neural-text', [BlockController::class, 'neuralText'])->name('blocks.neural-text');
         Route::get('blocks/{block}/neural-image', [BlockController::class, 'neuralImage'])->name('blocks.neural-image');
 
-        Route::put('blocks/{block}/string-data', [StringDataController::class, 'stringUpdate'])->name('blocks.string-data.update');
+        Route::put('blocks/{block}/string-data', [StringDataController::class, 'stringUpdate'])
+            ->withoutMiddleware(ConvertEmptyStringsToNull::class)
+            ->name('blocks.string-data.update');
         Route::post('blocks/{block}/image-data', [StringDataController::class, 'imageUpdate'])->name('blocks.image-data.update');
 
         Route::post('blocks/{block}/text-generation', [OpenAIController::class, 'blockTextGeneration'])->name('blocks.text-generation');
