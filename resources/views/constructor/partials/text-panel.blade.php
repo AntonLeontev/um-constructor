@@ -1,5 +1,5 @@
 <div id="text-panel"
-	class="fixed bottom-0 top-0 right-0 flex flex-col gap-2 w-1/3 bg-primary z-30 py-2 px-[30px] transition translate-x-full"
+	class="fixed bottom-0 top-0 right-0 flex flex-col gap-2 w-1/3 bg-primary z-30 py-2 px-[30px] transition translate-x-full overflow-y-auto"
 	:class="selected.type === 'string' && 'transform-none'"
 	x-data="{
 		loading: false,
@@ -12,7 +12,10 @@
 					key: this.selected.key, 
 					value: this.selectedTextData.replace(/\n/gi, '<br>')
 				})
-				.then(resp => this.$dispatch('block-update', this.selected.id))
+				.then(resp => {
+					this.$dispatch('block-update', this.selected.id)
+					this.cleanSelection()
+				})
 				.catch(error => {
 					this.$dispatch('toast-error', error.response.data.message)
 				})
@@ -27,14 +30,14 @@
 			</svg>
 		</button>
 	</div>
-	<div class="h-full">
-		<textarea class="w-full mb-2 textarea min-h-36 h-1/2" x-model="selectedTextData"></textarea>
+	<div class="flex flex-col h-full gap-2">
+		<textarea class="w-full textarea min-h-36 h-1/2" x-model="selectedTextData"></textarea>
 		<div class="flex gap-1 justify-evenly">
 			<div class="relative flex items-center w-1/2 gap-1">
 				<button class="w-full btn btn-accent btn-sm" @click="saveText">Save</button>
 				<span class="absolute loading loading-bars loading-xs right-5" x-show="loading"></span>
 			</div>
-			<button class="btn btn-sm">AI generation</button>
+			<button class="btn btn-sm" @click="text_generation_modal.showModal()">AI generation</button>
 		</div>
 	</div>
 </div>

@@ -113,11 +113,21 @@
 <section class="um-cover um-cover{{ $block->id }} _img-fs">
     <div class="um-container">
         <div class="um-cover__inner">
-            <div data-key="title" class="um-cover__title">
+            <div class="c-text um-cover__title"
+				data-key="text" 
+				data-type="string" 
+				data-id="{{ $block->id }}" 
+				@click="$dispatch('select')"
+			>
 				{{ data_get($data, 'title.value') }}
 			</div>
 			<div class="um-cover__text">
-				<p data-key="text">
+				<p class="c-text"
+					data-key="text" 
+					data-type="string" 
+					data-id="{{ $block->id }}" 
+					@click="$dispatch('select')"
+				>
 					{!! data_get($data, 'text.value') !!}
 				</p>
 			</div>

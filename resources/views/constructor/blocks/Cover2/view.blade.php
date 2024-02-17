@@ -119,11 +119,20 @@
                 <img data-key="image" src="{{ data_get($data, 'image.value') }}" alt="Image">
             </div>
             <div class="um-cover__content">
-                <div data-key="title" class="um-cover__title">
+                <div class="c-text um-cover__title"
+					data-key="title" 
+					data-type="string" 
+					data-id="{{ $block->id }}" 
+					@click="$dispatch('select')"
+				>
                     {{ data_get($data, 'title.value') }}
                 </div>
                 <div class="um-cover__text">
-                    <p data-key="text">
+                    <p class="c-text"
+						data-key="text" 
+						data-type="string" 
+						data-id="{{ $block->id }}" 
+						@click="$dispatch('select')">
                        {!! data_get($data, 'text.value') !!}
 					</p>
                 </div>

@@ -36,6 +36,7 @@
 
 		@include('constructor.partials.text-panel')
 		@include('constructor.partials.image-panel')
+		@include('constructor.partials.text-generation-modal')
 	</div>
 
 	<script>
