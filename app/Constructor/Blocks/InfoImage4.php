@@ -20,6 +20,11 @@ class InfoImage4 extends AbstractBlock
     public function dataProperties(): array
     {
         return [
+            'quote' => [
+                'value' => 'Quote',
+                'type' => DataType::string,
+                'label' => 'Quote',
+            ],
             'name' => [
                 'value' => 'Lao Tzi',
                 'type' => DataType::string,

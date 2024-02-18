@@ -50,15 +50,9 @@
     <div class="um-info__container um-container">
         <div class="um-info__title" data-key="title">{{ data_get($data, 'title.value') }}</div>
         <div class="um-info__text d-grid_3">
-            <p data-key="text1">
-				{{ data_get($data, 'text1.value') }}
-			</p>
-            <p data-key="text2">
-				{{ data_get($data, 'text2.value') }}
-			</p>
-            <p data-key="text3">
-				{{ data_get($data, 'text3.value') }}
-			</p>
+            <x-shared.paragraph key="text1" :$data :$block />
+            <x-shared.paragraph key="text2" :$data :$block />
+            <x-shared.paragraph key="text3" :$data :$block />
         </div>
     </div>
 </section>

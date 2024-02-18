@@ -115,12 +115,10 @@
 
 			<div>
 				<div>
-					<h2 class="um-response__title"><span data-key="title">{{ data_get($data, 'title.value') }}</span></h2>
+					<h2 class="um-response__title"><x-shared.paragraph key="title" :$data :$block /></h2>
 				</div>
 
-				<p class="um-response__text">
-					<span data-key="subtitle">{{ data_get($data, 'subtitle.value') }}</span>
-				</p>
+				<x-shared.paragraph class="um-response__text" key="subtitle" :$data :$block />
 			</div>
 
 			<div class="um-response__img-wrapp">

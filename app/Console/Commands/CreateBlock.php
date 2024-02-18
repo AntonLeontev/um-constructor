@@ -48,8 +48,6 @@ class CreateBlock extends Command implements PromptsForMissingInput
 
         if (! is_dir($dir)) {
             mkdir($dir);
-            file_put_contents($dir.'/neural-image.blade.php', file_get_contents(resource_path('stubs/neural-image.stub')));
-            file_put_contents($dir.'/neural-text.blade.php', '');
             file_put_contents($dir.'/view.blade.php', '');
         } else {
             $this->error('Папка для этого блока уже существует!');

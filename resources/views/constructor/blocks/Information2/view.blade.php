@@ -89,13 +89,13 @@
 </style>
 <section class="um-info">
     <div class="um-info__container um-container">
-        <div class="um-info__subtitle" data-key="title">{{ data_get($data, 'title.value') }}</div>
+        <div class="um-info__subtitle"><x-shared.paragraph key="title" :$data :$block /></div>
         <div class="um-info__text-block">
-            <div class="um-info__text" data-key="small_text">
-                {{ data_get($data, 'small_text.value') }}
+            <div class="um-info__text">
+                <x-shared.paragraph key="small_text" :$data :$block />
             </div>
-            <div class="um-info__accent-text" data-key="big_text">
-                {{ data_get($data, 'big_text.value') }}
+            <div class="um-info__accent-text">
+                <x-shared.paragraph key="big_text" :$data :$block />
             </div>
         </div>
     </div>

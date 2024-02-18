@@ -81,8 +81,8 @@
 </style>
 <section class="um-info-img _two-col">
     <div class="um-info-img__container um-container">
-        <div class="um-info-img__accent" data-key="text">
-            {{ data_get($data, 'text.value') }}
+        <div class="um-info-img__accent">
+            <x-shared.paragraph key="text" :$data :$block />
         </div>
         <div class="um-info-img__img">
             <x-shared.image key="image" :$data :$block />

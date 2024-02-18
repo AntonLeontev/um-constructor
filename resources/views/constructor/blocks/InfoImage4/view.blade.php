@@ -172,7 +172,7 @@
     <div class="um-quote__container um-container">
         <div class="um-quote__avatar">
             <div class="um-quote__title">
-                Quote
+                <x-shared.paragraph key="quote" :$data :$block />
             </div>
             <div class="um-avatar">
                 <div class="um-avatar__img">
@@ -180,17 +180,17 @@
                 </div>
                 <div class="um-avatar__body">
                     <div class="um-avatar__title" data-key="name">
-                        {{ data_get($data, 'name.value') }}
+                        <x-shared.paragraph key="name" :$data :$block />
                     </div>
                     <div class="um-avatar__text" data-key="description">
-                        {{ data_get($data, 'description.value') }}
+                        <x-shared.paragraph key="description" :$data :$block />
                     </div>
                 </div>
 
             </div>
         </div>
         <div class="um-quote__content" data-key="text">
-            {{ data_get($data, 'text.value') }}
+            <x-shared.paragraph key="text" :$data :$block />
         </div>
     </div>
 </section>

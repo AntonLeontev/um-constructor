@@ -79,8 +79,6 @@
 
 <section class="um-information" style="background-color: {{ data_get($data, 'background_color.value') }}; color: {{ data_get($data, 'font_color.value') }}">
     <div class="um-container">
-        <p class="um-information__text">
-			<span data-key="text">{{ data_get($data, 'text.value') }}</span>
-        </p>
+		<x-shared.paragraph class="um-information__text" key="text" :$data :$block />
     </div>
 </section>

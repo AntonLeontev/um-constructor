@@ -24,7 +24,7 @@
         line-height: 130%;
     }
 
-     .um-info-img .um-numbers__item strong {
+     .um-info-img .um-numbers__item .number {
         font-weight: 300;
         font-size: 36px;
         display: block;
@@ -33,7 +33,7 @@
 		white-space: nowrap;
     }
 
-    .um-info-img .um-numbers__item small {
+    .um-info-img .um-numbers__item .small {
         font-size: 14px;
     }
 
@@ -102,23 +102,23 @@
     <div class="um-info-img__container um-container">
         <div class="um-info-img__content">
             <div class="um-info-img__title" data-key="title">
-                {{ data_get($data, 'title.value') }}
+                <x-shared.paragraph key="title" :$data :$block />
             </div>
             <div class="um-info-img__text um-mb-40" data-key="text">
-                {{ data_get($data, 'text.value') }}
+                <x-shared.paragraph key="text" :$data :$block />
             </div>
             <div class="um-numbers d-grid_3">
                 <div class="um-numbers__item">
-                    <strong data-key="number1">{{ data_get($data, 'number1.value') }}</strong>
-                    <small data-key="text1">{{ data_get($data, 'text1.value') }}</small>
+                    <div class="number"><x-shared.paragraph key="number1" :$data :$block /></div>
+                    <div class="small"><x-shared.paragraph key="text1" :$data :$block /></div>
                 </div>
                 <div class="um-numbers__item">
-                    <strong data-key="number2">{{ data_get($data, 'number2.value') }}</strong>
-                    <small data-key="text2">{{ data_get($data, 'text2.value') }}</small>
+                    <div class="number"><x-shared.paragraph key="number2" :$data :$block /></div>
+                    <div class="small"><x-shared.paragraph key="text2" :$data :$block /></div>
                 </div>
                 <div class="um-numbers__item">
-                    <strong data-key="number3">{{ data_get($data, 'number3.value') }}</strong>
-                    <small data-key="text3">{{ data_get($data, 'text3.value') }}</small>
+                    <div class="number"><x-shared.paragraph key="number3" :$data :$block /></div>
+                    <div class="small"><x-shared.paragraph key="text3" :$data :$block /></div>
                 </div>
             </div>
         </div>

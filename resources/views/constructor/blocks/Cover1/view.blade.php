@@ -111,23 +111,11 @@
     <div class="um-container">
         <div class="um-cover__inner">
             <div class="um-cover__content">
-                <div class="c-text um-cover__title" 
-					data-key="title" 
-					data-type="string" 
-					data-id="{{ $block->id }}" 
-					@click="$dispatch('select')"
-				>
-                    {{ data_get($data, 'title.value') }}
+                <div class="um-cover__title">
+                    <x-shared.paragraph key="title" :$data :$block />
                 </div>
                 <div class="um-cover__text">
-                    <p class="c-text"
-						data-key="text" 
-						data-type="string" 
-						data-id="{{ $block->id }}" 
-						@click="$dispatch('select')"
-					>
-                        {!! data_get($data, 'text.value') !!}
-                    </p>
+					<x-shared.paragraph key="text" :$data :$block />
                 </div>
             </div>
             <div class="um-cover__img">

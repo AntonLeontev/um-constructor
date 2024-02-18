@@ -26,7 +26,7 @@
         gap: 60px;
     }
 
-    .um-info-img .um-info-img__col strong {
+    .um-info-img .um-info-img__col .title {
         font-size: 25px;
         margin-bottom: 10px;
         color: var(--text-grey);
@@ -114,7 +114,7 @@
             margin-bottom: 10px;
         }
 
-        .um-info-img .um-info-img__col strong {
+        .um-info-img .um-info-img__col .title {
             font-size: 18px;
             line-height: 120%;
         }
@@ -157,20 +157,24 @@
             <x-shared.image key="image" :$data :$block />
         </div>
         <div class="um-info-img__content">
-            <div class="um-info-img__accent" data-key="main_text">
-                {{ data_get($data, 'main_text.value') }}
+            <div class="um-info-img__accent">
+				<x-shared.paragraph key="main_text" :$data :$block />
             </div>
             <div class="um-info-img__block">
                 <div class="um-info-img__col">
-                    <strong data-key="title1">{{ data_get($data, 'title1.value') }}</strong>
+                    <div class="title">
+						<x-shared.paragraph key="title1" :$data :$block />
+					</div>
                     <div class="um-info-img__text" data-key="text1">
-                        {{ data_get($data, 'text1.value') }}
+                        <x-shared.paragraph key="main_text" :$data :$block />
                     </div>
                 </div>
                 <div class="um-info-img__col">
-                    <strong data-key="title2">{{ data_get($data, 'title2.value') }}</strong>
+                    <div class="title">
+						<x-shared.paragraph key="title2" :$data :$block />
+					</div>
                     <div class="um-info-img__text" data-key="text2">
-                        {{ data_get($data, 'text2.value') }}
+                        <x-shared.paragraph key="text2" :$data :$block />
                     </div>
                 </div>
             </div>
