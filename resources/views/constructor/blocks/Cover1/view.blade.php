@@ -131,13 +131,7 @@
                 </div>
             </div>
             <div class="um-cover__img">
-                <img
-					data-key="image" 
-					src="{{ data_get($data, 'image.value') }}"
-					alt="Image"
-					width="{{ data_get($data, 'image.width') }}px"  
-					height="{{ data_get($data, 'image.height') }}px"
-				>
+				<x-shared.image key="image" :$data :$block />
             </div>
         </div>
     </div>

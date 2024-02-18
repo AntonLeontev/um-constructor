@@ -176,7 +176,7 @@
             </div>
             <div class="um-avatar">
                 <div class="um-avatar__img">
-                    <img data-key="image" src="{{ data_get($data, 'image.value') }}" alt="Image" width="{{ data_get($data, 'image.width') }}px"  height="{{ data_get($data, 'image.height') }}px">
+                    <x-shared.image key="image" :$data :$block />
                 </div>
                 <div class="um-avatar__body">
                     <div class="um-avatar__title" data-key="name">

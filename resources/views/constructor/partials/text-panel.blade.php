@@ -1,5 +1,5 @@
 <div id="text-panel"
-	class="fixed bottom-0 top-0 right-0 flex flex-col gap-2 w-1/3 bg-primary z-30 py-2 px-[30px] transition translate-x-full overflow-y-auto"
+	class="fixed bottom-0 top-0 right-0 flex flex-col gap-2 w-1/3 bg-primary z-30 py-2 px-[30px] transition translate-x-full overflow-y-auto shadow-[-6px_0_8px_0_rgba(0,0,0,0.2)]"
 	:class="selected.type === 'string' && 'transform-none'"
 	x-data="{
 		loading: false,

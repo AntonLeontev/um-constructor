@@ -156,9 +156,7 @@
 				@endif
             </div>
             <div class="um-header__logo um-logo _img">
-                <img data-key="image" src="{{ data_get($data, 'image.value') }}" alt="Image"
-					width="{{ data_get($data, 'image.width') }}" height="{{ data_get($data, 'image.height') }}"
-				>
+                <x-shared.image key="image" :$data :$block />
             </div>
             <div data-key="phone" class="um-header__contact">
                 <a href="tel:{{ preg_replace('~\D~', '', data_get($data, 'phone.value')) }}" class="um-link">{{ data_get($data, 'phone.value') }}</a>

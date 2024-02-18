@@ -132,7 +132,7 @@
 				</p>
 			</div>
             <div class="um-cover__img">
-                <img data-key="image" src="{{ data_get($data, 'image.value') }}" alt="Image">
+                <x-shared.image key="image" :$data :$block />
             </div>
         </div>
     </div>

@@ -124,14 +124,7 @@
 			</div>
 
 			<div class="um-response__img-wrapp">
-				<img 
-				 	class="um-response__img"
-					data-key="image" 
-					src="{{ data_get($data, 'image.value') }}" 
-					alt="image" 
-					width="{{ data_get($data, 'image.width') }}"  
-					height="{{ data_get($data, 'image.height') }}"
-				>
+				<x-shared.image class="um-response__img" key="image" :$data :$block />
 			</div>
 		</div>
 

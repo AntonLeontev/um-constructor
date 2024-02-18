@@ -154,7 +154,7 @@
 <section class="um-info-img">
     <div class="um-info-img__container um-container">
         <div class="um-info-img__img">
-            <img data-key="image" src="{{ data_get($data, 'image.value') }}" alt="Image">
+            <x-shared.image key="image" :$data :$block />
         </div>
         <div class="um-info-img__content">
             <div class="um-info-img__accent" data-key="main_text">

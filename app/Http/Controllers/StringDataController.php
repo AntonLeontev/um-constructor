@@ -37,17 +37,19 @@ class StringDataController extends Controller
             Storage::makeDirectory($path);
         }
 
+        $name = "{$request->get('key')}-".time().'.webp';
+
         if ($request->has('link')) {
             $image = Image::make($request->get('link'));
 
             $image->fit($properties['width'], $properties['height'])
-                ->save(storage_path("app/public/$path/{$request->get('key')}.webp"), 80, 'webp');
+                ->save(storage_path("app/public/$path/$name"), 90, 'webp');
 
         } elseif ($request->has('image')) {
 
             Image::make($request->image->path())
                 ->fit($properties['width'], $properties['height'])
-                ->save(storage_path("app/public/$path/{$request->get('key')}.webp"), 80, 'webp');
+                ->save(storage_path("app/public/$path/$name"), 90, 'webp');
         }
 
         $data = StringData::updateOrCreate(
@@ -56,7 +58,7 @@ class StringDataController extends Controller
                 'key' => $request->get('key'),
             ],
             [
-                'value' => Storage::url("$path/{$request->get('key')}.webp"),
+                'value' => Storage::url("$path/$name"),
             ]
         );
 

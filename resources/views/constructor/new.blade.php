@@ -37,6 +37,7 @@
 		@include('constructor.partials.text-panel')
 		@include('constructor.partials.image-panel')
 		@include('constructor.partials.text-generation-modal')
+		@include('constructor.partials.image-generation-modal')
 	</div>
 
 	<script>
@@ -45,6 +46,7 @@
 				blocks: @json($site->blocks),
 				selected: {},
 				selectedTextData: '',
+				selectedImage: '',
 				
 				select() {
 					this.selected = {
@@ -56,10 +58,17 @@
 					if (this.$event.target.dataset.type === 'string') {
 						this.selectedTextData = this.$event.target.innerText
 					}
+
+					if (this.$event.target.dataset.type === 'image') {
+						this.selectedImage = this.$event.target.getAttribute('src')
+						this.selected.width = this.$event.target.dataset.width
+						this.selected.height = this.$event.target.dataset.height
+					}
 				},
 				cleanSelection() {
 					this.selected = {}
 					this.selectedTextData = ''
+					this.selectedImage = ''
 				},
 			}))
 		})

@@ -2,34 +2,30 @@
   --main-background: #65c3c8;
 }
 
-.c-header {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 70px;
-	z-index: 30;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 5px 10px;
-	background: var(--main-background);
-	transform: translateY(-100%);
-	transition: transform 0.4s ease;
-}
-
-.c-block {
-
-}
-
 .c-text {
 	position: relative;
-	outline: transparent solid 1px;
+	outline: transparent solid 3px;
+	outline-offset: 3px;
 	cursor: pointer;
+	transition: outline .1s ease;
 }
 .c-text_selected {
 	outline: var(--main-background) solid 3px;
 }
 .c-text:hover {
-	outline: var(--main-background) solid 1px;
+	outline: var(--main-background) solid 3px;
+}
+
+.c-image {
+	position: relative;
+	outline: transparent solid 3px;
+	outline-offset: 3px;
+	cursor: pointer;
+	transition: outline .1s ease;
+}
+.c-image_selected {
+	outline: var(--main-background) solid 3px;
+}
+.c-image:hover {
+	outline: var(--main-background) solid 3px;
 }

@@ -116,7 +116,7 @@
     <div class="um-container">
         <div class="um-cover__inner">
             <div class="um-cover__img _big-picture">
-                <img data-key="image" src="{{ data_get($data, 'image.value') }}" alt="Image">
+                <x-shared.image key="image" :$data :$block />
             </div>
             <div class="um-cover__content">
                 <div class="c-text um-cover__title"
