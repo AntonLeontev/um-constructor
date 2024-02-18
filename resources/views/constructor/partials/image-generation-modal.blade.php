@@ -155,6 +155,7 @@
                 this.selectedModel = this.models.find(el => this.$el.value == el.uuid)
             },
             accept(url) {
+				this.loading = true
                 axios
                     .post(route('blocks.image-data.update', this.selected.id), {
                         key: this.selected.key,
@@ -168,7 +169,10 @@
                         this.$dispatch('toast-error', error.response.data.publicMessage ?? error
                             .response.data.message);
                     })
-					.finally(() => image_generation_modal.close())
+					.finally(() => {
+						image_generation_modal.close()
+						this.loading = false
+					})
             },
         }))
     })
