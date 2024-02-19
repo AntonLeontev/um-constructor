@@ -25,7 +25,7 @@
 		</div>
 	@else
 		@foreach ($site->blocks->load('stringData') as $block) 
-			{!! $block->class->view($block->getSavedData()) !!}
+			{!! $block->class->view($block->getSavedData(), $block) !!}
 		@endforeach
 	@endif
 @endsection
