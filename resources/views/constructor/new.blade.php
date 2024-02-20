@@ -37,14 +37,14 @@
 		@include('constructor.partials.image-panel')
 		@include('constructor.partials.text-generation-modal')
 		@include('constructor.partials.image-generation-modal')
-		@include('constructor.partials.blocks-list')
+		@include('constructor.partials.blocks-panel')
 	</div>
 
 	<script>
 		document.addEventListener('alpine:init', () => {
 			Alpine.data('blocks', () => ({
 				site: @json($site),
-				blocks: @json($site->blocks),
+				blocks: @json($blocks),
 				selected: {},
 				selectedTextData: '',
 				selectedImage: '',

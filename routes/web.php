@@ -27,11 +27,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::any('/test', function (Request $request) {
 
-    dd(blocks_by_categories());
 })->name('test');
 
 Route::get('/', function () {
-    return view('home');
+    // return view('home');
+    return redirect('login');
 })->name('home');
 
 Route::middleware('auth')
