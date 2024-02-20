@@ -5,6 +5,7 @@
 @section('content')
 	<div class="w-full" 
 		@keyup.escape.window="cleanSelection"
+		@block-selected.window="scrollToBlock"
 		x-data="blocks"
 	>
 		<template x-for="block in blocks" x-key="block.id">
@@ -85,6 +86,10 @@
 					this.selected = {}
 					this.selectedTextData = ''
 					this.selectedImage = ''
+				},
+				scrollToBlock() {
+					let block = document.getElementById('block'+this.$event.detail.id)
+					block.scrollIntoView({behavior: 'smooth'})
 				},
 			}))
 		})

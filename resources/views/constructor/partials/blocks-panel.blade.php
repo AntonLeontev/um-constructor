@@ -4,6 +4,7 @@
 	:class="show && '!transform-none'"
 	x-data="blocksPanel"
 	@click.outside="show = false"
+	@block-selected="selectedBlock = $event.detail"
 >
 	@include('constructor.partials.blocks-list')
 	

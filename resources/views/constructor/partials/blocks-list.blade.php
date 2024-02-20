@@ -19,7 +19,7 @@
 			@dragend="dragend"
 			@dragover="updateListOrder" 
 			draggable="false"
-			@click="selectedBlock = block"
+			@click="$dispatch('block-selected', block)"
 		>
 			<img :src="block.class.image" alt="preview">
 			<p class="mt-2 text-center" x-text="block.title"></p>
