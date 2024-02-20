@@ -8,13 +8,13 @@
 		x-data="blocks"
 	>
 		<template x-for="block in blocks" x-key="block.id">
-			<div 
-				:id="'block'+block.id" 
+			<div class="relative"
 				@select="select"
 				@block-update.window="blockUpdate"
 				@refresh.window="getHtml"
 				x-data="{
 					id: block.id,
+					loading: true,
 
 					init() {
 						this.getHtml()
@@ -25,12 +25,27 @@
 						}
 					},
 					getHtml() {
+						this.loading = true
+						
 						axios
 							.get(route('blocks.view', block.id))
-							.then(resp => this.$el.innerHTML = resp.data.html)
+							.then(resp => {
+								this.$refs.block.innerHTML = resp.data.html
+								this.loading = false
+							})
 					},
 				}"
-			></div>
+			>
+				<div :id="'block'+block.id" x-ref="block"></div>
+				<div 
+					class="absolute top-0 bottom-0 left-0 right-0 z-10 flex items-center justify-center bootom-0 bg-base-100" 
+					x-show="loading" 
+					x-transition.opacity
+					x-transition.duration.400ms
+				>
+					{{-- <span class="loading loading-bars loading-lg text-primary"></span> --}}
+				</div>
+			</div>
 		</template>
 
 		@include('constructor.partials.text-panel')

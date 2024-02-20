@@ -1,6 +1,6 @@
 <div 
 	id="blocksPanel" 
-	class="fixed top-0 bottom-0 left-0 bg-base-200 flex flex-col w-[200px] border-r p-1 -translate-x-full transition shadow-xl" 
+	class="fixed top-0 bottom-0 left-0 bg-base-200 flex flex-col w-[200px] border-r p-1 -translate-x-full transition shadow-xl z-20" 
 	:class="show && '!transform-none'"
 	x-data="blocksPanel"
 	@click.outside="show = false"
