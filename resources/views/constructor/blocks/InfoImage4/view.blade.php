@@ -40,8 +40,6 @@
     .um-quote .um-avatar__img {
         width: 180px;
         height: 180px;
-        overflow: hidden;
-        border-radius: 50%;
         margin-bottom: 20px;
     }
 
@@ -49,6 +47,7 @@
         width: 100%;
         -o-object-fit: cover;
         object-fit: cover;
+		border-radius: 50%;
     }
 
     .um-quote .um-avatar__title {
