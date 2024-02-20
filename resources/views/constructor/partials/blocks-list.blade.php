@@ -57,7 +57,14 @@
 			},
 			dragend(event) {
 				this.$event.target.setAttribute('draggable', false)
-				this.$dispatch('refresh')
+
+				axios
+					.patch(route('sites.reorder-blocks', this.site.id), {blocks: this.blocks})
+					.then(response => {
+						console.log(response.data)
+						this.$dispatch('refresh')
+					})
+					.catch(error => this.$dispatch('toast-error', 'Error'))
 			},
 			updateListOrder(event) {
 				// This fires every time you drag over another list item

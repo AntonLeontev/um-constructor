@@ -42,6 +42,14 @@ if (! function_exists('blocks_by_categories')) {
 if (! function_exists('leo_models')) {
     function leo_models(): Collection
     {
-        return LeonardoModel::get();
+        if (cache('leo_models', null)) {
+            return cache('leo_models');
+        }
+
+        $models = LeonardoModel::get();
+
+        cache(['leo_models' => $models]);
+
+        return $models;
     }
 }

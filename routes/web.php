@@ -50,6 +50,8 @@ Route::middleware('auth')
         Route::get('constructor/{site}', ConstructorController::class)->name('constructor');
 
         Route::apiResource('sites', SiteController::class)->except(['index']);
+        Route::patch('sites/{site}/reorderBlocks', [SiteController::class, 'reorderBlocks'])->name('sites.reorder-blocks');
+
         Route::apiResource('sites.blocks', BlockController::class)->shallow();
         Route::apiResource('sites.domains', DomainController::class)->only(['store', 'destroy'])->shallow();
         Route::put('generals/{general}', [SiteGeneralController::class, 'update'])->name('generals.update');

@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-	@if ($site->blocks->isEmpty())
+	@if ($blocks->isEmpty())
 		<style>
 			.notice {
 				height: 100vh;
@@ -24,7 +24,7 @@
 			This site is blank. You can build it in the constructor
 		</div>
 	@else
-		@foreach ($site->blocks->load('stringData') as $block) 
+		@foreach ($blocks as $block) 
 			{!! $block->class->view($block->getSavedData(), $block) !!}
 		@endforeach
 	@endif

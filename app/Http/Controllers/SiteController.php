@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReorderBlocksRequest;
 use App\Http\Requests\SiteDestroyRequest;
 use App\Http\Requests\SiteShowRequest;
 use App\Http\Requests\SiteStoreRequest;
 use App\Http\Requests\SiteUpdateRequest;
+use App\Models\Block;
 use App\Models\Site;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class SiteController extends Controller
 {
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(SiteStoreRequest $request)
     {
         $site = Site::create([
@@ -26,34 +27,44 @@ class SiteController extends Controller
         return response()->json($site);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Site $site, SiteShowRequest $request): View|Factory
     {
-        return view('constructor.site-preview', compact('site'));
+        $blocks = Block::where('site_id', $site->id)
+            ->orderBy('position')
+            ->with('stringData')
+            ->get(['id', 'position', 'class']);
+
+        return view('constructor.site-preview', compact('site', 'blocks'));
     }
 
     public function showByDomain(Site $site): View|Factory
     {
-        return view('constructor.site-preview', compact('site'));
+        $blocks = Block::where('site_id', $site->id)
+            ->orderBy('position')
+            ->with('stringData')
+            ->get(['id', 'position', 'class']);
+
+        return view('constructor.site-preview', compact('site', 'blocks'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(SiteUpdateRequest $request, Site $site)
     {
         $site->update($request->all());
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Site $site, SiteDestroyRequest $request)
+    public function destroy(Site $site, SiteDestroyRequest $request): Response|ResponseFactory
     {
         $site->delete();
 
         return response('', Response::HTTP_NO_CONTENT);
+    }
+
+    public function reorderBlocks(Site $site, ReorderBlocksRequest $request): JsonResponse
+    {
+        foreach ($request->get('blocks') as $key => $block) {
+            Block::where('id', $block['id'])->update(['position' => $key]);
+        }
+
+        return response()->json();
     }
 }
