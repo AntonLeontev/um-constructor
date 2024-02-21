@@ -134,7 +134,6 @@
                         messageId: this.messageId
                     })
                     .then(response => {
-                        console.log(response)
                         this.progress = response.data.generations_by_pk.status;
 
                         if (response.data.generations_by_pk.status !== 'COMPLETE') {

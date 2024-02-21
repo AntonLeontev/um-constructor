@@ -47,7 +47,6 @@
                 axios
                     .post(route('request'), data)
                     .then(response => {
-                        console.log(response.data);
                         this.response = response.data.choices[0].message.content;
                     })
                     .catch(error => {

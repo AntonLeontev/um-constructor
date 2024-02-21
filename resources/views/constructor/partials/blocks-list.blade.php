@@ -61,7 +61,6 @@
 				axios
 					.patch(route('sites.reorder-blocks', this.site.id), {blocks: this.blocks})
 					.then(response => {
-						console.log(response.data)
 						this.$dispatch('refresh')
 					})
 					.catch(error => this.$dispatch('toast-error', 'Error'))

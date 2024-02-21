@@ -58,9 +58,9 @@ Route::middleware('auth')
 
         Route::get('blocks/{block}/input-view', [BlockController::class, 'inputView'])->name('blocks.input-view');
         Route::get('blocks/{block}/preview', [BlockController::class, 'preview'])->name('blocks.preview');
-        Route::get('blocks/{block}/view', [BlockController::class, 'view'])->name('blocks.view');
-        Route::get('blocks/{block}/neural-text', [BlockController::class, 'neuralText'])->name('blocks.neural-text');
-        Route::get('blocks/{block}/neural-image', [BlockController::class, 'neuralImage'])->name('blocks.neural-image');
+        Route::get('blocks/views/collect', [BlockController::class, 'views'])->name('blocks.views');
+        // Route::get('blocks/{block}/neural-text', [BlockController::class, 'neuralText'])->name('blocks.neural-text');
+        // Route::get('blocks/{block}/neural-image', [BlockController::class, 'neuralImage'])->name('blocks.neural-image');
 
         Route::put('blocks/{block}/string-data', [StringDataController::class, 'stringUpdate'])
             ->withoutMiddleware(ConvertEmptyStringsToNull::class)

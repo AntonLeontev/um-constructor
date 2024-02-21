@@ -12,32 +12,34 @@
 			<div class="relative"
 				@select="select"
 				@block-update.window="blockUpdate"
-				@refresh.window="getHtml"
+				
 				x-data="{
-					id: block.id,
-					loading: true,
+					loading: false,
 
-					init() {
-						this.getHtml()
-					},
 					blockUpdate() {
-						if (this.$event.detail == this.id) {
+						if (this.$event.detail == block.id) {
 							this.getHtml()
 						}
 					},
 					getHtml() {
 						this.loading = true
-						
 						axios
-							.get(route('blocks.view', block.id))
+							.get(route('blocks.views'), {
+								params: {blocks_ids: [block.id]}
+							})
 							.then(resp => {
-								this.$refs.block.innerHTML = resp.data.html
+								let html = resp.data.find(el => block.id == el.id).html
+								this.blocks.find(el => block.id == el.id).html = html
+
 								this.loading = false
+							})
+							.catch(error => {
+								this.$dispatch('toast-error', error.message)
 							})
 					},
 				}"
 			>
-				<div :id="'block'+block.id" x-ref="block"></div>
+				<div :id="'block'+block.id" x-ref="block" x-html="block.html"></div>
 				<div 
 					class="absolute top-0 bottom-0 left-0 right-0 z-10 flex items-center justify-center bootom-0 bg-base-100" 
 					x-show="loading" 
@@ -65,6 +67,9 @@
 				selectedTextData: '',
 				selectedImage: '',
 				
+				init() {
+					this.getAllBlocksHtml()
+				},
 				select() {
 					this.selected = {
 						id: this.$event.target.dataset.id,
@@ -90,6 +95,26 @@
 				scrollToBlock() {
 					let block = document.getElementById('block'+this.$event.detail.id)
 					block.scrollIntoView({behavior: 'smooth'})
+				},
+				getAllBlocksHtml() {
+					let ids = []
+
+					this.blocks.forEach(el => ids.push(el.id))
+
+					axios
+						.get(route('blocks.views'), {
+							params: {blocks_ids: ids}
+						})
+						.then(resp => {
+							resp.data.forEach(el => {
+								let block = this.blocks.find(block => el.id == block.id)
+
+								block.html = el.html
+							})
+						})
+						.catch(error => {
+							this.$dispatch('toast-error', error.message)
+						})
 				},
 			}))
 		})

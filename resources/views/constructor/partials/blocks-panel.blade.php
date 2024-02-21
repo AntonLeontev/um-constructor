@@ -74,9 +74,9 @@
 						title: this.selectedBlock.title,
 					})
 					.then(response => {
-						this.blocks.push(response.data);
+						let length = this.blocks.push(response.data);
 						blocks_choice.close();
-						this.selectedBlock = null;
+						this.$nextTick(() => this.$dispatch('block-selected', this.blocks[length - 1]))
 					})
 					.catch(error => {
 						alert('Error!');
@@ -92,11 +92,9 @@
 						this.blocks.splice(index, 1);
 						blocks_choice.close();
 						this.selectedBlock = null;
-						this.$nextTick(() => this.$dispatch('refresh'))
 					})
 					.catch(error => {
-						alert('Error!');
-						console.log(error);
+						this.$dispatch('toast-error', 'Deletion error')
 					})
 			},
 		}))
