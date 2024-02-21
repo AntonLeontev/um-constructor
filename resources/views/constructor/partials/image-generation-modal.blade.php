@@ -97,18 +97,13 @@
             loading: false,
 
             init() {
-                axios
-                    .get(route('leonardo.index'))
-                    .then(resp => {
-                        this.models = resp.data
-                        this.selectedModel = this.models[0]
-                    })
+				this.getLeonardoModels()
 
-                this.$watch('messageId', () => {
+				this.$watch('messageId', () => {
                     setTimeout(() => {
-                        this.getMessage();
-                    }, 6000);
-                });
+                        this.getMessage()
+                    }, 6000)
+                })
             },
             submitPic() {
                 let data = new FormData(this.$event.target);
@@ -173,6 +168,21 @@
 						this.loading = false
 					})
             },
+			getLeonardoModels() {
+				if (sessionStorage.getItem('leonardo_models')) {
+					this.models = JSON.parse(sessionStorage.getItem('leonardo_models'))
+					return
+				}
+
+                axios
+                    .get(route('leonardo.index'))
+                    .then(resp => {
+                        this.models = resp.data
+                        this.selectedModel = this.models[0]
+						sessionStorage.setItem('leonardo_models', JSON.stringify(resp.data))
+                    })
+					.catch(error => this.$dispatch('toast-error', 'Can\'t load leonardo models'))
+			},
         }))
     })
 </script>
