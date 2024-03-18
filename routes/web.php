@@ -7,9 +7,11 @@ use App\Http\Controllers\ImageGenerationController;
 use App\Http\Controllers\LeonardoModelController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\PersonalController;
+use App\Http\Controllers\RegisterRequestController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SiteGeneralController;
 use App\Http\Controllers\StringDataController;
+use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,8 +32,7 @@ Route::any('/test', function (Request $request) {
 })->name('test');
 
 Route::get('/', function () {
-    // return view('home');
-    return redirect('login');
+    return view('home');
 })->name('home');
 
 Route::middleware('auth')
@@ -79,3 +80,6 @@ Route::middleware('auth')
                 Route::post('get-message', 'getMessage')->name('image.get-message');
             });
     });
+
+Route::withoutMiddleware(VerifyCsrfToken::class)
+    ->post('register-request', RegisterRequestController::class)->name('register-request');

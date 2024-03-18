@@ -100,6 +100,14 @@ return [
             'level' => 'debug',
         ],
 
+        'telegram_auth' => [
+            'driver' => 'custom',
+            'via' => Logger\TelegramLogger::class,
+            'level' => 'debug',
+            'chat_id' => env('TELEGRAM_AUTH_CHAT_ID'),
+            'token' => env('AUTH_TELEGRAM_TOKEN'),
+        ],
+
         'stderr' => [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),

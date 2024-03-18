@@ -29,6 +29,8 @@ return [
 
     'telegram' => [
         'bot' => env('TELEGRAM_TOKEN'),
+        'auth_bot' => env('AUTH_TELEGRAM_TOKEN'),
+        'auth_chat' => env('TELEGRAM_AUTH_CHAT_ID'),
     ],
 
     'timeweb' => [
